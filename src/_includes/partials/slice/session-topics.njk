@@ -1,0 +1,31 @@
+{# Session Topics Section - Reusable partial for session-based slice pages #}
+{# Usage: {% include "partials/slice/session-topics.njk" %} with region variable set #}
+
+<section class="region flow">
+  <h2 class="text-center">Session Topics</h2>
+  <div class="card flow">
+    <p class="text-center text-muted">Sessions will cover topics relevant to {{ regionName }} practitioners, including:</p>
+    <div class="grid-2col gap-l" style="margin-top: 2rem;">
+      <div class="flow">
+        <h3 class="h4">Technical Content</h3>
+        <ul>
+          {% for topic in sliceTopics[region].technical %}
+          <li>{{ topic }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="flow">
+        <h3 class="h4">Regional Focus</h3>
+        <ul>
+          {% for topic in sliceTopics[region].regional %}
+          <li>{{ topic }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <p class="text-center text-muted" style="margin-top: 2rem;">
+      {{ cfpCloseMessage }}
+    </p>
+  </div>
+</section>

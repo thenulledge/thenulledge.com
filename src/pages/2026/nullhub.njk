@@ -1,0 +1,101 @@
+---
+layout: slice
+title: "nullHUB - January 2026"
+description: "A 90-minute virtual networking event for ServiceNow practitioners. Connect with peers, share experiences, and build lasting relationships."
+permalink: /2026/nullhub/
+eventBadge: "January 22, 2026 • 7:00 PM SGT"
+eventDate: "January 22, 2026"
+eventTime: "7:00 PM SGT (90 min)"
+ctaTitle: "Join the Community"
+ctaDescription: "Register now for nullHUB and connect with ServiceNow practitioners worldwide."
+region: apac
+---
+
+{% from "partials/timezone-converter.njk" import timezoneConverter %}
+
+{% set event = events2026.events[0] %}
+{% set region = "apac" %}
+
+{# Event Format #}
+<section class="region flow">
+  <h2 class="text-center">Event Format</h2>
+  <div class="grid-2col gap-l">
+    <div class="card flow">
+      <div class="card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Pure Networking</h3>
+      <p>This is a networking-focused event with no formal sessions. Join breakout rooms, participate in discussions, and connect with ServiceNow practitioners.</p>
+    </div>
+
+    <div class="card flow">
+      <div class="card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+      </div>
+      <h3>Global Reach</h3>
+      <p>Scheduled at a convenient time to accommodate participants across multiple timezones.</p>
+    </div>
+
+    <div class="card flow">
+      <div class="card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>90 Minutes</h3>
+      <p>A focused 90-minute event that respects your time while providing meaningful networking opportunities.</p>
+    </div>
+
+    <div class="card flow">
+      <div class="card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <h3>100% Free</h3>
+      <p>No registration fees. Supported by sponsors who believe in growing the ServiceNow community.</p>
+    </div>
+  </div>
+</section>
+
+{# Who Should Attend #}
+<section class="region flow">
+  <h2 class="text-center">Who Should Attend</h2>
+  <div class="card flow">
+    <div class="grid-2col gap-l">
+      <div class="flow">
+        <h3 class="h4">Perfect For:</h3>
+        <ul>
+          <li>ServiceNow developers and architects</li>
+          <li>Administrators looking to connect with peers</li>
+          <li>Consultants expanding their network</li>
+          <li>Anyone interested in the ServiceNow community</li>
+          <li>First-time nullEDGE attendees</li>
+        </ul>
+      </div>
+
+      <div class="flow">
+        <h3 class="h4">You'll Be Able To:</h3>
+        <ul>
+          <li>Meet ServiceNow professionals from around the world</li>
+          <li>Share challenges and solutions with peers</li>
+          <li>Discuss trends and opportunities</li>
+          <li>Build your professional network</li>
+          <li>Learn about the nullEDGE community</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# Timezone Coverage #}
+{{ timezoneConverter(
+  baseTime="7:00 PM",
+  baseTimezone="SGT",
+  baseCity="Singapore",
+  date="January 22, 2026",
+  atlantaTime="6:00 AM",
+  londonTime="11:00 AM",
+  indiaTime="4:30 PM",
+  sydneyTime="10:00 PM",
+  primaryRegion="sydney"
+) }}
+
+{# FAQ #}
+{% include "partials/slice/faq.njk" %}

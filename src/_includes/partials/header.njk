@@ -1,0 +1,99 @@
+<header class="site-header">
+  <a href="#main" class="skip-link">{{ meta.skipContent }}</a>
+
+  <div class="header-container">
+    <a href="/" class="site-logo" {{ indicateActiveHome }}>
+      <img src="/assets/images/nullEDGEicon.png" alt="nullEDGE logo" class="logo-image">
+      <span class="site-name">{{ meta.siteName }}</span>
+    </a>
+    {% include "partials/main-nav.njk" %}
+  </div>
+</header>
+
+<style>
+  .site-header {
+    padding: 1rem;
+    border-bottom: 2px solid hsl(var(--border));
+    background: hsl(var(--background));
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .site-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    font-size: var(--size-step-0);
+    text-decoration: none;
+    color: hsl(var(--foreground));
+    font-weight: 600;
+  }
+
+  .logo-image {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+  }
+
+  .site-logo:hover {
+    color: hsl(var(--primary));
+  }
+
+  .site-name {
+    font-family: var(--font-display);
+  }
+
+  /* Skip link accessibility */
+  .skip-link {
+    clip: rect(1px, 1px, 1px, 1px);
+    display: block;
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    top: 1rem;
+    left: 1rem;
+    z-index: 999;
+  }
+
+  .skip-link:focus {
+    clip: auto;
+    height: auto;
+    overflow: visible;
+    width: auto;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 0.5rem 1rem;
+    border-radius: calc(var(--radius) - 2px);
+    line-height: 1;
+  }
+
+  .skip-link:not(:focus) {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .site-header {
+      padding: 0.75rem;
+    }
+  }
+</style>

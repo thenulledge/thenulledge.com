@@ -1,0 +1,228 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      <nav class="footer-nav" aria-label="{{ meta.navigation.ariaBottom }}">
+        <span class="footer-copyright">&copy; {% year %}</span>
+        <a href="/" {{ indicateActiveHome }} class="footer-brand">
+          <span class="site-name">{{ meta.siteName }}</span>
+          <small class="version">v{{ pkg.version }}</small>
+        </a>
+
+        {% for item in navigation.bottom %}
+          <a
+            href="{{ item.url }}"
+            class="footer-link"
+            {{
+              helpers.getLinkActiveState(item.url,
+              page.url)
+              |
+              safe
+            }}
+            >{{ item.text }}</a
+          >
+        {% endfor %}
+      </nav>
+
+      <nav class="footer-social" aria-label="{{ meta.navigation.ariaPlatforms }}">
+        <!-- gets the first item from the feed loop set in meta -->
+        <a
+          href="{{ meta.blog.feedLinks[0].url }}"
+          rel="alternate"
+          type="{{ meta.blog.feedLinks[0].type }}"
+          class="social-link"
+          title="{{ meta.blog.feedLinks[0].title }}"
+        >
+          <span class="visually-hidden">{{ meta.blog.feedLinks[0].title }}</span>
+          {% svg "misc/rss" %}
+        </a>
+
+        {% for key, value in personal.platforms %}
+          {% if value != "" %}
+            <a class="social-link" href="{{ value }}" rel="me" title="{{ key | capitalize }}">
+              <span class="visually-hidden">{{ key | capitalize }}</span>
+              {% svg 'platform/' + key %}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </nav>
+    </div>
+
+    {% include 'partials/theme-switch.njk' %}
+
+    <aside class="footer-credit">
+      Made with <span class="visually-hidden">love</span><span class="heart-icon">{% svg "misc/heart" %}</span> and
+      <a href="https://www.11ty.dev/" title="Eleventy">
+        <span class="visually-hidden">Eleventy</span>
+        {% svg "misc/11ty" %}
+      </a>
+      by
+      <a href="{{ meta.creator.website }}">{{ meta.creator.name }}</a>
+    </aside>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 4rem;
+    padding: 2rem 1rem;
+    border-top: 2px solid hsl(var(--border));
+    background: hsl(var(--muted) / 0.3);
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    font-size: var(--size-step-0);
+  }
+
+  .footer-copyright {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+  }
+
+  .footer-brand:hover {
+    color: hsl(var(--primary));
+  }
+
+  .site-name {
+    font-family: var(--font-display);
+  }
+
+  .version {
+    font-size: var(--size-step--1);
+    color: hsl(var(--muted-foreground));
+  }
+
+  .footer-link {
+    text-decoration: none;
+    color: hsl(var(--muted-foreground));
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover {
+    color: hsl(var(--primary));
+  }
+
+  .footer-link[aria-current='page'] {
+    color: hsl(var(--primary));
+    font-weight: 600;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid hsl(var(--border));
+    border-radius: calc(var(--radius) - 2px);
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    border-color: hsl(var(--primary));
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    box-shadow: 0 4px 8px hsl(var(--primary) / 0.2);
+  }
+
+  .social-link svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .footer-credit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid hsl(var(--border));
+    font-size: var(--size-step--1);
+    color: hsl(var(--muted-foreground));
+  }
+
+  .footer-credit a {
+    color: hsl(var(--foreground));
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-credit a:hover {
+    color: hsl(var(--primary));
+  }
+
+  .footer-credit svg {
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .heart-icon {
+    color: hsl(var(--destructive));
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  @media (max-width: 768px) {
+    .site-footer {
+      padding: 1.5rem 1rem;
+    }
+
+    .footer-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .footer-nav {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+  }
+</style>

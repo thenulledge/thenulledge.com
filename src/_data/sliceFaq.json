@@ -1,0 +1,54 @@
+{
+  "common": [
+    {
+      "question": "What's the difference between nullSlice and nullEDGE?",
+      "answer": "nullSlice events are shorter, regional gatherings (4 hours, 6 sessions for session-based events, 90 minutes for networking). nullEDGE (October 2026) is our full-day flagship conference with 50+ sessions. Both are free and part of the same community."
+    },
+    {
+      "question": "Is this really free?",
+      "answer": "Yes! All nullSlice and nullEDGE events are 100% free thanks to our sponsors. No hidden fees, no paid upgrades."
+    }
+  ],
+  "apac": [
+    {
+      "question": "Will there be recorded sessions?",
+      "answer": "This is a networking event without formal sessions, so there won't be recordings. For technical content, check out <a href=\"/2026/conference\">nullEDGE '26</a> or our <a href=\"/2025/conference\">2025 recordings</a>."
+    },
+    {
+      "question": "Do I need to be from APAC to attend?",
+      "answer": "No! Anyone is welcome to join. The event is scheduled for APAC timezones, but we welcome participants from anywhere in the world who want to connect with the APAC community."
+    }
+  ],
+  "emea": [
+    {
+      "question": "Will sessions be recorded?",
+      "answer": "Yes! All sessions are recorded and published on YouTube after the event. You'll have permanent access to rewatch and share the content."
+    },
+    {
+      "question": "Do I need to be from EMEA to attend?",
+      "answer": "No! Anyone is welcome to join. The event is scheduled for EMEA timezones and features EMEA-focused content, but we welcome participants from anywhere in the world."
+    },
+    {
+      "question": "How do I submit a session proposal?",
+      "answer": "Our CFP opens January 26 and closes March 15, 2026. Visit our <a href=\"/speakers\">Speakers page</a> for guidelines on what we're looking for and how to submit your proposal."
+    }
+  ],
+  "india": [
+    {
+      "question": "Will sessions be recorded?",
+      "answer": "Yes! All sessions are recorded and published on YouTube after the event. You'll have permanent access to rewatch and share the content."
+    },
+    {
+      "question": "Do I need to be from India to attend?",
+      "answer": "No! Anyone is welcome to join. The event is scheduled for IST and features India-focused content, but we welcome participants from anywhere in the world."
+    },
+    {
+      "question": "How do I submit a session proposal?",
+      "answer": "Our CFP opens April 27 and closes July 5, 2026. Visit our <a href=\"/speakers\">Speakers page</a> for guidelines on what we're looking for and how to submit your proposal."
+    },
+    {
+      "question": "Will there be certifications or CPE credits?",
+      "answer": "nullSlice is a community learning event focused on practical knowledge sharing. While we don't offer formal certifications, you'll gain valuable insights and connections that can help advance your career."
+    }
+  ]
+}

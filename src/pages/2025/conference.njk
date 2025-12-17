@@ -1,0 +1,269 @@
+---
+layout: base
+title: "nullEDGE 2025 — Retrospective"
+description: "Retrospective for the nullEDGE 2025 conference: session videos, feedback and resources"
+permalink: /2025/conference/
+---
+
+<div class="container wrapper flow">
+  {# Hero Section #}
+  <section class="prose text-center">
+    <h1>nullEDGE Conference 2025 — Retrospective</h1>
+    <p class="lead">
+      A place to find session replays, feedback, resources and highlights from the 2025 conference.
+    </p>
+  </section>
+
+  {# Highlights #}
+  <section class="region flow">
+    <h2>Highlights</h2>
+    <div class="card flow">
+      <p>
+        nullEDGE 2025 brought together platform engineers, product owners and community leaders to discuss practical approaches to observability, cost optimization, and scalable platform design. Below are session replays and resources to help you catch up.
+      </p>
+      <div class="quick-links">
+        <a href="#session-schedule">Session Schedule</a>
+        <a href="/feedback">Feedback and Resources</a>
+      </div>
+    </div>
+  </section>
+
+  {# Session Schedule #}
+  <section id="session-schedule" class="region flow">
+    <div class="section-header">
+      <h2>Conference Schedule</h2>
+      <p class="text-muted">Click any session to watch the replay</p>
+    </div>
+
+    <div class="sessions-grid">
+      {% for session in sessions2025 %}
+        {% if session.id %}
+          <div class="session-card">
+            {# Session Thumbnail - Links to session page #}
+            <a href="/2025/conference/{{ session.title | slugify }}/" class="video-wrapper">
+              <img src="https://img.youtube.com/vi/{{ session.id }}/maxresdefault.jpg" 
+                   alt="{{ session.title }}" 
+                   loading="lazy"
+                   class="session-thumbnail">
+              <div class="play-overlay">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="10" opacity="0.9"/>
+                  <polygon points="10 8 16 12 10 16" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            
+            {# Session Info #}
+            <div class="session-info">
+              <h3 class="session-title">
+                <a href="/2025/conference/{{ session.title | slugify }}/">{{ session.title }}</a>
+              </h3>
+              
+              <div class="session-meta">
+                <div class="meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>{{ session.duration }} min</span>
+                </div>
+                
+                <div class="meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <span>{{ session.speakers | join(", ") }}</span>
+                </div>
+              </div>
+              
+              <a href="/2025/conference/{{ session.title | slugify }}/" class="watch-link">
+                View Session & Chat →
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  {# CTA Section #}
+  <section class="region text-center">
+    <div class="card flow prose">
+      <h2>Join Us in 2026</h2>
+      <p>nullEDGE 2026 includes four events across the year. Register now for upcoming conferences.</p>
+      <div class="button-group">
+        <a href="/" class="button">View 2026 Events</a>
+        <a href="/speakers" class="button button-secondary">Submit a Talk</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--space-m-l);
+  }
+
+  .quick-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .quick-links a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .quick-links a:hover {
+    text-decoration: underline;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .section-header h2 {
+    margin: 0;
+  }
+
+  .sessions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+    gap: var(--space-l);
+  }
+
+  .session-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .session-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .video-wrapper {
+    aspect-ratio: 16 / 9;
+    background: #000;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .session-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .video-wrapper:hover .session-thumbnail {
+    transform: scale(1.05);
+  }
+
+  .play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.9);
+    transition: transform 0.2s ease, color 0.2s ease;
+    pointer-events: none;
+  }
+
+  .video-wrapper:hover .play-overlay {
+    transform: translate(-50%, -50%) scale(1.1);
+    color: rgba(255, 255, 255, 1);
+  }
+
+  .session-info {
+    padding: var(--space-m);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .session-title {
+    font-size: var(--size-step-0);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .session-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .session-title a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .session-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--size-step--1);
+    color: var(--color-text-muted);
+  }
+
+  .meta-item svg {
+    flex-shrink: 0;
+    color: var(--color-primary);
+  }
+
+  .watch-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: var(--size-step--1);
+    font-weight: 500;
+    margin-top: 0.5rem;
+  }
+
+  .watch-link:hover {
+    text-decoration: underline;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+  }
+
+  .text-muted {
+    color: var(--color-text-muted);
+    font-size: var(--size-step--1);
+  }
+
+  @media (max-width: 768px) {
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .sessions-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
