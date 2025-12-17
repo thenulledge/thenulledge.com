@@ -84,16 +84,17 @@ permalink: /sponsors/
       </p>
     </div>
     
-    <div class="grid-2col gap-l">
+    <div class="grid-3col gap-l">
       {# Community Supporter - Under $1000 #}
       <div class="card flow">
         <h3>Community Supporter</h3>
-        <p class="text-muted">Under $1,000 contribution</p>
+        <!--<p class="text-muted">Under $1,000 contribution</p>-->
+        <p class="text-muted">$1 - $999 </p>
         
         <div class="benefits-list">
           <div class="benefit-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-            <span>Logo on presentation slides (visible in every session)</span>
+            <span>Logo on presentations</span>
           </div>
           <div class="benefit-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
@@ -101,7 +102,7 @@ permalink: /sponsors/
           </div>
           <div class="benefit-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-            <span>Option for anonymous support (no logo/mention)</span>
+            <span>Option for anonymous support</span>
           </div>
         </div>
         
@@ -116,12 +117,15 @@ permalink: /sponsors/
       <div class="card flow card-featured">
         <span class="badge badge-primary">Most Popular</span>
         <h3>Brand Partner</h3>
-        <p class="text-muted">$1,000+ contribution</p>
+        <p class="text-muted">$1,000+</p>
         
         <div class="benefits-list">
           <div class="benefit-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-            <span class="font-semibold">All Community Supporter benefits</span>
+            <!--<span class="font-semibold">All Community Supporter benefits</span>-->
+            <!-- lets make this very clear that all benefits are included -->
+            <span class="font-semibold">Includes all Community Supporter benefits, plus:</span>
+            <span>
           </div>
           <div class="benefit-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
@@ -151,15 +155,33 @@ permalink: /sponsors/
           Contact Us
         </a>
       </div>
-    </div>
 
-    <div class="text-center prose" style="margin-top: 3rem;">
+      {# Custom Sponsorships #}
       <div class="card flow">
         <h3>Custom Sponsorships</h3>
-        <p class="text-muted">Have specific goals or want to sponsor multiple events? We're flexible and happy to create a custom package that works for you.</p>
-        <p class="text-sm text-muted">
-          We can discuss multi-event sponsorships, year-round homepage presence, priority booth placements, speaking slots at the flagship conference, and more.
-        </p>
+        <p class="text-muted">Have specific goals or want to sponsor multiple events?</p>
+        
+        <div class="benefits-list">
+          <div class="benefit-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Multi-event sponsorships</span>
+          </div>
+          <div class="benefit-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Year-round homepage presence</span>
+          </div>
+          <div class="benefit-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Priority booth placements</span>
+          </div>
+          <div class="benefit-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Speaking slots at flagship conference</span>
+          </div>
+        </div>
+        
+        <p class="text-sm text-muted" style="margin-top: 1rem;">We're flexible and happy to create a custom package that works for your specific goals and budget.</p>
+        
         <a href="mailto:{{ meta.email }}?subject=Custom%20Sponsorship%20Discussion" class="btn btn-outline">
           Let's Talk
         </a>
@@ -334,10 +356,22 @@ permalink: /sponsors/
 
   .sponsors-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-l);
     margin: 2rem auto;
     max-width: 1000px;
+  }
+
+  @media (max-width: 768px) {
+    .sponsors-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .sponsors-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .sponsor-card {

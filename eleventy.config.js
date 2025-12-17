@@ -77,8 +77,6 @@ export default async function (eleventyConfig) {
   eleventyConfig.addFilter('formatDateWithTimezone', filters.formatDateWithTimezone);
   eleventyConfig.addFilter('markdownFormat', filters.markdownFormat);
   eleventyConfig.addFilter('splitlines', filters.splitlines);
-  eleventyConfig.addFilter('striptags', filters.striptags);
-  eleventyConfig.addFilter('shuffle', filters.shuffleArray);
   eleventyConfig.addFilter('alphabetic', filters.sortAlphabetically);
   eleventyConfig.addFilter('slugify', filters.slugifyString);
   eleventyConfig.addFilter('parseChatFile', filters.parseChatFile);

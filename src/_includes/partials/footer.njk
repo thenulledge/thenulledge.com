@@ -22,32 +22,7 @@
           >
         {% endfor %}
       </nav>
-
-      <nav class="footer-social" aria-label="{{ meta.navigation.ariaPlatforms }}">
-        <!-- gets the first item from the feed loop set in meta -->
-        <a
-          href="{{ meta.blog.feedLinks[0].url }}"
-          rel="alternate"
-          type="{{ meta.blog.feedLinks[0].type }}"
-          class="social-link"
-          title="{{ meta.blog.feedLinks[0].title }}"
-        >
-          <span class="visually-hidden">{{ meta.blog.feedLinks[0].title }}</span>
-          {% svg "misc/rss" %}
-        </a>
-
-        {% for key, value in personal.platforms %}
-          {% if value != "" %}
-            <a class="social-link" href="{{ value }}" rel="me" title="{{ key | capitalize }}">
-              <span class="visually-hidden">{{ key | capitalize }}</span>
-              {% svg 'platform/' + key %}
-            </a>
-          {% endif %}
-        {% endfor %}
-      </nav>
     </div>
-
-    {% include 'partials/theme-switch.njk' %}
 
     <aside class="footer-credit">
       Made with <span class="visually-hidden">love</span><span class="heart-icon">{% svg "misc/heart" %}</span> and

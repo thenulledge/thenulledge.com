@@ -23,20 +23,8 @@ export default {
   ],
   bottom: [
     {
-      text: 'Legal',
-      url: '/legal/'
-    },
-    {
       text: 'Privacy',
       url: '/privacy/'
-    },
-    {
-      text: 'Accessibility',
-      url: '/accessibility/'
-    },
-    {
-      text: 'Sustainability',
-      url: '/sustainability/'
     }
   ]
 };

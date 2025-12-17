@@ -14,7 +14,35 @@ permalink: /2025/conference/
     </p>
   </section>
 
+  {# Table of Contents #}
+  <nav class="toc-section">
+    <h2 class="toc-title">Quick Navigation</h2>
+    <div class="toc-grid">
+      <a href="#highlights" class="toc-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>Highlights</span>
+      </a>
+      <a href="#session-schedule" class="toc-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <span>Session Videos</span>
+      </a>
+      <a href="#contributors" class="toc-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Our Team</span>
+      </a>
+      <a href="#sponsors" class="toc-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span>Sponsors</span>
+      </a>
+      <a href="mailto:{{ meta.email }}?subject=nullEDGE%202025%20Feedback" class="toc-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Feedback</span>
+      </a>
+    </div>
+  </nav>
+
   {# Highlights #}
+  <section id="highlights" class="region flow">
   <section class="region flow">
     <h2>Highlights</h2>
     <div class="card flow">
@@ -23,7 +51,7 @@ permalink: /2025/conference/
       </p>
       <div class="quick-links">
         <a href="#session-schedule">Session Schedule</a>
-        <a href="/feedback">Feedback and Resources</a>
+        <a href="mailto:{{ meta.email }}?subject=nullEDGE%202025%20Feedback">Share Your Feedback</a>
       </div>
     </div>
   </section>
@@ -81,6 +109,61 @@ permalink: /2025/conference/
     </div>
   </section>
 
+  {# Contributors Section #}
+  <section id="contributors" class="region flow">
+    <div class="section-header">
+      <h2>Made Possible By Our Team</h2>
+      <p class="text-muted">The dedicated volunteers who brought nullEDGE 2025 to life</p>
+    </div>
+
+    <div class="contributors-grid">
+      {% set contributors = [
+        { name: "Jace Benson", role: "Founder" },
+        { name: "Jeff Jessie", role: "Contributor" },
+        { name: "Kalisha Moore", role: "Contributor" },
+        { name: "Arlesha Moore", role: "Contributor" },
+        { name: "Josh Bohn", role: "Contributor" },
+        { name: "Kevin Eldridge", role: "Contributor" },
+        { name: "Kourtney B.", role: "Contributor" },
+        { name: "Matt Warwick", role: "Contributor" },
+        { name: "Mike Hradek", role: "Contributor" },
+        { name: "Rhyanna", role: "Contributor" },
+        { name: "Slava Savitsky", role: "Contributor" },
+        { name: "Sydney James", role: "Contributor" },
+        { name: "Tiffany", role: "Contributor" },
+        { name: "Tim Molloy", role: "Contributor" }
+      ] %}
+      
+      {% for contributor in contributors %}
+        <div class="contributor-card">
+          <div class="contributor-info">
+            <h3 class="contributor-name">{{ contributor.name }}</h3>
+            <p class="contributor-role">{{ contributor.role }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  {# Sponsors Section #}
+  <section id="sponsors" class="region flow">
+    <div class="section-header">
+      <h2>Our 2025 Sponsors</h2>
+      <p class="text-muted">Thank you to these organizations for supporting community-driven learning</p>
+    </div>
+
+    <div class="sponsors-grid">
+      {% for sponsor in sponsors %}
+      <div class="sponsor-item">
+        <a href="{{ sponsor.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-link">
+          <img src="/assets/images{{ sponsor.logo }}" alt="{{ sponsor.name }}" loading="lazy">
+          <p class="sponsor-name">{{ sponsor.name }}</p>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
   {# CTA Section #}
   <section class="region text-center">
     <div class="card flow prose">
@@ -95,6 +178,64 @@ permalink: /2025/conference/
 </div>
 
 <style>
+  .toc-section {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--space-m-l);
+    margin: var(--space-l) 0;
+  }
+
+  .toc-title {
+    text-align: center;
+    font-size: var(--size-step-1);
+    margin: 0 0 var(--space-m) 0;
+    color: var(--color-text);
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+    gap: var(--space-s);
+  }
+
+  .toc-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-s) var(--space-m);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all 0.2s ease;
+  }
+
+  .toc-card:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .toc-card svg {
+    color: var(--color-primary);
+    transition: color 0.2s ease;
+  }
+
+  .toc-card:hover svg {
+    color: var(--color-bg);
+  }
+
+  .toc-card span {
+    font-size: var(--size-step--1);
+    font-weight: 500;
+    text-align: center;
+  }
+
   .card {
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border);
@@ -256,13 +397,118 @@ permalink: /2025/conference/
     font-size: var(--size-step--1);
   }
 
+  .contributors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+    gap: var(--space-m);
+  }
+
+  .contributor-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--space-m);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+  }
+
+  .contributor-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .contributor-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .contributor-name {
+    font-size: var(--size-step-0);
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  .contributor-role {
+    font-size: var(--size-step--1);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .sponsors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+    gap: var(--space-l);
+    align-items: center;
+  }
+
+  .sponsor-item {
+    text-align: center;
+    padding: var(--space-m);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .sponsor-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .sponsor-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .sponsor-item img {
+    max-height: 80px;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .sponsor-name {
+    font-size: var(--size-step--1);
+    font-weight: 500;
+    color: var(--color-text);
+    margin: 0;
+    margin-top: var(--space-xs);
+  }
+
   @media (max-width: 768px) {
+    .toc-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .section-header {
       flex-direction: column;
       align-items: flex-start;
     }
 
     .sessions-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contributors-grid {
+      grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
+    }
+
+    .sponsors-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .toc-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sponsors-grid {
       grid-template-columns: 1fr;
     }
   }

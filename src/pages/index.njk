@@ -162,28 +162,6 @@ description: 'Join 1,000+ ServiceNow practitioners for deep technical sessions, 
   </div>
 </section>
 
-{# Sponsors #}
-<section class="sponsors-section">
-  <div class="container">
-    <h2 class="section-title">Our 2025 Sponsors</h2>
-    <p class="section-subtitle">Thank you to these organizations for supporting community-driven learning</p>
-    
-    <div class="sponsors-grid">
-      {% for sponsor in sponsors.slice(0, 8) %}
-      <div class="sponsor-item">
-        <a href="{{ sponsor.website }}" target="_blank" rel="noopener noreferrer">
-          <img src="/assets/images{{ sponsor.logo }}" alt="{{ sponsor.name }}" loading="lazy">
-        </a>
-      </div>
-      {% endfor %}
-    </div>
-    
-    <div class="text-center" style="margin-top: 3rem;">
-      <a href="/sponsors" class="btn btn-lg btn-primary">Become a 2026 Sponsor</a>
-    </div>
-  </div>
-</section>
-
 <style>
   /* Hero Section - Custom Styles */
   .hero-section {
@@ -351,9 +329,9 @@ description: 'Join 1,000+ ServiceNow practitioners for deep technical sessions, 
   /* Differentiators Grid */
   .differentiators-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-    max-width: 1000px;
+    max-width: 1400px;
     margin: 0 auto;
   }
 
@@ -387,8 +365,10 @@ description: 'Join 1,000+ ServiceNow practitioners for deep technical sessions, 
   /* Events Grid */
   .events-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .event-card {
@@ -400,6 +380,8 @@ description: 'Join 1,000+ ServiceNow practitioners for deep technical sessions, 
     text-decoration: none;
     color: inherit;
     transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
   }
 
   .event-card:hover {
@@ -466,29 +448,13 @@ description: 'Join 1,000+ ServiceNow practitioners for deep technical sessions, 
     line-height: 1.6;
   }
 
-  /* Sponsors Grid */
-  .sponsors-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    align-items: center;
-  }
-
-  .sponsor-item {
-    text-align: center;
-  }
-
-  .sponsor-item img {
-    max-height: 80px;
-    width: auto;
-    max-width: 100%;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
   /* Mobile Responsive */
+  @media (max-width: 1024px) {
+    .differentiators-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 768px) {
     .hero-section {
       padding: 3rem 1rem;
@@ -508,6 +474,14 @@ description: 'Join 1,000+ ServiceNow practitioners for deep technical sessions, 
     .btn {
       width: 100%;
       text-align: center;
+    }
+
+    .events-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .differentiators-grid {
+      grid-template-columns: 1fr;
     }
   }
 
