@@ -1,6 +1,5 @@
 import * as meta from '../../_data/meta.js';
 export default async function () {
-
   return {
     id: "2026-nulledge",
     name: "nullEDGE",
@@ -10,7 +9,9 @@ export default async function () {
     },
     type: "full-day",
     url: "/2026/conference",
-    registrationUrl: "https://events.ringcentral.com/events/nulledge-2026",
+    registrationUrl: "https://events.ringcentral.com/events/nulledge-2026-10-17",
+    registrationWidgetId: "z5df2FfYlatTonc7QoiLU6BlG",
+    registrationIframeSrc: "https://registration.events.ringcentral.com/widgets/registration/nulledge-2026-10-17",
     speakerRegistrationUrl: "https://events.ringcentral.com/events/nulledge-2026/speakers",
     speakerSubmissionStart: "2026-02-01T00:00:00-05:00",
     speakerSubmissionEnd: "2026-08-31T23:59:59-04:00",

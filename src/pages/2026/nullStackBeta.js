@@ -1,5 +1,4 @@
 import * as meta from '../../_data/meta.js';
-
 export default async function () {
   return {
     id: "2026-nullstack-beta",
@@ -10,14 +9,16 @@ export default async function () {
     },
     type: "sessions",
     url: "/2026/nullstack-beta",
-    registrationUrl: "https://events.ringcentral.com/events/nullslice-india-2026",
-    speakerRegistrationUrl: "https://events.ringcentral.com/events/nullslice-india-2026/speakers",
+    registrationUrl: "https://events.ringcentral.com/events/nullstack-beta-2026",
+    speakerRegistrationUrl: "https://events.ringcentral.com/events/nullstack-beta-2026/speakers",
+    registrationWidgetId: "h1TYTPrZfMPaOCuzMXjW5w6xY",
+    registrationIframeSrc: "https://registration.events.ringcentral.com/widgets/registration/nullstack-beta",
     speakerSubmissionStart: "2026-04-01T00:00:00Z",
     speakerSubmissionEnd: "2026-06-30T23:59:59Z",
     sponsorUrl: `mailto:${meta.email}?subject=nullSTACK%20Beta%202026%20Sponsorship`,
     description: "Virtual sessions and networking. Discover insights from experts and expand your network.",
     duration: "3 hours",
-    sessionCount: 6,
+    sessionCount: 5,
     timezone: "Asia/Kolkata",
     niceDatesTimes: {
       atlanta: "4:30 AM EDT",
@@ -25,7 +26,30 @@ export default async function () {
       india: "2:00 PM IST",
       sydney: "6:30 PM AEST"
     },
-      featuredSpeakers: [
+    region: "APAC",
+    faqs: [
+      {
+        question: "How many sessions will there be?",
+        answer: "We're planning 8-10 technical sessions covering various ServiceNow topics including development, architecture, and best practices. The final schedule will be announced closer to the event date."
+      },
+      {
+        question: "Will sessions be recorded?",
+        answer: "Yes! All sessions will be recorded and made available to registered attendees within 48 hours after the event."
+      },
+      {
+        question: "Can I submit a session proposal?",
+        answer: "Yes! We're accepting session proposals until June 30, 2026. Click the 'Submit a Session Proposal' button above to share your knowledge with the community."
+      },
+      {
+        question: "What topics are you looking for?",
+        answer: "We're interested in real-world implementations, lessons learned, technical deep-dives, and best practices. Both technical and process-oriented topics are welcome."
+      },
+      {
+        question: "Is there a cost to attend?",
+        answer: "No! All nullEDGE events are completely free, thanks to our generous sponsors."
+      }
+    ],
+    featuredSpeakers: [
     {
       name: "Jace Benson",
       title: "Founder",
@@ -34,7 +58,8 @@ export default async function () {
       bio: "I make the things I want to exist."
     }
   ],
-    sponsors: [],
-    sessions: []
+  stats: {},
+  sponsors: [],
+  sessions: []
   };
 }
