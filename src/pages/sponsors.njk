@@ -1,7 +1,7 @@
 ---
 layout: base
 title: "Sponsor nullEDGE 2026 | Partnership Opportunities"
-description: "Connect with 1,000+ ServiceNow folks through authentic, community-focused events. Explore sponsorship packages for nullEDGE 2026."
+description: "Connect with ServiceNow folks through authentic, community-focused events. Explore sponsorship packages for nullEDGE 2026."
 permalink: /sponsors/
 ---
 
@@ -11,7 +11,7 @@ permalink: /sponsors/
     <span class="badge">Sponsorship Opportunities</span>
     <h1>Partner with nullEDGE 2026</h1>
     <p class="lead">
-      Connect with 1,000+ ServiceNow folks through authentic, community-focused events across four global conferences.
+      Connect with ServiceNow folks through authentic, community-focused events across four global conferences.
     </p>
     
     <div class="button-group">
@@ -39,7 +39,7 @@ permalink: /sponsors/
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <h3>Build Brand Presence</h3>
-        <p>Connect with 1,000+ ServiceNow developers, admins, and architects. Get your brand in front of folks actively building solutions.</p>
+        <p>Connect with ServiceNow developers, admins, and architects. Get your brand in front of folks actively building solutions.</p>
       </div>
       
       <div class="card flow">
@@ -52,28 +52,17 @@ permalink: /sponsors/
     </div>
   </section>
 
-  {# Stats Section #}
-  <section class="region flow text-center">
-    <h2>2025 by the Numbers</h2>
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-number">1,000+</div>
-        <div class="stat-label">Attendees</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">40+</div>
-        <div class="stat-label">Speakers</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">Sessions</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Free to Attend</div>
-      </div>
-    </div>
-  </section>
+{% from "partials/stats.njk" import stats %}
+{{ stats(
+  title="2025 by the Numbers",
+  subtitle="A community that showed up and engaged",
+  statItems=[
+    { label: "Attendees", value: "746" },
+    { label: "Connections Made", value: "57" },
+    { label: "Chat Messages", value: "2,701" },
+    { label: "Satisfaction", value: "9.2/10" }
+  ]
+) }}
 
   {# Sponsorship Packages #}
   <section id="packages" class="region flow">

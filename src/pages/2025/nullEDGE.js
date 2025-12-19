@@ -122,7 +122,7 @@ export default async function () {
             }
         ],
         stats: {
-            attendees: "1,000+",
+            attendees: "746",
             sessions: "37",
             sponsors: "13"
         },
