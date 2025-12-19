@@ -42,7 +42,7 @@
   imageUrl=eventData.heroImage or "",
   imageAlt=eventData.name ~ " Event",
   primaryCtaText="Register Free",
-  primaryCtaLink=eventData.registrationUrl,
+  primaryCtaLink="#registration",
   secondaryCtaText="Become a Sponsor",
   secondaryCtaLink="/sponsors"
 ) }}
@@ -207,7 +207,7 @@
 
 {# Registration Form - Shows if widget ID and iframe src are provided #}
 {% if eventData.registrationWidgetId and eventData.registrationIframeSrc %}
-<section class="registration-section">
+<section class="registration-section" id="registration">
   <div class="container">
     <div class="registration-header">
       <h2>Register for {{ eventData.name }}</h2>
