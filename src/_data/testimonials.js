@@ -7,7 +7,7 @@ export default [
     "linkedin": "https://www.linkedin.com/in/tyroach/",
     "photo": "/assets/images/speakers/ty-roach.jpg",
     "isSpeaker": true,
-    "sessionLink": "/2025/conference/",
+    "sessionLink": "/2025/conference/#event-chat",
     "sessionTitle": "nullEDGE Conference"
   },
   {
@@ -18,7 +18,7 @@ export default [
     "linkedin": "https://www.linkedin.com/in/gregory-yuh-2a8546/",
     "photo": "/assets/images/speakers/gregory-yuh.jpg",
     "isSpeaker": true,
-    "sessionLink": "/2025/conference/",
+    "sessionLink": "/2025/conference/#event-chat",
     "sessionTitle": "nullEDGE Conference"
   },
   {
@@ -29,7 +29,7 @@ export default [
     "linkedin": "http://linkedin.com/in/slabodnick",
     "photo": "/assets/images/speakers/michael-slabodnick.jpg",
     "isSpeaker": true,
-    "sessionLink": "/2025/conference/closing/",
+    "sessionLink": "/2025/conference/closing-remarks/#event-chat",
     "sessionTitle": "Closing"
   },
   {
@@ -40,29 +40,29 @@ export default [
     "linkedin": "https://www.linkedin.com/in/kalishamoore/",
     "photo": null,
     "isSpeaker": false,
-    "sessionLink": "/2025/conference/5-things-i-do-to-new-many-to-many-tables/",
+    "sessionLink": "/2025/conference/5-things-i-do-to-new-many-to-many-tables/#event-chat",
     "sessionTitle": "5 Things I do to New Many to Many Tables"
   },
   {
     "name": "Casey Ferguson",
     "role": "Sr. Director of Solutions",
     "company": "HaloKinetic",
-    "quote": "The format, parallel chat, and pacing is perfect for my ADHD brain (and i think others, as well, based on the amount of side-chatter in sessions!) amazing event so far. Kudos to everyone invovled",
+    "quote": "Jace Benson the format, parallel chat, and pacing is perfect",
     "linkedin": "http://linkedin.com/in/caseynsb",
     "photo": null,
     "isSpeaker": false,
-    "sessionLink": "/2025/conference/",
+    "sessionLink": "/2025/conference/#event-chat",
     "sessionTitle": "nullEDGE Conference"
   },
   {
     "name": "Brad Hicks",
     "role": "",
     "company": "Veeam",
-    "quote": "Thank you all for putting this together!!!",
+    "quote": "definitely recommend doing this again. This is extremely helpful! Thank you to everyone who made this happen.",
     "linkedin": "https://www.linkedin.com/in/brad-hicks-3786b67/",
     "photo": null,
     "isSpeaker": false,
-    "sessionLink": "/2025/conference/closing/",
+    "sessionLink": "/2025/conference/closing-remarks/#event-chat",
     "sessionTitle": "Closing"
   },
   {
@@ -73,7 +73,7 @@ export default [
     "linkedin": "",
     "photo": null,
     "isSpeaker": false,
-    "sessionLink": "/2025/conference/",
+    "sessionLink": "/2025/conference/#event-chat",
     "sessionTitle": "nullEDGE Conference"
   },
   {
@@ -84,18 +84,18 @@ export default [
     "linkedin": "",
     "photo": null,
     "isSpeaker": false,
-    "sessionLink": "/2025/conference/",
+    "sessionLink": "/2025/conference/#event-chat",
     "sessionTitle": "nullEDGE Conference"
   },
   {
     "name": "Sharon VanLuyn-Prater",
     "role": "Aspiring ServiceNow star",
     "company": "Self-employed",
-    "quote": "THIS WAS AN AMAZING EVENT! thank you ALL",
+    "quote": "THANK YOU to all the presenters! What a great event...fast paced and FUN",
     "linkedin": "https://www.linkedin.com/in/sharonvanluynprater/",
     "photo": null,
     "isSpeaker": false,
-    "sessionLink": "/2025/conference/closing/",
+    "sessionLink": "/2025/conference/closing-remarks/#event-chat",
     "sessionTitle": "Closing"
   },
   {
@@ -106,7 +106,7 @@ export default [
     "linkedin": "http://linkedin.com/in/jeff-jessie",
     "photo": null,
     "isSpeaker": false,
-    "sessionLink": "/2025/conference/",
+    "sessionLink": "/2025/conference/#event-chat",
     "sessionTitle": "nullEDGE Conference"
   }
 ];

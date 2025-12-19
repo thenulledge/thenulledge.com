@@ -84,6 +84,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addFilter('parseChatFile', filters.parseChatFile);
   eleventyConfig.addFilter('sortEventsByDate', filters.sortEventsByDate);
   eleventyConfig.addFilter('eventsToArray', filters.eventsToArray);
+  eleventyConfig.addFilter('urlEncode', filters.urlEncode);
 
   // --------------------- Shortcodes
   eleventyConfig.addShortcode('svg', shortcodes.svgShortcode);

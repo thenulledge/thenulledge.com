@@ -12,7 +12,7 @@ Set these variables before including:
     
     <div class="testimonials-masonry">
       {% for testimonial in testimonials %}
-      <a href="{{ testimonial.sessionLink }}" class="testimonial-card">
+      <a href="{{ testimonial.sessionLink }}:~:text={{testimonial.quote | urlEncode}}" class="testimonial-card">
         <div class="testimonial-header">
           <div class="testimonial-photo">
             {% if testimonial.photo %}

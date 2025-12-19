@@ -6,6 +6,15 @@ import {slugifyString} from './filters/slugify.js';
 import {parseChatFile} from './filters/parse-chat.js';
 import {sortEventsByDate, eventsToArray} from './filters/sort-events.js';
 
+/**
+ * URL encode a string using encodeURIComponent
+ * @param {string} str - String to encode
+ * @returns {string} - URL encoded string
+ */
+function urlEncode(str) {
+  return encodeURIComponent(str);
+}
+
 export default {
   toISOString,
   formatDate,
@@ -17,5 +26,6 @@ export default {
   slugifyString,
   parseChatFile,
   sortEventsByDate,
-  eventsToArray
+  eventsToArray,
+  urlEncode
 };
