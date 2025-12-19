@@ -1,0 +1,202 @@
+{# Hero Section Macro
+Usage:
+{% from "partials/hero.njk" import hero %}
+{{ hero(
+  title="Join 1,000+ ServiceNow Folks FREE",
+  subtitle="Deep technical sessions, real code, and zero sales pitches",
+  videoId="dU6JY136vTg",
+  videoCaption="Watch highlights from nullEDGE 2025",
+  primaryCtaText="View 2026 Events",
+  primaryCtaLink="#events",
+  secondaryCtaText="Become a Sponsor",
+  secondaryCtaLink="/sponsors"
+) }}
+#}
+
+{% macro hero(title, subtitle="", videoId="", videoCaption="", imageUrl="", imageAlt="", primaryCtaText="", primaryCtaLink="", secondaryCtaText="", secondaryCtaLink="") %}
+<section class="hero-section">
+  <div class="hero-gradient"></div>
+  <div class="container hero-content">
+    <div class="hero-inner">
+      
+      <h1 class="hero-title">
+        {{ title }}
+      </h1>
+
+      <p class="hero-subtitle">
+        {{ subtitle }}
+      </p>
+
+      
+      {# Embedded Video conditional #}
+      {% if videoId %}
+      <div class="video-container">
+        <div class="video-wrapper">
+          <lite-youtube videoid="{{ videoId }}"></lite-youtube>
+        </div>
+        <p class="video-caption">{{ videoCaption }}</p>
+      </div>
+      {% endif %}
+      {% if imageUrl %}
+      <div class="hero-image">
+        <img src="{{ imageUrl }}" alt="{{ imageAlt }}" />
+      </div>
+      {% endif %}
+
+      {# CTA Buttons #}
+      <div class="cta-buttons">
+        <a href="{{ primaryCtaLink }}" class="btn btn-lg btn-primary">{{ primaryCtaText }}</a>
+        <a href="{{ secondaryCtaLink }}" class="btn btn-lg btn-outline">{{ secondaryCtaText }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Hero Section Styles */
+  .hero-section {
+    position: relative;
+    padding: 5rem 1rem;
+    overflow: hidden;
+  }
+
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+      color-mix(in srgb, var(--color-primary) 10%, transparent),
+      var(--color-bg),
+      color-mix(in srgb, var(--color-secondary) 10%, transparent)
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-inner {
+    text-align: center;
+  }
+
+  .logo-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .hero-logo {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+  }
+
+  .badge-wrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .text-primary {
+    color: hsl(var(--primary));
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 2rem;
+  }
+
+  /* Video Styles */
+  .video-container {
+    max-width: 800px;
+    margin: 2rem auto;
+  }
+
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: calc(var(--radius) - 2px);
+  }
+
+  .video-wrapper lite-youtube {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-caption {
+    margin-top: 0.5rem;
+    font-size: var(--size-step--1);
+    color: hsl(var(--muted-foreground));
+    text-align: center;
+  }
+
+  /* Hero Image Styles */
+  .hero-image {
+    max-width: 800px;
+    margin: 2rem auto;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 8px 24px hsl(var(--foreground) / 0.1);
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Event Info Icons */
+  .event-info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .event-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .event-info-item svg {
+    color: hsl(var(--primary));
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 3rem 1rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+{% endmacro %}

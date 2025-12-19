@@ -1,339 +1,247 @@
+---js
+{
+  pagination: {
+    data: "events2025Array",
+    size: 1,
+    alias: "eventData",
+    resolve: "values",
+    before: function(paginationData) {
+      // Get the nullEDGE event and flatten its sessions
+      const nullEDGE = paginationData.find(event => event.id === "2025-nulledge");
+      if (!nullEDGE || !nullEDGE.sessions) return [];
+      return nullEDGE.sessions.filter(session => session.id !== null);
+    }
+  },
+  layout: "base",
+  eleventyComputed: {
+    title: (data) => `${data.eventData.title} - nullEDGE 2025`,
+    description: (data) => `Watch ${data.eventData.title} from nullEDGE 2025 featuring ${data.eventData.speakers.join(', ')}`,
+    permalink: (data) => {
+      const slug = data.slugifyTitle(data.eventData.title);
+      return `/2025/conference/${slug}/`;
+    },
+    session: (data) => data.eventData,
+    event: (data) => {
+      // Find the nullEDGE event from events2025Array
+      return data.events2025Array.find(e => e.id === "2025-nulledge");
+    }
+  }
+}
 ---
-pagination:
-  data: sessions2025
-  size: 1
-  alias: session
-permalink: "/2025/conference/{{ session.title | slugify }}/"
-layout: base
-eleventyComputed:
-  title: "{{ session.title }} - nullEDGE 2025"
-  description: "Watch {{ session.title }} from nullEDGE 2025{% if session.speakers.length > 0 %} presented by {{ session.speakers | join(', ') }}{% endif %}."
----
+
+{# Import partials #}
+{% from "partials/chat.njk" import chatDisplay %}
 
 <div class="container wrapper flow">
   {# Session Header #}
-  <section class="prose">
-    <a href="/2025/conference" class="back-link">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-      Back to nullEDGE 2025
-    </a>
+  <header class="session-header flow">
+    <nav class="breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/2025/conference">nullEDGE 2025</a>
+      <span>/</span>
+      <span>{{ eventData.title }}</span>
+    </nav>
     
-    <h1>{{ session.title }}</h1>
+    <h1>{{ eventData.title }}</h1>
     
-    <div class="session-meta-group">
-      {% if session.speakers.length > 0 %}
+    <div class="session-meta">
       <div class="meta-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <span>
-          {% for speaker in session.speakers %}
-            {{ speaker }}{% if not loop.last %}, {% endif %}
-          {% endfor %}
-        </span>
-      </div>
-      {% endif %}
-      
-      <div class="meta-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span>{{ session.duration }} minutes</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span>{{ eventData.speakers | join(", ") }}</span>
       </div>
       
       <div class="meta-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-        <span>{{ session.published | formatDate }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span>{{ eventData.duration }} minutes</span>
+      </div>
+      
+      <div class="meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <span>{{ eventData.published | formatDate('MMMM D, YYYY') }}</span>
       </div>
     </div>
-  </section>
+  </header>
 
   {# Video Player #}
-  <section class="region">
-    <div class="video-container-large">
-      <lite-youtube videoid="{{ session.id }}" playlabel="Play: {{ session.title }}"></lite-youtube>
+  <section class="video-section">
+    <div class="video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/{{ eventData.id }}" 
+        title="{{ eventData.title }}"
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
     </div>
     
     <div class="video-actions">
-      <a href="https://www.youtube.com/watch?v={{ session.id }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+      <a href="https://www.youtube.com/watch?v={{ eventData.id }}" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+          <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+        </svg>
         Watch on YouTube
-      </a>
-      <a href="https://www.youtube.com/watch?v={{ session.id }}&list=PLtH9Jc3qh0zMO8lx6xW0A_1g9zJ0JQZjr" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
-        View Playlist
       </a>
     </div>
   </section>
 
   {# Chat Transcript #}
-  {% if session.chatFile %}
-  {% from "partials/chat.njk" import chatDisplay %}
-  <section class="region">
-    {{ chatDisplay(session.chatFile) }}
-  </section>
-  {% endif %}
+  {{ chatDisplay(eventData.chatMessages) }}
 
-  {# More Sessions #}
-  <section class="region flow">
-    <h2 class="text-center">More from nullEDGE 2025</h2>
-    <div class="sessions-grid-compact">
-      {% set displayedCount = 0 %}
-      {% for otherSession in sessions2025 %}
-        {% if otherSession.id != session.id and displayedCount < 6 %}
-        <a href="/2025/conference/{{ otherSession.title | slugify }}/" class="session-card-compact">
-          <div class="session-thumbnail">
-            <img src="https://i.ytimg.com/vi/{{ otherSession.id }}/mqdefault.jpg" alt="{{ otherSession.title }}" loading="lazy">
-            <div class="session-duration">{{ otherSession.duration }} min</div>
-          </div>
-          <div class="session-info-compact">
-            <h3 class="session-title-compact">{{ otherSession.title }}</h3>
-            {% if otherSession.speakers.length > 0 %}
-            <p class="session-speaker-compact">{{ otherSession.speakers | join(', ') }}</p>
-            {% endif %}
-          </div>
-        </a>
-        {% set displayedCount = displayedCount + 1 %}
-        {% endif %}
-      {% endfor %}
-    </div>
-    
-    <div class="text-center" style="margin-top: 2rem;">
-      <a href="/2025/conference" class="btn btn-lg btn-primary">View All Sessions</a>
-    </div>
+  {# Back to Conference #}
+  <section class="back-navigation">
+    <a href="/2025/conference" class="button button-secondary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"/>
+        <polyline points="12 19 5 12 12 5"/>
+      </svg>
+      Back to Conference Schedule
+    </a>
   </section>
 </div>
 
 <style>
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: hsl(var(--primary));
-    text-decoration: none;
-    font-size: var(--size-step--1);
-    margin-bottom: 1rem;
+  .session-header {
+    text-align: center;
+    padding: var(--space-l) 0;
   }
 
-  .back-link:hover {
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--size-step--1);
+    color: var(--color-text-muted);
+    justify-content: center;
+    margin-bottom: var(--space-m);
+  }
+
+  .breadcrumb a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
     text-decoration: underline;
   }
 
-  .session-meta-group {
+  .breadcrumb span {
+    color: var(--color-text-muted);
+  }
+
+  .session-header h1 {
+    margin: 0 0 var(--space-m) 0;
+    font-size: var(--size-step-3);
+  }
+
+  .session-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
-    margin: 1.5rem 0;
-    padding: 1rem 0;
-    border-top: 1px solid hsl(var(--border));
-    border-bottom: 1px solid hsl(var(--border));
+    gap: var(--space-m);
+    justify-content: center;
+    align-items: center;
   }
 
   .meta-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: var(--size-step--1);
-    color: hsl(var(--muted-foreground));
+    gap: var(--space-xs);
+    font-size: var(--size-step-0);
+    color: var(--color-text);
   }
 
   .meta-item svg {
+    color: var(--color-primary);
     flex-shrink: 0;
-    color: hsl(var(--primary));
   }
 
-  .video-container-large {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
+  .video-section {
+    margin: var(--space-xl) 0;
+  }
+
+  .video-container {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #000;
+    border-radius: var(--border-radius);
     overflow: hidden;
-    border-radius: var(--radius);
-    background: hsl(var(--muted));
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
 
-  .video-container-large lite-youtube {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .video-container iframe {
     width: 100%;
     height: 100%;
+    display: block;
   }
 
   .video-actions {
     display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--space-m);
   }
 
-  .video-actions .btn {
+  .video-actions .button {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-xs);
   }
 
-  .sessions-grid-compact {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
-    gap: var(--space-l);
+  .chat-section {
+    margin: var(--space-xl) 0;
+    padding: var(--space-l);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
   }
 
-  .session-card-compact {
-    display: flex;
-    flex-direction: column;
-    background: hsl(var(--card));
-    border: 2px solid hsl(var(--border));
-    border-radius: var(--radius);
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s ease;
-  }
-
-  .session-card-compact:hover {
-    border-color: hsl(var(--primary));
-    box-shadow: 0 8px 16px hsl(var(--primary) / 0.1);
-  }
-
-  .session-thumbnail {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%;
-    background: hsl(var(--muted));
-    overflow: hidden;
-  }
-
-  .session-thumbnail img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .session-duration {
-    position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    background: hsl(var(--background) / 0.9);
-    color: hsl(var(--foreground));
-    font-size: var(--size-step--2);
-    font-weight: 600;
-    border-radius: calc(var(--radius) - 2px);
-  }
-
-  .session-info-compact {
-    padding: var(--space-m);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .session-title-compact {
-    font-size: var(--size-step-0);
-    font-weight: 600;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  .session-speaker-compact {
-    font-size: var(--size-step--1);
-    color: hsl(var(--muted-foreground));
-    margin: 0;
-  }
-
-  /* Chat Section Styles */
   .chat-section h2 {
-    font-size: var(--size-step-2);
-    font-weight: 700;
-    margin-bottom: var(--space-m);
+    margin: 0 0 var(--space-xs) 0;
   }
 
-  .chat-container {
-    background: hsl(var(--muted) / 0.1);
-    border: 2px solid hsl(var(--border));
-    border-radius: var(--radius);
-    padding: var(--space-m);
-    max-height: 600px;
-    overflow-y: auto;
-    font-family: 'Courier New', monospace;
+  .text-muted {
+    color: var(--color-text-muted);
     font-size: var(--size-step--1);
-    line-height: 1.6;
   }
 
-  .chat-message {
-    margin-bottom: 0.5rem;
-    word-wrap: break-word;
+  .back-navigation {
+    margin: var(--space-xl) 0;
+    text-align: center;
   }
 
-  .chat-time {
-    color: hsl(var(--muted-foreground));
-    font-weight: 600;
-  }
-
-  .chat-author {
-    color: hsl(var(--primary));
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .chat-author:hover {
-    text-decoration: underline;
-  }
-
-  .chat-author-plain {
-    color: hsl(var(--foreground));
-    font-weight: 600;
-  }
-
-  .chat-text {
-    color: hsl(var(--foreground));
-  }
-
-  .chat-giphy {
-    max-width: 300px;
-    max-height: 200px;
-    margin-top: 0.25rem;
-    border-radius: calc(var(--radius) - 2px);
-    display: block;
-  }
-
-  .chat-giphy-link {
-    display: inline-block;
-  }
-
-  .chat-giphy-link:hover .chat-giphy {
-    opacity: 0.8;
-    transition: opacity 0.2s ease;
-  }
-
-  /* Remove external link icon from chat links */
-  .chat-container a[target="_blank"]::after {
-    content: none !important;
+  .back-navigation .button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
   }
 
   @media (max-width: 768px) {
-    .session-meta-group {
+    .session-header h1 {
+      font-size: var(--size-step-2);
+    }
+
+    .session-meta {
       flex-direction: column;
-      gap: 1rem;
-    }
-
-    .video-actions {
-      flex-direction: column;
-    }
-
-    .video-actions .btn {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .chat-container {
-      max-height: 400px;
+      gap: var(--space-s);
     }
   }
-
-  /* Lite YouTube Embed Styles */
-  {% include "../../assets/css/local/lite-youtube.css" %}
 </style>
-
-<script type="module">
-  import 'https://cdn.jsdelivr.net/npm/@justinribeiro/lite-youtube@1.5.0/lite-youtube.js';
-</script>

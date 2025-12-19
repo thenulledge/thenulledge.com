@@ -31,30 +31,14 @@ function parseCSVLine(line) {
 }
 
 /**
- * Parses a chat CSV file and returns an array of message objects
+ * Parses the Event chat.csv file and returns messages
  */
-export function parseChatFile(filename) {
-  if (!filename) {
-    return [];
-  }
-
-  // Try multiple possible locations for chat files
-  const possiblePaths = [
-    path.join(__dirname, '../../pages/2025/chats', filename),
-    path.join(__dirname, '../../pages/2026/chats', filename),
-    path.join(__dirname, '../../_data/chats', filename)
-  ];
+export default function() {
+  const chatDir = path.join(__dirname, '../pages/2025/chats');
+  const filePath = path.join(chatDir, 'Event chat.csv');
   
-  let filePath = null;
-  for (const testPath of possiblePaths) {
-    if (fs.existsSync(testPath)) {
-      filePath = testPath;
-      break;
-    }
-  }
-  
-  if (!filePath) {
-    console.warn(`Chat file not found: ${filename}`);
+  if (!fs.existsSync(filePath)) {
+    console.warn('Event chat.csv not found');
     return [];
   }
   
@@ -78,10 +62,8 @@ export function parseChatFile(filename) {
     const messages = [];
     for (let i = 1; i < lines.length; i++) {
       const fields = parseCSVLine(lines[i]);
-      
       const text = fields[textIndex] || '';
       
-      // Only add messages with text
       if (text && text.trim()) {
         messages.push({
           time: fields[timeIndex] || '',
@@ -95,9 +77,7 @@ export function parseChatFile(filename) {
     
     return messages;
   } catch (error) {
-    console.error(`Error parsing chat file ${filename}:`, error);
+    console.error('Error parsing Event chat.csv:', error);
     return [];
   }
 }
-
-export default { parseChatFile };

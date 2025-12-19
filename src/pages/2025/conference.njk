@@ -1,9 +1,20 @@
+---js
+{
+  layout: "base",
+  title: "nullEDGE 2025 — Retrospective",
+  description: "Retrospective for the nullEDGE 2025 conference: session videos, feedback and resources",
+  permalink: "/2025/conference/",
+  eleventyComputed: {
+    nullEDGE: (data) => {
+      // Find the nullEDGE event from events2025Array
+      return data.events2025Array.find(e => e.id === "2025-nulledge");
+    }
+  }
+}
 ---
-layout: base
-title: "nullEDGE 2025 — Retrospective"
-description: "Retrospective for the nullEDGE 2025 conference: session videos, feedback and resources"
-permalink: /2025/conference/
----
+
+{# Import partials #}
+{% from "partials/chat.njk" import chatDisplay %}
 
 <div class="container wrapper flow">
   {# Hero Section #}
@@ -21,6 +32,10 @@ permalink: /2025/conference/
       <a href="#highlights" class="toc-card">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         <span>Highlights</span>
+      </a>
+      <a href="#event-chat" class="toc-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Event Chat</span>
       </a>
       <a href="#session-schedule" class="toc-card">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
@@ -50,6 +65,7 @@ permalink: /2025/conference/
         nullEDGE 2025 brought together platform engineers, product owners and community leaders to discuss practical approaches to observability, cost optimization, and scalable platform design. Below are session replays and resources to help you catch up.
       </p>
       <div class="quick-links">
+        <a href="#event-chat">Event Chat</a>
         <a href="#session-schedule">Session Schedule</a>
         <a href="mailto:{{ meta.email }}?subject=nullEDGE%202025%20Feedback">Share Your Feedback</a>
       </div>
@@ -64,7 +80,7 @@ permalink: /2025/conference/
     </div>
 
     <div class="sessions-grid">
-      {% for session in sessions2025 %}
+      {% for session in nullEDGE.sessions %}
         {% if session.id %}
           <div class="session-card">
             {# Session Thumbnail - Links to session page #}
@@ -107,6 +123,12 @@ permalink: /2025/conference/
         {% endif %}
       {% endfor %}
     </div>
+  </section>
+
+
+  {# Event Chat #}
+  <section id="event-chat" class="region flow">
+    {{ chatDisplay(eventChat) }}
   </section>
 
   {# Contributors Section #}
@@ -153,10 +175,10 @@ permalink: /2025/conference/
     </div>
 
     <div class="sponsors-grid">
-      {% for sponsor in sponsors %}
+      {% for sponsor in nullEDGE.sponsors %}
       <div class="sponsor-item">
         <a href="{{ sponsor.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-link">
-          <img src="/assets/images{{ sponsor.logo }}" alt="{{ sponsor.name }}" loading="lazy">
+          <img src="/assets/images{{ sponsor.logo }}" alt="{{ sponsor.name }}" loading="lazy" width="200" height="auto">
           <p class="sponsor-name">{{ sponsor.name }}</p>
         </a>
       </div>

@@ -31,6 +31,7 @@ export default async function (eleventyConfig) {
   // --------------------- custom wtach targets
   eleventyConfig.addWatchTarget('./src/assets/**/*.{css,js,svg,png,jpeg}');
   eleventyConfig.addWatchTarget('./src/_includes/**/*.{webc}');
+  eleventyConfig.addWatchTarget('./src/pages/**/*.js');
 
   // --------------------- layout aliases
   eleventyConfig.addLayoutAlias('base', 'base.njk');
@@ -75,11 +76,14 @@ export default async function (eleventyConfig) {
   eleventyConfig.addFilter('toIsoString', filters.toISOString);
   eleventyConfig.addFilter('formatDate', filters.formatDate);
   eleventyConfig.addFilter('formatDateWithTimezone', filters.formatDateWithTimezone);
+  eleventyConfig.addFilter('formatDateShort', filters.formatDateShort);
   eleventyConfig.addFilter('markdownFormat', filters.markdownFormat);
   eleventyConfig.addFilter('splitlines', filters.splitlines);
   eleventyConfig.addFilter('alphabetic', filters.sortAlphabetically);
   eleventyConfig.addFilter('slugify', filters.slugifyString);
   eleventyConfig.addFilter('parseChatFile', filters.parseChatFile);
+  eleventyConfig.addFilter('sortEventsByDate', filters.sortEventsByDate);
+  eleventyConfig.addFilter('eventsToArray', filters.eventsToArray);
 
   // --------------------- Shortcodes
   eleventyConfig.addShortcode('svg', shortcodes.svgShortcode);
@@ -95,16 +99,13 @@ export default async function (eleventyConfig) {
   // --------------------- Passthrough File Copy
 
   // -- same path
-  ['src/assets/fonts/', 'src/assets/images/template', 'src/assets/og-images'].forEach(path =>
+  ['src/assets/fonts/', 'src/assets/images/template', 'src/assets/images/expoBooths', 'src/assets/og-images'].forEach(path =>
     eleventyConfig.addPassthroughCopy(path)
   );
 
   eleventyConfig.addPassthroughCopy({
     // -- to root
-    'src/assets/images/favicon/*': '/',
-
-    // -- node_modules
-    'node_modules/lite-youtube-embed/src/lite-yt-embed.{css,js}': `assets/components/`
+    'src/assets/images/favicon/*': '/'
   });
 
   // ----------------------  ignore test files (no longer needed, pa11y deleted)

@@ -1,0 +1,84 @@
+{# Hero Section Macro
+Usage:
+{% from "partials/stats.njk" import stats %}
+{{ stats(
+  title="Join 1,000+ ServiceNow Folks FREE",
+  subtitle="Deep technical sessions, real code, and zero sales pitches",
+  statItems=[
+    { icon: "fa-solid fa-users", value: "1,000+", label: "Attendees" },
+    { icon: "fa-solid fa-microchip", value: "50+", label: "Technical Sessions" },
+    { icon: "fa-solid fa-globe", value: "4", label: "Global Events" }
+  ],
+  primaryCtaText="View 2026 Events",
+  primaryCtaLink="#events"
+) }}
+#}
+
+{% macro stats(title, subtitle="", statItems=[], primaryCtaText="", primaryCtaLink="") %}
+<section class="stats-section">
+  <div class="container">
+    <h2 class="section-title">{{ title }}</h2>
+    <p class="section-subtitle">{{ subtitle }}</p>
+    
+    <div class="stats-grid">
+      {% for item in statItems %}
+      <div class="stat-item">
+        <div class="stat-number">{{ item.value }}</div>
+        <div class="stat-label">{{ item.label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <div class="text-center" style="margin-top: 2rem;">
+      <a href="{{ primaryCtaLink }}" class="btn btn-lg btn-outline">{{ primaryCtaText }}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Stats Section Styles */
+  .stats-section {
+    padding: 5rem 1rem;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: hsl(var(--muted-foreground));
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: hsl(var(--primary));
+  }
+
+  .stat-label {
+    font-size: var(--size-step-0);
+    color: hsl(var(--muted-foreground));
+  }
+
+  @media (max-width: 768px) {
+    .stats-section {
+      padding: 3rem 1rem;
+    }
+  }
+</style>
+{% endmacro %}

@@ -3,28 +3,14 @@ export const url = process.env.URL || 'http://localhost:8080';
 export const domain = new URL(url).hostname;
 export const name = 'nullEDGE';
 export const siteName = 'theNullEDGE';
-export const description = 'Join 1,000+ ServiceNow practitioners for deep technical sessions, real code, and zero sales pitches. 100% free virtual conference.';
-export const siteDescription = 'Join 1,000+ ServiceNow practitioners for deep technical sessions, real code, and zero sales pitches. 100% free virtual conference.';
+export const email = 'team@getaiinabox.com';
+export const emailName = 'nullEDGE Team';
+export const description = 'Join 1,000+ ServiceNow folks for deep technical sessions, real code, and clear lessons. 100% free virtual conference.';
 export const siteType = 'Organization'; // schema
 export const locale = 'en_EN';
 export const lang = 'en';
 export const skipContent = 'Skip to content';
-export const author = {
-  name: 'nullEDGE Team', 
-  avatar: '/icon-512x512.png', 
-  email: 'team@getaiinabox.com', 
-  website: 'https://thenulledge.com', 
-  fediverse: '@jacebenson@mastodon.social' 
-};
-export const creator = {
-  name: 'Jace Benson', // i.e. Lene Saile - creator's (developer) name.
-  email: 'team@getaiinabox.com',
-  website: 'https://www.jace.pro',
-  social: 'https://linkedin.com/in/jacebenson' // i.e. https://twitter.com/lenesaile - the social profile of the creator
-};
-export const twitter = '@nulledge';
 export const social = {
-  linkedin: 'https://www.linkedin.com/company/thenulledge',
   youtube: 'https://www.youtube.com/@thenulledge'
 };
 export const theme = {
@@ -32,18 +18,13 @@ export const theme = {
   background: '#ffffff',
   text: '#1f2937'
 };
-export const conference2025 = {
-  attendees: '1,000+',
-  speakers: '40+',
-  sessions: '50+'
-};
 export const pathToSvgLogo = 'src/assets/svg/misc/logo.svg'; // used for favicon generation
-export const themeColor = '#dd4462'; // used in manifest, for example primary color value
+//export const themeColor = '#dd4462'; // used in manifest, for example primary color value
+export const themeColor = '#efe154'; // used in manifest, for example primary color value
 export const themeLight = '#f8f8f8'; // used for meta tag theme-color, if light colors are prefered. best use value set for light bg
 export const themeDark = '#2e2e2e'; // used for meta tag theme-color, if dark colors are prefered. best use value set for dark bg
 export const opengraph_default = '/assets/images/template/opengraph-default.jpg'; // fallback/default meta image
-export const opengraph_default_alt =
-  "nullEDGE - Free ServiceNow Conference. Join 1,000+ practitioners for deep technical sessions, real code, and zero sales pitches."; // alt text for default meta image"
+export const opengraph_default_alt = `nullEDGE - Free ServiceNow Conference. ${description}`; // alt text for default meta image
 export const navigation = {
   navLabel: 'Menu',
   ariaTop: 'Main',
@@ -51,9 +32,4 @@ export const navigation = {
   ariaPlatforms: 'Platforms',
   drawerNav: false,
   subMenu: false
-};
-export const viewRepo = {
-  // this is for the view/edit on github link. The value in the package.json will be pulled in.
-  allow: true,
-  infoText: 'View this page on GitHub'
 };

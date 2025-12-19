@@ -15,10 +15,6 @@ export default {
     {
       text: 'Sponsors',
       url: '/sponsors/'
-    },
-    {
-      text: 'About',
-      url: '/about/'
     }
   ],
   bottom: [

@@ -1,0 +1,230 @@
+---js
+{
+  pagination: {
+    data: "events2026Array",
+    size: 1,
+    alias: "eventData"
+  },
+  layout: "event",
+  eleventyComputed: {
+    title: (data) => {
+      const date = new Date(data.eventData.when.start);
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = date.toLocaleDateString('en-US', options);
+      return `${data.eventData.name} - ${formattedDate}`;
+    },
+    description: (data) => data.eventData.description,
+    permalink: (data) => `${data.eventData.url}/`,
+    ctaTitle: (data) => data.eventData.registrationUrl ? "Register Now" : "Stay Tuned",
+    ctaDescription: (data) => data.eventData.registrationUrl ? (data.eventData.ctaDescription || `Save your spot for ${data.eventData.name}`) : `Registration opens soon for ${data.eventData.name}`,
+    region: (data) => data.eventData.region || 'global',
+    event: (data) => data.eventData
+  }
+}
+---
+
+{# Import all partials #}
+{% from "partials/hero.njk" import hero %}
+{% from "partials/info-badges.njk" import infoBadges %}
+{% from "partials/feature-grid.njk" import featureGrid %}
+{% from "partials/two-column-lists.njk" import twoColumnLists %}
+{% from "partials/cta-banner.njk" import ctaBanner %}
+{% from "partials/events-timeline.njk" import eventsTimeline %}
+{% from "partials/timezone-display.njk" import timezoneDisplay %}
+{% from "partials/speaker-highlights.njk" import speakerHighlights %}
+{% from "partials/event-faq.njk" import eventFaq %}
+
+{# Hero Section #}
+{{ hero(
+  title=eventData.name,
+  subtitle=eventData.description,
+  imageUrl=eventData.heroImage or "",
+  imageAlt=eventData.name ~ " Event",
+  primaryCtaText="Register Free",
+  primaryCtaLink=eventData.registrationUrl,
+  secondaryCtaText="Become a Sponsor",
+  secondaryCtaLink="/sponsors"
+) }}
+
+{# Event Info Badges #}
+{{ infoBadges(items=[
+  {
+    iconClass: "fa-solid fa-calendar",
+    label: "Date",
+    value: eventData.when.start | formatDate('MMMM D, YYYY')
+  },
+  {
+    iconClass: "fa-solid fa-clock",
+    label: "Duration",
+    value: eventData.duration
+  },
+  {
+    iconClass: "fa-solid fa-globe",
+    label: "Location",
+    value: "Virtual Event"
+  },
+  {
+    iconClass: "fa-solid fa-ticket",
+    label: "Cost",
+    value: "100% Free"
+  }
+]) }}
+
+{# Timezone Display #}
+{% if eventData.niceDatesTimes %}
+{{ timezoneDisplay(
+  title="Join us from anywhere in the world",
+  timezones=eventData.niceDatesTimes
+) }}
+{% endif %}
+
+{# Event Format/Details Section - Conditional based on event type #}
+{% if eventData.type == 'networking' %}
+  {# Networking Event Format #}
+  {{ featureGrid(
+    title="Event Format",
+    columns=4,
+    items=[
+      {
+        iconClass: "fa-solid fa-users",
+        title: "Pure Networking",
+        description: "This is a networking-focused event with no formal sessions. Join breakout rooms, participate in discussions, and connect with ServiceNow folks."
+      },
+      {
+        iconClass: "fa-solid fa-globe",
+        title: "Global Reach",
+        description: "Scheduled at a convenient time to accommodate participants across multiple timezones."
+      },
+      {
+        iconClass: "fa-solid fa-clock",
+        title: "90 Minutes",
+        description: "A focused 90-minute event that respects your time while providing meaningful networking opportunities."
+      },
+      {
+        iconClass: "fa-solid fa-hand-holding-dollar",
+        title: "100% Free",
+        description: "No registration fees. Supported by sponsors who believe in growing the ServiceNow community."
+      }
+    ]
+  ) }}
+
+  {# Who Should Attend #}
+  {{ twoColumnLists(
+    title="Who Should Attend",
+    leftTitle="Perfect For:",
+    leftItems=[
+      "ServiceNow developers and architects",
+      "Administrators looking to connect with peers",
+      "Consultants expanding their network",
+      "Anyone interested in the ServiceNow community",
+      "First-time nullEDGE attendees"
+    ],
+    rightTitle="You'll Be Able To:",
+    rightItems=[
+      "Meet ServiceNow professionals from around the world",
+      "Share challenges and solutions with peers",
+      "Discuss trends and opportunities",
+      "Build your professional network",
+      "Learn about the nullEDGE community"
+    ]
+  ) }}
+
+{% elseif eventData.type == 'sessions' %}
+  {# Sessions Event Format #}
+  {{ featureGrid(
+    title="Event Details",
+    columns=4,
+    items=[
+      {
+        iconClass: "fa-solid fa-calendar-days",
+        title: eventData.sessionCount ~ " Technical Sessions",
+        description: "Deep-dive technical sessions covering real-world implementations, best practices, and lessons learned from the ServiceNow community."
+      },
+      {
+        iconClass: "fa-solid fa-chalkboard-user",
+        title: "Expert Speakers",
+        description: "Learn from experienced ServiceNow folks sharing their real-world knowledge and battle-tested solutions."
+      },
+      {
+        iconClass: "fa-solid fa-earth-americas",
+        title: "Regional Focus",
+        description: "Scheduled to accommodate " ~ (eventData.region | upper) ~ " timezones, making it easier for regional folks to participate live."
+      },
+      {
+        iconClass: "fa-solid fa-hand-holding-dollar",
+        title: "100% Free",
+        description: "No registration fees. Community-funded event focused on education over promotion."
+      }
+    ]
+  ) }}
+
+  {# Call for Speakers if active #}
+  {% if eventData.speakerRegistrationUrl %}
+  {{ ctaBanner(
+    title="Call for Speakers",
+    description="We're looking for speakers to share their ServiceNow knowledge and experience. Whether you're a seasoned presenter or sharing for the first time, we'd love to hear from you!",
+    primaryButtonText="Submit a Session Proposal",
+    primaryButtonLink=eventData.speakerRegistrationUrl,
+    metaText="Submissions close: " ~ (eventData.speakerSubmissionEnd | formatDateShort(eventData.timezone))
+  ) }}
+  {% endif %}
+
+{% elseif eventData.type == 'full-day' %}
+  {# Full-Day Conference Format #}
+  {{ featureGrid(
+    title="What to Expect",
+    columns=3,
+    items=[
+      {
+        iconClass: "fa-solid fa-calendar-days",
+        title: (eventData.stats.sessions or '30+') ~ " Sessions",
+        description: "A full day of technical content across multiple tracks covering development, architecture, admin, and emerging ServiceNow technologies."
+      },
+      {
+        iconClass: "fa-solid fa-users",
+        title: "World-Class Speakers",
+        description: "Industry leaders, ServiceNow MVPs, and experienced folks sharing real-world knowledge and proven solutions."
+      },
+      {
+        iconClass: "fa-solid fa-hand-holding-dollar",
+        title: "100% Free",
+        description: "No registration fees, no sales pitches. Just pure technical content and community connection."
+      }
+    ]
+  ) }}
+{% endif %}
+
+{# Speaker Highlights - Shows for any event type if speakers exist #}
+{% if eventData.featuredSpeakers and eventData.featuredSpeakers.length > 0 %}
+{{ speakerHighlights(
+  title="Featured Speakers",
+  subtitle="Learn from experienced ServiceNow folks",
+  speakers=eventData.featuredSpeakers,
+  viewAllLink="/speakers"
+) }}
+{% endif %}
+
+{# Related Events Section #}
+{{ eventsTimeline(
+  title="More nullEDGE 2026 Events",
+  subtitle="Explore other events in the nullEDGE 2026 series",
+  year="2026",
+  eventsData=events['2026']
+) }}
+
+{# Final CTA Banner #}
+{{ ctaBanner(
+  title=ctaTitle,
+  description=ctaDescription,
+  primaryButtonText="Register Free",
+  primaryButtonLink=eventData.registrationUrl,
+  variant="primary"
+) }}
+
+{# FAQ Section #}
+{% if eventData.faqs and eventData.faqs.length > 0 %}
+{{ eventFaq(
+  title="Frequently Asked Questions",
+  faqs=eventData.faqs
+) }}
+{% endif %}
