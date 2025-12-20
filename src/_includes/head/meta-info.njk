@@ -47,22 +47,36 @@
     {{- meta.siteName -}}
   {%- endif -%}"
 />
-<meta
-  property="og:image"
-  content="{%- if layout == 'post' -%}
+{%- set ogImageUrl -%}
+  {%- if ogImage -%}
+    {{- meta.url -}}{{- ogImage -}}
+  {%- elif session -%}
+    {{- meta.url -}}/assets/og-images/session-{{ session.title | slugify }}-preview.jpeg
+  {%- elif eventData and eventData.id -%}
+    {{- meta.url -}}/assets/og-images/event-{{ eventData.id }}-preview.jpeg
+  {%- elif layout == 'post' -%}
     {{- meta.url -}}/assets/og-images/{{ title | slugify }}-preview.jpeg
   {%- else -%}
     {{- meta.url -}}{{- meta.opengraph_default -}}
-  {%- endif -%}"
-/>
-<meta
-  property="og:image:alt"
-  content="{%- if layout == 'post' -%}
-    {{- title -}}
-  {%- else -%}
-    {{- meta.opengraph_default_alt -}}
-  {%- endif -%}"
-/>
+  {%- endif -%}
+{%- endset -%}
+
+{% set ogImageAltText -%}
+{%- if ogImageAlt -%}
+{{- ogImageAlt -}}
+{%- elif session -%}
+{{- session.title -}} - nullEDGE 2025
+{%- elif eventData -%}
+{{- eventData.name -}} - nullEDGE 2026
+{%- elif layout == 'post' -%}
+{{- title -}}
+{%- else -%}
+{{- meta.opengraph_default_alt -}}
+{%- endif -%}
+{%- endset %}
+
+<meta property="og:image" content="{{ ogImageUrl }}" />
+<meta property="og:image:alt" content="{{ ogImageAltText }}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:description" content="{{ metaDescription }}" />
@@ -87,3 +101,6 @@
 <link rel="icon" href="{{ '/favicon.svg' | url }}" type="image/svg+xml" />
 <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | url }}" />
 <link rel="manifest" href="{{ '/site.webmanifest' | url }}" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />

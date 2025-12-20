@@ -47,30 +47,17 @@
     
     <div class="session-meta">
       <div class="meta-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-          <circle cx="9" cy="7" r="4"/>
-          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-        </svg>
+        <i class="fa-solid fa-users" style="font-size: 20px;"></i>
         <span>{{ eventData.speakers | join(", ") }}</span>
       </div>
       
       <div class="meta-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12 6 12 12 16 14"/>
-        </svg>
+        <i class="fa-solid fa-clock" style="font-size: 20px;"></i>
         <span>{{ eventData.duration }} minutes</span>
       </div>
       
       <div class="meta-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-          <line x1="16" y1="2" x2="16" y2="6"/>
-          <line x1="8" y1="2" x2="8" y2="6"/>
-          <line x1="3" y1="10" x2="21" y2="10"/>
-        </svg>
+        <i class="fa-solid fa-calendar" style="font-size: 20px;"></i>
         <span>{{ eventData.published | formatDate('MMMM D, YYYY') }}</span>
       </div>
     </div>
@@ -94,10 +81,7 @@
          target="_blank" 
          rel="noopener noreferrer" 
          class="button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
-          <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
-        </svg>
+        <i class="fa-brands fa-youtube" style="font-size: 20px;"></i>
         Watch on YouTube
       </a>
     </div>
@@ -109,10 +93,7 @@
   {# Back to Conference #}
   <section class="back-navigation">
     <a href="/2025/conference" class="button button-secondary">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="19" y1="12" x2="5" y2="12"/>
-        <polyline points="12 19 5 12 12 5"/>
-      </svg>
+      <i class="fa-solid fa-arrow-left" style="font-size: 20px;"></i>
       Back to Conference Schedule
     </a>
   </section>
@@ -168,7 +149,7 @@
     color: var(--color-text);
   }
 
-  .meta-item svg {
+  .meta-item svg, .meta-item i {
     color: var(--color-primary);
     flex-shrink: 0;
   }

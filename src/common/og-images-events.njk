@@ -1,0 +1,125 @@
+---
+fontDisplay: "'Red Hat Display', 'Arial Black', sans-serif"
+fontBody: "'Atkinson Hyperlegible', Arial, sans-serif"
+background: '#efdf53'
+text: '#1a1a1a'
+siteUrl: 'thenulledge.com'
+pagination:
+  data: collections.events2026
+  size: 1
+  alias: event
+permalink: '/assets/og-images/event-{{ event.id }}-preview.svg'
+eleventyExcludeFromCollections: true
+---
+
+<svg
+  width="1200"
+  height="630"
+  viewBox="0 0 1200 630"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+  {% set eventDate = event.when.start | formatDate('MMMM D, YYYY') %}
+  {% set titleInLines = event.name | splitlines(25) %}
+  {% set descriptionInLines = event.description | splitlines(45) %}
+
+  <!-- Background -->
+  <rect id="bg" width="100%" height="100%" fill="{{ background }}" />
+
+  <!-- Top Bar with Logo -->
+  <g id="header">
+    <!-- Logo Text -->
+    <text
+      font-family="{{ fontDisplay }}"
+      font-size="32"
+      font-weight="900"
+      fill="{{ text }}"
+      letter-spacing="-0.5"
+    >
+      <tspan x="60" y="80">nullEDGE</tspan>
+    </text>
+    
+    <!-- Year -->
+    <text
+      font-family="{{ fontBody }}"
+      font-size="28"
+      font-weight="600"
+      fill="{{ text }}"
+      opacity="0.8"
+    >
+      <tspan x="1080" y="80">2026</tspan>
+    </text>
+  </g>
+
+  <!-- Event Name -->
+  <text
+    id="event-name"
+    font-family="{{ fontDisplay }}"
+    font-size="76"
+    font-weight="900"
+    fill="{{ text }}"
+    letter-spacing="-2"
+  >
+    {% for line in titleInLines %}
+      <tspan x="60" y="{{ 200 + loop.index0 * 90 }}">{{ line }}</tspan>
+    {% endfor %}
+  </text>
+
+  <!-- Event Date -->
+  <g id="event-meta">
+    <text
+      font-family="{{ fontBody }}"
+      font-size="32"
+      font-weight="600"
+      fill="{{ text }}"
+      opacity="0.85"
+      letter-spacing="-0.5"
+    >
+      <tspan x="60" y="380">📅 {{ eventDate }}</tspan>
+    </text>
+    
+    <text
+      font-family="{{ fontBody }}"
+      font-size="32"
+      font-weight="600"
+      fill="{{ text }}"
+      opacity="0.85"
+      letter-spacing="-0.5"
+    >
+      <tspan x="60" y="425">🌍 Virtual Event</tspan>
+    </text>
+  </g>
+
+  <!-- Event Description -->
+  <text
+    font-family="{{ fontBody }}"
+    font-size="26"
+    font-weight="400"
+    fill="{{ text }}"
+    opacity="0.75"
+    letter-spacing="-0.3"
+  >
+    {% for line in descriptionInLines %}
+      {% if loop.index0 < 2 %}
+        <tspan x="60" y="{{ 485 + loop.index0 * 34 }}">{{ line }}</tspan>
+      {% endif %}
+    {% endfor %}
+  </text>
+
+  <!-- Footer URL -->
+  <text
+    font-family="{{ fontBody }}"
+    font-size="24"
+    font-weight="500"
+    fill="{{ text }}"
+    opacity="0.7"
+    letter-spacing="-0.5"
+  >
+    <tspan x="60" y="580">{{ siteUrl }}</tspan>
+  </text>
+
+  <!-- Decorative Element -->
+  <rect x="0" y="0" width="8" height="630" fill="{{ text }}" opacity="0.15" />
+
+</svg>

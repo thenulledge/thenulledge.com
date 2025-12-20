@@ -1,0 +1,115 @@
+---
+fontDisplay: "'Red Hat Display', 'Arial Black', sans-serif"
+fontBody: "'Atkinson Hyperlegible', Arial, sans-serif"
+background: '#efdf53'
+text: '#1a1a1a'
+siteUrl: 'thenulledge.com'
+pagination:
+  data: collections.sessions2025
+  size: 1
+  alias: session
+permalink: '/assets/og-images/session-{{ session.title | slugify }}-preview.svg'
+eleventyExcludeFromCollections: true
+---
+
+<svg
+  width="1200"
+  height="630"
+  viewBox="0 0 1200 630"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+  {% set titleInLines = session.title | splitlines(30) %}
+  {% set numberOfLines = titleInLines.length %}
+  {% if numberOfLines == 1 %}
+    {% set verticalStartingPoint = 280 %}
+    {% set fontSize = 72 %}
+  {% elseif numberOfLines == 2 %}
+    {% set verticalStartingPoint = 240 %}
+    {% set fontSize = 68 %}
+  {% elseif numberOfLines == 3 %}
+    {% set verticalStartingPoint = 210 %}
+    {% set fontSize = 60 %}
+  {% else %}
+    {% set verticalStartingPoint = 190 %}
+    {% set fontSize = 54 %}
+  {% endif %}
+
+  <!-- Background -->
+  <rect id="bg" width="100%" height="100%" fill="{{ background }}" />
+
+  <!-- Top Bar with Logo and Year -->
+  <g id="header">
+    <!-- Logo Text (simplified, since we can't easily embed PNG in SVG for 11ty) -->
+    <text
+      font-family="{{ fontDisplay }}"
+      font-size="32"
+      font-weight="900"
+      fill="{{ text }}"
+      letter-spacing="-0.5"
+    >
+      <tspan x="60" y="80">nullEDGE</tspan>
+    </text>
+    
+    <!-- Year -->
+    <text
+      font-family="{{ fontBody }}"
+      font-size="28"
+      font-weight="600"
+      fill="{{ text }}"
+      opacity="0.8"
+    >
+      <tspan x="1080" y="80">2025</tspan>
+    </text>
+  </g>
+
+  <!-- Session Title -->
+  <text
+    id="title"
+    font-family="{{ fontDisplay }}"
+    font-size="{{ fontSize }}"
+    font-weight="900"
+    fill="{{ text }}"
+    letter-spacing="-2"
+  >
+    {% for line in titleInLines %}
+      <tspan x="60" y="{{ verticalStartingPoint + loop.index0 * (fontSize + 15) }}">{{ line }}</tspan>
+    {% endfor %}
+  </text>
+
+  <!-- Speaker Info -->
+  <g id="speaker-info">
+    {% set speakerText = session.speakers | join(", ") %}
+    {% set speakerLines = speakerText | splitlines(40) %}
+    
+    <text
+      font-family="{{ fontBody }}"
+      font-size="28"
+      font-weight="500"
+      fill="{{ text }}"
+      opacity="0.85"
+      letter-spacing="-0.5"
+    >
+      {% for line in speakerLines %}
+        <tspan x="60" y="{{ 480 + loop.index0 * 36 }}">{{ line }}</tspan>
+      {% endfor %}
+    </text>
+  </g>
+
+  <!-- Footer URL -->
+  <text
+    font-family="{{ fontBody }}"
+    font-size="24"
+    font-weight="500"
+    fill="{{ text }}"
+    opacity="0.7"
+    letter-spacing="-0.5"
+  >
+    <tspan x="60" y="580">{{ siteUrl }}</tspan>
+  </text>
+
+  <!-- Decorative Element (corner accent) -->
+  <rect x="0" y="0" width="8" height="630" fill="{{ text }}" opacity="0.15" />
+
+</svg>

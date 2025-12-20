@@ -70,10 +70,7 @@
                    loading="lazy"
                    class="session-thumbnail">
               <div class="play-overlay">
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
-                  <circle cx="12" cy="12" r="10" opacity="0.9"/>
-                  <polygon points="10 8 16 12 10 16" fill="white"/>
-                </svg>
+                <i class="fa-solid fa-circle-play" style="font-size: 64px;"></i>
               </div>
             </a>
             
@@ -85,12 +82,12 @@
               
               <div class="session-meta">
                 <div class="meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <i class="fa-solid fa-clock" style="font-size: 16px;"></i>
                   <span>{{ session.duration }} min</span>
                 </div>
                 
                 <div class="meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <i class="fa-solid fa-users" style="font-size: 16px;"></i>
                   <span>{{ session.speakers | join(", ") }}</span>
                 </div>
               </div>
@@ -221,6 +218,16 @@
     border-color: var(--color-primary);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .toc-card i {
+    font-size: 24px;
+    color: var(--color-primary);
+    transition: color 0.2s ease;
+  }
+
+  .toc-card:hover i {
+    color: var(--color-bg);
   }
 
   .toc-card svg {
@@ -367,7 +374,7 @@
     color: var(--color-text-muted);
   }
 
-  .meta-item svg {
+  .meta-item svg, .meta-item i {
     flex-shrink: 0;
     color: var(--color-primary);
   }

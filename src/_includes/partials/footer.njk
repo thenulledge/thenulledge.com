@@ -25,10 +25,10 @@
     </div>
 
     <aside class="footer-credit">
-      Made with <span class="visually-hidden">love</span><span class="heart-icon">{% svg "misc/heart" %}</span> and
+      Made with <span class="visually-hidden">love</span><span class="heart-icon"><i class="fa-solid fa-heart"></i></span> and
       <a href="https://www.11ty.dev/" title="Eleventy">
         <span class="visually-hidden">Eleventy</span>
-        {% svg "misc/11ty" %}
+        <i class="fa-solid fa-code"></i>
       </a>
       by {{ meta.emailName }}
     </aside>
@@ -131,7 +131,7 @@
     box-shadow: 0 4px 8px hsl(var(--primary) / 0.2);
   }
 
-  .social-link svg {
+  .social-link svg, .social-link i {
     width: 1.25rem;
     height: 1.25rem;
   }
@@ -159,7 +159,7 @@
     color: hsl(var(--primary));
   }
 
-  .footer-credit svg {
+  .footer-credit svg, .footer-credit i {
     width: 1rem;
     height: 1rem;
     display: inline-block;
