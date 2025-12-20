@@ -1,0 +1,38 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "{{ eventData.name }}",
+    "description": "{{ eventData.description }}",
+    "startDate": "{{ eventData.when.start }}",
+    "endDate": "{{ eventData.when.end }}",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "location": {
+      "@type": "VirtualLocation",
+      "url": "{{ meta.url }}{{ eventData.url }}"
+    },
+    "image": "{{ meta.url }}/assets/og-images/event-{{ eventData.id }}-preview.jpeg",
+    "organizer": {
+      "@type": "Organization",
+      "@id": "{{ meta.url }}#organization"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "{{ eventData.registrationUrl }}",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }{% if eventData.featuredSpeakers and eventData.featuredSpeakers.length > 0 %},
+    "performer": [
+      {% for speaker in eventData.featuredSpeakers %}
+      {
+        "@type": "Person",
+        "name": "{{ speaker.name }}"{% if speaker.image %},
+        "image": "{{ meta.url }}{{ speaker.image }}"{% endif %}{% if speaker.bio %},
+        "description": "{{ speaker.bio }}"{% endif %}
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]{% endif %}
+  }
+</script>

@@ -1,0 +1,30 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "{{ session.title }}",
+    "description": "{{ description }}",
+    "thumbnailUrl": "{{ meta.url }}/assets/og-images/session-{{ session.title | slugify }}-preview.jpeg",
+    "uploadDate": "{{ session.published | toIsoString }}",
+    "duration": "PT{{ session.duration }}M",
+    "embedUrl": "https://www.youtube.com/embed/{{ session.id }}",
+    "contentUrl": "https://www.youtube.com/watch?v={{ session.id }}",
+    "publisher": {
+      "@type": "Organization",
+      "@id": "{{ meta.url }}#organization"
+    }{% if session.speakers and session.speakers.length > 0 %},
+    "author": [
+      {% for speaker in session.speakers %}
+      {
+        "@type": "Person",
+        "name": "{{ speaker }}"
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]{% endif %},
+    "isPartOf": {
+      "@type": "Event",
+      "name": "nullEDGE 2025",
+      "url": "{{ meta.url }}/2025/conference"
+    }
+  }
+</script>

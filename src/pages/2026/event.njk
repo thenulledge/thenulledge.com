@@ -6,6 +6,7 @@
     alias: "eventData"
   },
   layout: "event",
+  schema: "Event",
   eleventyComputed: {
     title: (data) => {
       const date = new Date(data.eventData.when.start);

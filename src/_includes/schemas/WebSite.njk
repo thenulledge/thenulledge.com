@@ -8,7 +8,25 @@
         "url": "{{ meta.url }}",
         "name": "{{ meta.siteName }}",
         "description": "{{ meta.siteDescription }}",
-        "inLanguage": "{{ meta.locale }}"
+        "inLanguage": "{{ meta.locale }}",
+        "publisher": {
+          "@id": "{{ meta.url }}#organization"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "{{ meta.url }}#organization",
+        "name": "{{ meta.siteName }}",
+        "url": "{{ meta.url }}",
+        "email": "{{ meta.email }}",
+        "description": "{{ meta.description }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ meta.url }}/assets/images/nullEDGElogo.png"
+        },
+        "sameAs": [
+          "{{ meta.social.youtube }}"
+        ]
       }
     ]
   }

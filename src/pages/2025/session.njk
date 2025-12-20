@@ -13,6 +13,7 @@
     }
   },
   layout: "base",
+  schema: "VideoObject",
   eleventyComputed: {
     title: (data) => `${data.eventData.title} - nullEDGE 2025`,
     description: (data) => `Watch ${data.eventData.title} from nullEDGE 2025 featuring ${data.eventData.speakers.join(', ')}`,
@@ -24,7 +25,12 @@
     event: (data) => {
       // Find the nullEDGE event from events2025Array
       return data.events2025Array.find(e => e.id === "2025-nulledge");
-    }
+    },
+    breadcrumb: (data) => ({
+      parent: "nullEDGE 2025",
+      parentUrl: "/2025/conference",
+      current: data.eventData.title
+    })
   }
 }
 ---

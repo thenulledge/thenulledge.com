@@ -36,7 +36,13 @@
 
 <!-- Open Graph meta  -->
 <meta property="og:url" content="{{ meta.url }}{{ page.url }}" />
+{% if session %}
+<meta property="og:type" content="video.other" />
+{% elif eventData and eventData.id %}
+<meta property="og:type" content="event" />
+{% else %}
 <meta property="og:type" content="website" />
+{% endif %}
 <meta
   property="og:title"
   content="{%- if discover.title -%}
@@ -83,6 +89,22 @@
 <meta property="og:site_name" content="{{ meta.siteName }}" />
 <meta property="og:locale" content="{{ meta.locale }}" />
 <meta property="article:author" content="{{ meta.author.name }}" />
+
+{% if session %}
+<!-- Video-specific Open Graph tags -->
+<meta property="og:video" content="https://www.youtube.com/watch?v={{ session.id }}" />
+<meta property="og:video:url" content="https://www.youtube.com/watch?v={{ session.id }}" />
+<meta property="og:video:secure_url" content="https://www.youtube.com/watch?v={{ session.id }}" />
+<meta property="og:video:type" content="text/html" />
+<meta property="og:video:width" content="1280" />
+<meta property="og:video:height" content="720" />
+<meta property="video:duration" content="{{ session.duration * 60 }}" />
+<meta property="video:release_date" content="{{ session.published | toIsoString }}" />
+{% elif eventData and eventData.when %}
+<!-- Event-specific Open Graph tags -->
+<meta property="event:start_time" content="{{ eventData.when.start }}" />
+<meta property="event:end_time" content="{{ eventData.when.end }}" />
+{% endif %}
 
 <!-- Twitter specific head data was removed in v2 -->
 
