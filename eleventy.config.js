@@ -79,6 +79,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addFilter('formatDate', filters.formatDate);
   eleventyConfig.addFilter('formatDateWithTimezone', filters.formatDateWithTimezone);
   eleventyConfig.addFilter('formatDateShort', filters.formatDateShort);
+  eleventyConfig.addFilter('formatDateShortEST', filters.formatDateShortEST);
   eleventyConfig.addFilter('markdownFormat', filters.markdownFormat);
   eleventyConfig.addFilter('splitlines', filters.splitlines);
   eleventyConfig.addFilter('alphabetic', filters.sortAlphabetically);
@@ -87,6 +88,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addFilter('sortEventsByDate', filters.sortEventsByDate);
   eleventyConfig.addFilter('eventsToArray', filters.eventsToArray);
   eleventyConfig.addFilter('urlEncode', filters.urlEncode);
+  eleventyConfig.addFilter('nlToBr', filters.nlToBr);
 
   // --------------------- Shortcodes
   eleventyConfig.addShortcode('image', shortcodes.imageShortcode);
