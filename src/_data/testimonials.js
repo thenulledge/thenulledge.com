@@ -11,7 +11,6 @@ function shuffleArray(array) {
   }
   return shuffled;
 }
-
 const testimonials = [
   {
     name: 'Ty Roach',
