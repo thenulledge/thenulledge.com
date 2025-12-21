@@ -12,42 +12,92 @@ Set these variables before including:
     
     <div class="testimonials-masonry">
       {% for testimonial in testimonials %}
-      <a href="{{ testimonial.sessionLink }}:~:text={{testimonial.quote | urlEncode}}" class="testimonial-card">
-        <div class="testimonial-header">
-          <div class="testimonial-photo">
-            {% if testimonial.photo %}
-            <img 
-              src="{{ testimonial.photo }}" 
-              alt="{{ testimonial.name }}"
-              loading="lazy"
-            />
-            {% else %}
-            <div class="testimonial-placeholder">
-              {% set nameParts = testimonial.name.split(' ') %}
-              <span class="testimonial-initials">
-                {{ nameParts[0][0] }}{{ nameParts[nameParts.length - 1][0] }}
-              </span>
-            </div>
+        {# Determine platform from link #}
+        {% set platform = "none" %}
+        {% set hasLink = testimonial.link and testimonial.link != "" %}
+        {% set finalLink = "" %}
+        
+        {% if hasLink %}
+          {% if "thenulledge.com" in testimonial.link %}
+            {% set platform = "nulledge" %}
+            {% set finalLink = testimonial.link + ":~:text=" + (testimonial.quote | urlEncode) %}
+          {% elif "linkedin.com" in testimonial.link %}
+            {% set platform = "linkedin" %}
+            {% set finalLink = testimonial.link %}
+          {% elif "twitter.com" in testimonial.link or "x.com" in testimonial.link %}
+            {% set platform = "twitter" %}
+            {% set finalLink = testimonial.link %}
+          {% elif "discord.com" in testimonial.link or "discord.gg" in testimonial.link %}
+            {% set platform = "discord" %}
+            {% set finalLink = testimonial.link %}
+          {% elif "slack.com" in testimonial.link %}
+            {% set platform = "slack" %}
+            {% set finalLink = testimonial.link %}
+          {% else %}
+            {% set platform = "generic" %}
+            {% set finalLink = testimonial.link %}
+          {% endif %}
+        {% endif %}
+        
+        {# All platforms use custom styled cards #}
+        
+        {# Conditional wrapper - <a> if has link, <div> if not #}
+        {% if hasLink %}
+        <a href="{{ finalLink }}" 
+           class="testimonial-card testimonial-{{ platform }}"
+           {% if platform != "nulledge" %}target="_blank" rel="noopener noreferrer"{% endif %}>
+        {% else %}
+        <div class="testimonial-card testimonial-none">
+        {% endif %}
+        
+          <div class="testimonial-header">
+            {# Avatar image - only show if avatarImage exists #}
+            {% if testimonial.avatarImage %}
+              <div class="testimonial-avatar">
+                <img src="{{ testimonial.avatarImage }}" alt="{{ testimonial.name }}" class="testimonial-avatar-img">
+              </div>
             {% endif %}
+            
+            {# Name and optional role #}
+            <div class="testimonial-meta">
+              <div class="testimonial-name">
+                {{ testimonial.name }}
+                {# Platform icon - inline with name #}
+                {% if platform != "none" %}
+                  <span class="testimonial-platform-icon">
+                    {% if platform == "nulledge" %}
+                      <img src="/assets/images/nullEDGEicon.png" alt="nullEDGE" class="platform-logo" />
+                    {% elif platform == "linkedin" %}
+                      <i class="fa-brands fa-linkedin"></i>
+                    {% elif platform == "twitter" %}
+                      <i class="fa-brands fa-x-twitter"></i>
+                    {% elif platform == "discord" %}
+                      <i class="fa-brands fa-discord"></i>
+                    {% elif platform == "slack" %}
+                      <i class="fa-brands fa-slack"></i>
+                    {% else %}
+                      <i class="fa-solid fa-quote-left"></i>
+                    {% endif %}
+                  </span>
+                {% endif %}
+              </div>
+              {% if testimonial.role %}
+                <div class="testimonial-role">{{ testimonial.role }}</div>
+              {% endif %}
+            </div>
           </div>
           
-          <div class="testimonial-meta">
-            <div class="testimonial-name">{{ testimonial.name }}</div>
-            {% if testimonial.role %}
-            <div class="testimonial-role">{{ testimonial.role }}</div>
-            {% endif %}
-          </div>
-        </div>
+          {# Quote #}
+          <blockquote class="testimonial-quote">
+            {{ testimonial.quote }}
+          </blockquote>
         
-        <blockquote class="testimonial-quote">
-          "{{ testimonial.quote }}"
-        </blockquote>
-        
-        <div class="testimonial-session">
-          <i class="fa-solid fa-play" style="font-size: 16px;"></i>
-          <span>{{ testimonial.sessionTitle }}</span>
+        {# Close conditional wrapper #}
+        {% if hasLink %}
+        </a>
+        {% else %}
         </div>
-      </a>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -77,64 +127,73 @@ Set these variables before including:
   /* Masonry layout using CSS columns */
   .testimonials-masonry {
     column-count: 1;
-    column-gap: 1.5rem;
-    margin-top: 3rem;
+    column-gap: 0;
+    margin-top: 2rem;
   }
 
   .testimonial-card {
     display: block;
     break-inside: avoid;
-    margin-bottom: 1.5rem;
-    padding: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
     background: hsl(var(--card));
-    border: 3px solid hsl(var(--border));
+    border: 2px solid hsl(var(--border));
     border-radius: 8px;
-    transition: all 0.3s ease;
     text-decoration: none;
     color: inherit;
+    position: relative;
   }
 
-  .testimonial-card:hover {
-    border-color: hsl(var(--primary));
-    box-shadow: 0 8px 24px hsl(var(--primary) / 0.15);
+  /* Only apply hover/transition effects if it's a link */
+  a.testimonial-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  a.testimonial-card:hover {
     transform: translateY(-2px);
+  }
+
+  /* Non-link cards - no hover effects */
+  div.testimonial-card {
+    cursor: default;
   }
 
   .testimonial-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .testimonial-photo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    border: 2px solid hsl(var(--primary) / 0.3);
-  }
-
-  .testimonial-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .testimonial-placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--primary) / 0.5));
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    gap: 0 0.75rem;
+    position: relative;
   }
 
   .testimonial-initials {
-    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
     font-weight: 700;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--primary) / 0.5));
     color: hsl(var(--primary));
+    border: 2px solid hsl(var(--primary) / 0.3);
+  }
+
+  .testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: hsl(var(--muted));
+  }
+
+  .testimonial-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .testimonial-meta {
@@ -143,40 +202,147 @@ Set these variables before including:
   }
 
   .testimonial-name {
-    font-size: var(--size-step-0);
+    font-size: 0.95rem;
     font-weight: 700;
     color: hsl(var(--foreground));
-    margin-bottom: 0.25rem;
     line-height: 1.3;
-  }
-
-  .testimonial-role {
-    font-size: var(--size-step--1);
-    color: hsl(var(--muted-foreground));
-    line-height: 1.3;
-  }
-
-  .testimonial-quote {
-    font-size: var(--size-step-0);
-    color: hsl(var(--foreground));
-    line-height: 1.6;
-    margin: 0 0 1rem 0;
-    font-style: italic;
-  }
-
-  .testimonial-session {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: var(--size-step--1);
-    color: hsl(var(--primary));
-    font-weight: 500;
-    padding-top: 1rem;
-    border-top: 1px solid hsl(var(--border));
   }
 
-  .testimonial-session svg, .testimonial-session i {
-    flex-shrink: 0;
+  .testimonial-role {
+    font-size: 0.8rem;
+    color: hsl(var(--muted-foreground));
+    line-height: 1.3;
+    margin-top: 0.25rem;
+  }
+
+  .testimonial-quote {
+    font-size: 0.9rem;
+    color: hsl(var(--foreground));
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    border: none;
+    margin-top: -1rem;
+    white-space: pre-line;
+    word-wrap: break-word;
+  }
+
+  /* Platform icon - inline with name */
+  .testimonial-platform-icon {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1rem;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+
+  a.testimonial-card:hover .testimonial-platform-icon {
+    opacity: 0.8;
+  }
+
+  .testimonial-platform-icon .platform-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+
+  /* nullEDGE - Primary brand color */
+  .testimonial-nulledge {
+    border-left: 4px solid hsl(var(--primary));
+  }
+
+  a.testimonial-nulledge:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 8px 24px hsl(var(--primary) / 0.15);
+  }
+
+  .testimonial-nulledge .testimonial-platform-icon {
+    opacity: 0.5;
+  }
+
+  /* LinkedIn - Professional Blue */
+  .testimonial-linkedin {
+    border-left: 4px solid #0A66C2;
+  }
+
+  a.testimonial-linkedin:hover {
+    border-color: #0A66C2;
+    box-shadow: 0 8px 24px rgba(10, 102, 194, 0.15);
+  }
+
+  .testimonial-linkedin .testimonial-platform-icon {
+    color: #0A66C2;
+  }
+
+  /* Twitter/X - Sky Blue */
+  .testimonial-twitter {
+    border-left: 4px solid #1DA1F2;
+  }
+
+  a.testimonial-twitter:hover {
+    border-color: #1DA1F2;
+    box-shadow: 0 8px 24px rgba(29, 161, 242, 0.15);
+  }
+
+  .testimonial-twitter .testimonial-platform-icon {
+    color: #1DA1F2;
+  }
+
+  /* Discord - Blurple */
+  .testimonial-discord {
+    border-left: 4px solid #5865F2;
+  }
+
+  a.testimonial-discord:hover {
+    border-color: #5865F2;
+    box-shadow: 0 8px 24px rgba(88, 101, 242, 0.15);
+  }
+
+  .testimonial-discord .testimonial-platform-icon {
+    color: #5865F2;
+  }
+
+  /* Slack - Aubergine */
+  .testimonial-slack {
+    border-left: 4px solid #4A154B;
+  }
+
+  a.testimonial-slack:hover {
+    border-color: #4A154B;
+    box-shadow: 0 8px 24px rgba(74, 21, 75, 0.15);
+  }
+
+  .testimonial-slack .testimonial-platform-icon {
+    color: #4A154B;
+  }
+
+  /* Generic with link */
+  .testimonial-generic {
+    border-left: 4px solid hsl(var(--primary));
+  }
+
+  a.testimonial-generic:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 8px 24px hsl(var(--primary) / 0.15);
+  }
+
+  .testimonial-generic .testimonial-platform-icon {
+    color: hsl(var(--primary));
+  }
+
+  /* No link - static, not clickable */
+  .testimonial-none {
+    border-left: 4px solid hsl(var(--border));
+  }
+
+  /* No hover effects for none */
+  div.testimonial-none:hover {
+    border-color: hsl(var(--border));
+    box-shadow: none;
+    transform: none;
   }
 
   /* Responsive column counts */
