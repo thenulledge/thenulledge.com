@@ -15,6 +15,16 @@ function urlEncode(str) {
   return encodeURIComponent(str);
 }
 
+/**
+ * Convert newlines to <br> tags
+ * @param {string} str - String with newlines
+ * @returns {string} - String with <br> tags
+ */
+function nlToBr(str) {
+  if (!str || typeof str !== 'string') return str;
+  return str.replace(/\n/g, '<br>');
+}
+
 export default {
   toISOString,
   formatDate,
@@ -28,5 +38,6 @@ export default {
   parseChatFile,
   sortEventsByDate,
   eventsToArray,
-  urlEncode
+  urlEncode,
+  nlToBr
 };

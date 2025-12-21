@@ -89,7 +89,7 @@ Set these variables before including:
           
           {# Quote #}
           <blockquote class="testimonial-quote">
-            {{ testimonial.quote }}
+            {{ testimonial.quote | nlToBr | safe }}
           </blockquote>
         
         {# Close conditional wrapper #}
