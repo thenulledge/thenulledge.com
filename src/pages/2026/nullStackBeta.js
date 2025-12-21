@@ -4,8 +4,8 @@ export default async function () {
     id: "2026-nullstack-beta",
     name: "nullSTACK Beta",
     when: {
-      start: "2026-07-23T14:00:00+05:30",
-      end: "2026-07-23T17:00:00+05:30"
+      start: "2026-07-23T04:30:00-04:00",
+      end: "2026-07-23T07:30:00-04:00"
     },
     type: "sessions",
     url: "/2026/nullstack-beta",
@@ -19,7 +19,7 @@ export default async function () {
     description: "Virtual sessions and networking. Discover insights from experts and expand your network.",
     duration: "3 hours",
     sessionCount: 5,
-    timezone: "Asia/Kolkata",
+    timezone: "America/New_York",
     niceDatesTimes: {
       atlanta: "4:30 AM EDT",
       london: "9:30 AM BST",

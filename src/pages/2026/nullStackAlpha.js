@@ -4,8 +4,8 @@ export default async function () {
   id: "2026-nullstack-alpha",
   name: "nullStack Alpha",
   when: {
-    start: "2026-04-16T14:00:00+01:00",
-    end: "2026-04-16T15:30:00+01:00"
+    start: "2026-04-16T09:00:00-04:00",
+    end: "2026-04-16T10:30:00-04:00"
   },
   type: "sessions",
   url: "/2026/nullstack-alpha",
@@ -19,7 +19,7 @@ export default async function () {
   description: "Virtual sessions and networking. Learn from others and connect with peers across the region.",
   duration: "3 hours",
   sessionCount: 5,
-  timezone: "Europe/London",
+  timezone: "America/New_York",
   niceDatesTimes: {
     atlanta: "9:00 AM EDT",
     london: "2:00 PM BST",
