@@ -44,7 +44,6 @@
     "esbuild": "^0.27.0",
     "fast-glob": "^3.3.3",
     "html-minifier-terser": "^7.2.0",
-    "js-yaml": "^4.1.1",
     "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-attrs": "^4.3.1",
