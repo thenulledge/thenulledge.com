@@ -15,7 +15,7 @@ export default async function () {
     speakerRegistrationUrl: "https://events.ringcentral.com/events/nulledge-2026/speakers",
     speakerSubmissionStart: "2026-02-01T00:00:00-05:00",
     speakerSubmissionEnd: "2026-08-31T23:59:59-04:00",
-    sponsorUrl: `mailto:${meta.email}?subject=nullEDGE%202026%20Sponsorship`,
+    sponsorUrl: `mailto:${meta.email}?subject=Sponsor%20nullEDGE%202026`,
     description: "The flagship nullEDGE conference returns for 2026. A full day of technical sessions, networking, and sharing.",
     duration: "8 hours",
     sessionCount: 40,

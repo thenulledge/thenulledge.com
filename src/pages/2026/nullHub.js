@@ -15,7 +15,7 @@ export default async function () {
   speakerRegistrationUrl: null,
   speakerSubmissionStart: null,
   speakerSubmissionEnd: null,
-  sponsorUrl: `mailto:${meta.email}?subject=nullHUB%202026%20Sponsorship`,
+  sponsorUrl: `mailto:${meta.email}?subject=Sponsor%20nullHUB%202026`,
   description: "Connect with peers, share experiences, and build lasting relationships.",
   duration: "90 minutes",
   sessionCount: 0,

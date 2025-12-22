@@ -15,7 +15,7 @@ export default async function () {
     speakerRegistrationUrl: "https://events.ringcentral.com/events/nullstack-beta-2026/speakers",
     speakerSubmissionStart: "2026-04-01T00:00:00Z",
     speakerSubmissionEnd: "2026-06-30T23:59:59Z",
-    sponsorUrl: `mailto:${meta.email}?subject=nullSTACK%20Beta%202026%20Sponsorship`,
+    sponsorUrl: `mailto:${meta.email}?subject=Sponsor%20nullSTACK%20Beta%202026`,
     description: "Virtual sessions and networking. Discover insights from experts and expand your network.",
     duration: "3 hours",
     sessionCount: 5,

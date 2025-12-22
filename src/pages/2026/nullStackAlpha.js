@@ -15,7 +15,7 @@ export default async function () {
   registrationIframeSrc: "https://registration.events.ringcentral.com/widgets/registration/nullstack-alpha",
   speakerSubmissionStart: "2026-01-15T00:00:00Z",
   speakerSubmissionEnd: "2026-03-31T23:59:59Z",
-  sponsorUrl: `mailto:${meta.email}?subject=nullSTACK%20Alpha%202026%20Sponsorship`,
+  sponsorUrl: `mailto:${meta.email}?subject=Sponsor%20nullSTACK%20Alpha%202026`,
   description: "Virtual sessions and networking. Learn from others and connect with peers across the region.",
   duration: "3 hours",
   sessionCount: 5,
