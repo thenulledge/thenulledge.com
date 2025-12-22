@@ -70,7 +70,7 @@
                    loading="lazy"
                    class="session-thumbnail">
               <div class="play-overlay">
-                <i class="fa-solid fa-circle-play" style="font-size: 64px;"></i>
+                <i class="fa-solid fa-circle-play"></i>
               </div>
             </a>
             
@@ -82,12 +82,12 @@
               
               <div class="session-meta">
                 <div class="meta-item">
-                  <i class="fa-solid fa-clock" style="font-size: 16px;"></i>
+                  <i class="fa-solid fa-clock"></i>
                   <span>{{ session.duration }} min</span>
                 </div>
                 
                 <div class="meta-item">
-                  <i class="fa-solid fa-users" style="font-size: 16px;"></i>
+                  <i class="fa-solid fa-users"></i>
                   <span>{{ session.speakers | join(", ") }}</span>
                 </div>
               </div>
@@ -177,6 +177,9 @@
 </div>
 
 <style>
+  /* Conference-specific styles only - Global components in src/assets/css/global/ */
+  /* See: card.css, button-group.css, section-header.css for reusable components */
+  
   .toc-section {
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border);
@@ -245,13 +248,6 @@
     text-align: center;
   }
 
-  .card {
-    background: var(--color-bg-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    padding: var(--space-m-l);
-  }
-
   .quick-links {
     display: flex;
     flex-direction: column;
@@ -266,19 +262,6 @@
 
   .quick-links a:hover {
     text-decoration: underline;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .section-header h2 {
-    margin: 0;
   }
 
   .sessions-grid {
@@ -377,6 +360,18 @@
   .meta-item svg, .meta-item i {
     flex-shrink: 0;
     color: var(--color-primary);
+    font-size: 16px;
+  }
+
+  .play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.9);
+    transition: transform 0.2s ease, color 0.2s ease;
+    pointer-events: none;
+    font-size: 64px;
   }
 
   .watch-link {
@@ -391,14 +386,6 @@
 
   .watch-link:hover {
     text-decoration: underline;
-  }
-
-  .button-group {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 2rem 0;
   }
 
   .text-muted {
@@ -498,7 +485,6 @@
       flex-direction: column;
       align-items: flex-start;
     }
-
     .sessions-grid {
       grid-template-columns: 1fr;
     }
