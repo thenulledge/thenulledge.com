@@ -1,0 +1,27 @@
+/* Grid Layouts - Reusable grid patterns */
+
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: var(--space-l);
+}
+
+.grid-2col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+  gap: var(--space-l);
+}
+
+.grid-4col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: var(--space-l);
+}
+
+@media (max-width: 768px) {
+  .grid-3col,
+  .grid-2col,
+  .grid-4col {
+    grid-template-columns: 1fr;
+  }
+}

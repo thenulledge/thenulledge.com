@@ -1,0 +1,17 @@
+/* Button Group - Horizontal button grouping utility */
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.button-group.button-group-start {
+  justify-content: flex-start;
+}
+
+.button-group.button-group-end {
+  justify-content: flex-end;
+}
