@@ -11,9 +11,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-// add yaml support
-import yaml from 'js-yaml';
-
 //  config import
 import {showInSitemap, sessions2025, events2026} from './src/_config/collections.js';
 import events from './src/_config/events.js';
@@ -33,11 +30,6 @@ export default async function (eleventyConfig) {
   eleventyConfig.addWatchTarget('./src/_includes/**/*.{webc}');
   eleventyConfig.addWatchTarget('./src/pages/**/*.js');
 
-  // --------------------- layout aliases
-  eleventyConfig.addLayoutAlias('base', 'base.njk');
-  eleventyConfig.addLayoutAlias('page', 'page.njk');
-  eleventyConfig.addLayoutAlias('slice', 'slice.njk');
-
   //	---------------------  Collections
   eleventyConfig.addCollection('showInSitemap', showInSitemap);
   eleventyConfig.addCollection('sessions2025', sessions2025);
@@ -46,8 +38,6 @@ export default async function (eleventyConfig) {
   // ---------------------  Plugins
   eleventyConfig.addPlugin(plugins.htmlConfig);
   eleventyConfig.addPlugin(plugins.drafts);
-
-  eleventyConfig.addPlugin(plugins.EleventyRenderPlugin);
 
   eleventyConfig.addPlugin(plugins.webc, {
     components: ['./src/_includes/webc/**/*.webc'],
@@ -72,27 +62,20 @@ export default async function (eleventyConfig) {
 
   // 	--------------------- Library and Data
   eleventyConfig.setLibrary('md', plugins.markdownLib);
-  eleventyConfig.addDataExtension('yaml', contents => yaml.load(contents));
 
   // --------------------- Filters
   eleventyConfig.addFilter('toIsoString', filters.toISOString);
   eleventyConfig.addFilter('formatDate', filters.formatDate);
   eleventyConfig.addFilter('formatDateWithTimezone', filters.formatDateWithTimezone);
   eleventyConfig.addFilter('formatDateShort', filters.formatDateShort);
-  eleventyConfig.addFilter('formatDateShortEST', filters.formatDateShortEST);
-  eleventyConfig.addFilter('markdownFormat', filters.markdownFormat);
   eleventyConfig.addFilter('splitlines', filters.splitlines);
-  eleventyConfig.addFilter('alphabetic', filters.sortAlphabetically);
   eleventyConfig.addFilter('slugify', filters.slugifyString);
-  eleventyConfig.addFilter('parseChatFile', filters.parseChatFile);
-  eleventyConfig.addFilter('sortEventsByDate', filters.sortEventsByDate);
   eleventyConfig.addFilter('eventsToArray', filters.eventsToArray);
   eleventyConfig.addFilter('urlEncode', filters.urlEncode);
   eleventyConfig.addFilter('nlToBr', filters.nlToBr);
 
   // --------------------- Shortcodes
   eleventyConfig.addShortcode('image', shortcodes.imageShortcode);
-  eleventyConfig.addShortcode('imageKeys', shortcodes.imageKeysShortcode);
   eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`);
 
   // --------------------- Events: after build

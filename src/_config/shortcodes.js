@@ -1,3 +1,3 @@
-import {imageShortcode, imageKeysShortcode} from './shortcodes/image.js';
+import {imageShortcode} from './shortcodes/image.js';
 
-export default {imageShortcode, imageKeysShortcode};
+export default {imageShortcode};

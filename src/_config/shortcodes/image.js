@@ -100,11 +100,3 @@ export const imageShortcode = async (
     formats
   });
 };
-
-// Named parameters
-export const imageKeysShortcode = async (options = {}) => {
-  if (!options.src) {
-    errorSrcRequired('imageKeys');
-  }
-  return processImage(options);
-};
