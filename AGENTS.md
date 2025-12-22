@@ -28,3 +28,10 @@
 - CSS: Global styles in `src/assets/css/global/`, local/page-specific in `local/`, components in `components/`
 - Images: Process through eleventy-img shortcodes, optimize to webp+jpeg
 - Dates: Use dayjs with UTC/timezone plugins, custom formatters in `filters/dates.js`
+
+## CSS Architecture
+- **Global Components**: Reusable components in `src/assets/css/global/blocks/` (card.css, badge.css, etc.)
+- **Compositions**: Layout patterns in `src/assets/css/global/compositions/` (grids.css, wrapper.css)
+- **Utilities**: Single-purpose classes in `src/assets/css/global/utilities/`
+- **NO inline styles**: Use CSS classes or create utility classes instead of `style=""` attributes
+- **Component reuse**: Before adding page-specific CSS, check if a global component exists
