@@ -26,7 +26,7 @@ permalink: /speakers/
     <div class="grid-3col gap-l">
       <div class="card flow">
         <div class="card-icon">
-          <span class="fa-solid fa-users" style="font-size:32px;"></span>
+          <span class="fa-solid fa-users"></span>
         </div>
         <h3>Reach Folks</h3>
         <p>Connect with ServiceNow developers, admins, and architects who are eager to learn from your experience.</p>
@@ -34,7 +34,7 @@ permalink: /speakers/
       
       <div class="card flow">
         <div class="card-icon">
-          <span class="fa-solid fa-bullhorn" style="font-size:32px;"></span>
+          <span class="fa-solid fa-bullhorn"></span>
         </div>
         <h3>Build Your Brand</h3>
         <p>Establish yourself as a thought leader in the ServiceNow community. All sessions are recorded and promoted.</p>
@@ -42,7 +42,7 @@ permalink: /speakers/
       
       <div class="card flow">
         <div class="card-icon">
-          <span class="fa-solid fa-plane-departure" style="font-size:32px;"></span>
+          <span class="fa-solid fa-plane-departure"></span>
         </div>
         <h3>Zero Pressure</h3>
         <p>Virtual format means no travel required. Casual, practitioner-focused environment—be yourself and share what you know.</p>
@@ -56,7 +56,7 @@ permalink: /speakers/
     <div class="card flow">
       <div class="flow gap-m">
         <div class="checklist-item">
-          <span class="fa-regular fa-circle-check" style="font-size:24px; color:hsl(var(--primary)); margin-top:0.25rem;"></span>
+          <span class="fa-regular fa-circle-check checklist-icon"></span>
           <div>
             <p class="font-semibold">Real-World Implementations</p>
             <p class="text-muted">Production code, actual architectures, and lessons learned from live systems</p>
@@ -64,7 +64,7 @@ permalink: /speakers/
         </div>
         
         <div class="checklist-item">
-          <span class="fa-regular fa-circle-check" style="font-size:24px; color:hsl(var(--primary)); margin-top:0.25rem;"></span>
+          <span class="fa-regular fa-circle-check checklist-icon"></span>
           <div>
             <p class="font-semibold">Technical Deep Dives</p>
             <p class="text-muted">Show us the code, walk through the logic, explain the technical decisions</p>
@@ -72,7 +72,7 @@ permalink: /speakers/
         </div>
         
         <div class="checklist-item">
-          <span class="fa-regular fa-circle-check" style="font-size:24px; color:hsl(var(--primary)); margin-top:0.25rem;"></span>
+          <span class="fa-regular fa-circle-check checklist-icon"></span>
           <div>
             <p class="font-semibold">Problem-Solving Stories</p>
             <p class="text-muted">How you solved a tough challenge, what didn't work, and what you'd do differently</p>
@@ -80,7 +80,7 @@ permalink: /speakers/
         </div>
         
         <div class="checklist-item">
-          <span class="fa-regular fa-circle-check" style="font-size:24px; color:hsl(var(--primary)); margin-top:0.25rem;"></span>
+          <span class="fa-regular fa-circle-check checklist-icon"></span>
           <div>
             <p class="font-semibold">Community Contributions</p>
             <p class="text-muted">Open source tools, scripts, frameworks, or methodologies you've built and shared</p>
@@ -88,7 +88,7 @@ permalink: /speakers/
         </div>
         
         <div class="checklist-item">
-          <span class="fa-regular fa-circle-check" style="font-size:24px; color:hsl(var(--primary)); margin-top:0.25rem;"></span>
+          <span class="fa-regular fa-circle-check checklist-icon"></span>
           <div>
             <p class="font-semibold">Practitioner Perspectives</p>
             <p class="text-muted">Your experience in the trenches—what works, what doesn't, and why</p>
@@ -132,12 +132,12 @@ permalink: /speakers/
           
           <div class="card-body flow gap-s">
             <div class="info-item">
-              <span class="fa-regular fa-calendar" style="font-size:32px;"></span>
+              <span class="fa-regular fa-calendar"></span>
               <span>Event: {{ event.when.start | formatDate("MMMM D, YYYY") }}</span>
             </div>
             
             <div class="info-item">
-              <span class="fa-solid fa-presentation-screen" style="font-size:32px;"></span>
+              <span class="fa-solid fa-presentation-screen"></span>
               <span>
                 {% if event.type == 'full-day' %}
                   Seeking {{event.sessionCount}} sessions
@@ -153,7 +153,7 @@ permalink: /speakers/
             
             {% if event.speakerSubmissionStart and event.speakerSubmissionEnd %}
             <div class="info-item">
-              <span class="fa-regular fa-clock" style="font-size:32px;"></span>
+              <span class="fa-regular fa-clock"></span>
               <span>CFP: {{ event.speakerSubmissionStart | formatDate("MMM D") }} - {{ event.speakerSubmissionEnd | formatDate("MMM D, YYYY") }}</span>
             </div>
             {% endif %}
@@ -168,7 +168,7 @@ permalink: /speakers/
     {% else %}
       <div class="card flow cfp-placeholder">
         <div class="cfp-placeholder-icon">
-          <span class="fa-regular fa-calendar-plus" style="font-size:48px;"></span>
+          <span class="fa-regular fa-calendar-plus"></span>
         </div>
         <h3 class="text-center">Call for Proposals Opening Soon</h3>
         <p class="text-muted text-center">
@@ -206,7 +206,7 @@ permalink: /speakers/
   {# FAQ Section #}
   <section class="region flow">
     <h2 class="text-center">Speaker FAQ</h2>
-    <div class="flow gap-m">
+    <div class="flow gap-m faq-container">
       <div class="card flow">
         <h3 class="h4">How long should my session be?</h3>
         <p class="text-muted">
@@ -239,7 +239,7 @@ permalink: /speakers/
 
   {# CTA Section #}
   <section class="region text-center">
-    <div class="card flow prose">
+    <div class="card flow prose cta-container">
       <h2>Ready to Share Your Knowledge?</h2>
       <p>Join 40+ speakers who presented at nullEDGE 2025. The community is waiting to learn from your experience.</p>
       <div class="button-group">
@@ -251,55 +251,24 @@ permalink: /speakers/
 </div>
 
 <style>
-  .badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border: 2px solid hsl(var(--border));
-    border-radius: calc(var(--radius) - 2px);
-    font-size: var(--size-step--1);
-    font-weight: 500;
+  /* Speakers-specific styles only - Global components in src/assets/css/global/ */
+  /* See: badge.css, card.css, button-group.css, grids.css for reusable components */
+
+  /* Content width constraints */
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  .button-group {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 2rem 0;
+  .cta-container {
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  .card {
-    background: hsl(var(--card));
-    border: 2px solid hsl(var(--border));
-    border-radius: var(--radius);
-    padding: var(--space-m-l);
-    transition: all 0.2s;
-  }
-
-  .card:hover {
-    border-color: hsl(var(--primary));
-    box-shadow: 0 8px 16px hsl(var(--primary) / 0.1);
-  }
-
-  .card-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    background: hsl(var(--primary) / 0.1);
-    border-radius: calc(var(--radius) - 2px);
+  .checklist-icon {
+    font-size: 24px;
     color: hsl(var(--primary));
-    margin-bottom: 1rem;
-  }
-
-  .card-header {
-    margin-bottom: 1rem;
-  }
-
-  .card-body {
-    padding-top: 1rem;
-    border-top: 2px solid hsl(var(--border));
+    margin-top: 0.25rem;
   }
 
   .flex-between {
@@ -321,6 +290,7 @@ permalink: /speakers/
     flex-shrink: 0;
     color: hsl(var(--primary));
     margin-top: 0.25rem;
+    font-size: 24px;
   }
 
   .checklist-item .font-semibold {
@@ -336,9 +306,10 @@ permalink: /speakers/
     font-size: var(--size-step--1);
   }
 
-  .info-item svg {
+  .info-item svg, .info-item span.fa-solid, .info-item span.fa-regular {
     flex-shrink: 0;
     color: hsl(var(--primary));
+    font-size: 32px;
   }
 
   .alert {
@@ -360,18 +331,6 @@ permalink: /speakers/
 
   .font-semibold {
     font-weight: 600;
-  }
-
-  .grid-2col {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-    gap: var(--space-m);
-  }
-
-  .grid-3col {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-    gap: var(--space-m);
   }
 
   .gap-l {
@@ -402,6 +361,7 @@ permalink: /speakers/
     border-radius: 50%;
     color: hsl(var(--primary));
     margin: 0 auto 1.5rem;
+    font-size: 48px;
   }
 
   .cfp-timeline {

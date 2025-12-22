@@ -53,17 +53,17 @@
     
     <div class="session-meta">
       <div class="meta-item">
-        <i class="fa-solid fa-users" style="font-size: 20px;"></i>
+        <i class="fa-solid fa-users"></i>
         <span>{{ eventData.speakers | join(", ") }}</span>
       </div>
       
       <div class="meta-item">
-        <i class="fa-solid fa-clock" style="font-size: 20px;"></i>
+        <i class="fa-solid fa-clock"></i>
         <span>{{ eventData.duration }} minutes</span>
       </div>
       
       <div class="meta-item">
-        <i class="fa-solid fa-calendar" style="font-size: 20px;"></i>
+        <i class="fa-solid fa-calendar"></i>
         <span>{{ eventData.published | formatDate('MMMM D, YYYY') }}</span>
       </div>
     </div>
@@ -87,7 +87,7 @@
          target="_blank" 
          rel="noopener noreferrer" 
          class="button">
-        <i class="fa-brands fa-youtube" style="font-size: 20px;"></i>
+        <i class="fa-brands fa-youtube"></i>
         Watch on YouTube
       </a>
     </div>
@@ -99,13 +99,14 @@
   {# Back to Conference #}
   <section class="back-navigation">
     <a href="/2025/conference" class="button button-secondary">
-      <i class="fa-solid fa-arrow-left" style="font-size: 20px;"></i>
+      <i class="fa-solid fa-arrow-left"></i>
       Back to Conference Schedule
     </a>
   </section>
 </div>
 
 <style>
+  /* Session-specific styles only */
   .session-header {
     text-align: center;
     padding: var(--space-l) 0;
@@ -158,6 +159,7 @@
   .meta-item svg, .meta-item i {
     color: var(--color-primary);
     flex-shrink: 0;
+    font-size: 20px;
   }
 
   .video-section {
@@ -191,23 +193,6 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-xs);
-  }
-
-  .chat-section {
-    margin: var(--space-xl) 0;
-    padding: var(--space-l);
-    background: var(--color-bg-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-  }
-
-  .chat-section h2 {
-    margin: 0 0 var(--space-xs) 0;
-  }
-
-  .text-muted {
-    color: var(--color-text-muted);
-    font-size: var(--size-step--1);
   }
 
   .back-navigation {
