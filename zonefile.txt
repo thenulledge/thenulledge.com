@@ -1,0 +1,25 @@
+;; Exported on 2025-12-19T09:11:41Z
+$ORIGIN	thenulledge.com.
+$TTL	3600
+
+@	IN	SOA	hydrogen.ns.hetzner.com. dns.hetzner.com. 2025121205 86400 10800 3600000 3600
+
+; NS records
+@	IN	NS	helium.ns.hetzner.de.
+@	IN	NS	hydrogen.ns.hetzner.com.
+@	IN	NS	oxygen.ns.hetzner.com.
+
+; A records
+@	IN	A	216.198.79.1
+chat	IN	A	5.78.151.119
+
+; CNAME records
+autodiscover	3600	IN	CNAME	autodiscover.outlook.com.
+www	IN	CNAME	5ceae962620cd8c5.vercel-dns-017.com.
+
+; MX records
+@	3600	IN	MX	0 thenulledge-com.mail.protection.outlook.com.
+
+; TXT records
+@	3600	IN	TXT	"MS=ms89985196"
+@	3600	IN	TXT	"v=spf1 include:spf.protection.outlook.com -all"
