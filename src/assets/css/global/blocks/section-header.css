@@ -1,0 +1,25 @@
+/* Section Header - Page section header with title and optional actions */
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.section-title {
+  font-size: var(--size-step-2);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: hsl(var(--muted-foreground));
+  font-size: var(--size-step-0);
+}
