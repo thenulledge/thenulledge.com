@@ -157,15 +157,6 @@ permalink: /speakers/
               <span>CFP: {{ event.speakerSubmissionStart | formatDate("MMM D") }} - {{ event.speakerSubmissionEnd | formatDate("MMM D, YYYY") }}</span>
             </div>
             {% endif %}
-              </span>
-            </div>
-            
-            {% if event.speakerSubmissionStart and event.speakerSubmissionEnd %}
-            <div class="info-item">
-              <span class="fa-regular fa-clock" style="font-size:32px;"></span>
-              <span>CFP: {{ event.speakerSubmissionStart | formatDate("MMM D") }} - {{ event.speakerSubmissionEnd | formatDate("MMM D, YYYY") }}</span>
-            </div>
-            {% endif %}
             
             <a href="{{ event.speakerRegistrationUrl }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
               Submit Your Talk
@@ -215,7 +206,7 @@ permalink: /speakers/
   {# FAQ Section #}
   <section class="region flow">
     <h2 class="text-center">Speaker FAQ</h2>
-    <div class="flow gap-m">
+    <div class="flow gap-m faq-container">
       <div class="card flow">
         <h3 class="h4">How long should my session be?</h3>
         <p class="text-muted">
@@ -248,7 +239,7 @@ permalink: /speakers/
 
   {# CTA Section #}
   <section class="region text-center">
-    <div class="card flow prose">
+    <div class="card flow prose cta-container">
       <h2>Ready to Share Your Knowledge?</h2>
       <p>Join 40+ speakers who presented at nullEDGE 2025. The community is waiting to learn from your experience.</p>
       <div class="button-group">
@@ -262,6 +253,17 @@ permalink: /speakers/
 <style>
   /* Speakers-specific styles only - Global components in src/assets/css/global/ */
   /* See: badge.css, card.css, button-group.css, grids.css for reusable components */
+
+  /* Content width constraints */
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
 
   .checklist-icon {
     font-size: 24px;
