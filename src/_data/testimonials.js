@@ -124,7 +124,11 @@ https://lnkd.in/d4JzixGt`,
     quote: "The speakers and content were fantastic.  The organizers are awesome!",
     profile: "https://www.linkedin.com/in/brian-rowland-7151168/",
   },
-
+  {
+    name: "Trey Carroll",
+    avatarImage: "/assets/images/testimonials/trey-carroll.jpeg",
+    quote: "The freedom of the presenters to candidly say what they really thought.  The absence of the deluge of marketing information.  The actual focus on development.   The real-world applicability of the content"
+  },
   // waiting for the below still 
   // chat messages
   /*
@@ -179,11 +183,6 @@ Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
     avatarImage: "/assets/images/testimonials/robert-fedoruk.jpeg",
     quote: "It's a whose who and then some of people who've always got valuable stuff to say.",
     link: "https://www.cjandtheduke.com/podcast/episode/1dfcf540/have-you-heard-of-the-servicenow-nulledge-conference"
-  },
-  {
-    name: "Trey Carroll",
-    avatarImage: "/assets/images/testimonials/trey-carroll.jpeg",
-    quote: "The freedom of the presenters to candidly say what they really thought.  The absence of the deluge of marketing information.  The actual focus on development.   The real-world applicability of the content"
   },
   {
     name: "Robert Fedoruk",
