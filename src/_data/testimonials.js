@@ -55,46 +55,6 @@ All in all, it was a highly valuable and inspiring evening. Many thanks to the o
     link: 'https://thenulledge.com/2025/conference/closing-remarks/#event-chat',
   },
   {
-    name: 'Kalisha Moore',
-    avatarImage: "/assets/images/testimonials/kalisha-moore.jpeg",
-    quote: 'Awesome content like always!',
-    link: 'https://thenulledge.com/2025/conference/5-things-i-do-to-new-many-to-many-tables/#event-chat',
-  },
-  {
-    name: 'Brad Hicks',
-    avatarImage: "/assets/images/testimonials/brad-hicks.jpeg",
-    quote: 'definitely recommend doing this again. This is extremely helpful! Thank you to everyone who made this happen.',
-    link: 'https://thenulledge.com/2025/conference/closing-remarks/#event-chat',
-  },
-  {
-    name: 'James Chang',
-    quote: 'Really appreciate everyone who organized this great event!',
-    link: 'https://thenulledge.com/2025/conference/#event-chat',
-  },
-  {
-    name: 'Simone Williams',
-    quote: 'Hello! Just want to say glad to be able to have access and experience this. Thanks to everyone for putting this together!',
-    link: 'https://thenulledge.com/2025/conference/#event-chat',
-  },
-  {
-    name: 'Jeff Jessie',
-    avatarImage: "/assets/images/contributors/jeff-jessie.jpeg",
-    quote: 'Networking has been awesome.',
-    link: 'https://thenulledge.com/2025/conference/#event-chat',
-  },
-  {
-    name: "Kevin Clark",
-    avatarImage: "/assets/images/testimonials/kevin-clark.jpeg",
-    quote: "Year one nullEDGE attendance = 5% of a Knowledge… what growth curve will we see in future years?",
-    link: 'https://www.linkedin.com/feed/update/urn:li:activity:7387614835640999936/?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7387614835640999936%2C7387666455959494656%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287387666455959494656%2Curn%3Ali%3Aactivity%3A7387614835640999936%29',
-  },
-  {
-    name: "Cory Wesley",
-    avatarImage: "/assets/images/testimonials/cory-wesley.jpeg",
-    quote: `If you missed some of the hashtag#nullEDGE 2025 sessions like I did, you're in luck! Jace and crew have archived them all so you can catch up on all the sessions you missed! This is amazing work. Full Stop. I appreciate the ludicrous levels of time, effort, and dedication the team put into pulling this conference off, archiving it all for easy access, and bringing the community together. Well Done. 👏🏾🙌🏾 hashtag#ServiceNow hashtag#ServiceNowCommunity`,
-    link: "https://www.linkedin.com/posts/cjwesley_nulledge-2025-retrospective-heres-all-activity-7388631241618731009-Lx9_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
-  },
-  {
     name: "Simen Staaby Knudsen",
     avatarImage: "/assets/images/testimonials/simen-staaby-knedsen.jpeg",
     quote: `The nullEDGE conference is all about the tech side of ServiceNow - created by the community, not a marketing team.
@@ -103,30 +63,20 @@ https://lnkd.in/d4JzixGt`,
     link: "https://www.linkedin.com/posts/simen-staaby-knudsen-6715691b2_nulledge-activity-7388463135424282624-WwXl?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
   },
   {
-    name: "Robert Fedoruk",
-    avatarImage: "/assets/images/testimonials/robert-fedoruk.jpeg",
-    quote: `I was there at the beginning. As good as today's hashtag#ServiceNow Knowledge conferences are (and they're amazing). There was a magic to the earliest ones. A sense that we were all building the ecosystem together. Nobody could read the future, but we all felt the vibe... the possibility of what could be. Peers sharing insights.
-
-Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
-    link: "https://www.linkedin.com/posts/rfedoruk_the-nulledge-conference-last-week-still-has-activity-7387093143072038913--bms?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
+    name: "Kevin Clark",
+    avatarImage: "/assets/images/testimonials/kevin-clark.jpeg",
+    quote: "Year one nullEDGE attendance = 5% of a Knowledge… what growth curve will we see in future years?",
+    link: 'https://www.linkedin.com/feed/update/urn:li:activity:7387614835640999936/?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7387614835640999936%2C7387666455959494656%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287387666455959494656%2Curn%3Ali%3Aactivity%3A7387614835640999936%29',
   },
   {
-    name: "Robert Fedoruk",
-    avatarImage: "/assets/images/testimonials/robert-fedoruk.jpeg",
-    quote: "It's a whose who and then some of people who've always got valuable stuff to say.",
-    link: "https://www.cjandtheduke.com/podcast/episode/1dfcf540/have-you-heard-of-the-servicenow-nulledge-conference"
+    name: "Kevin Byrne",
+    avatarImage: "/assets/images/testimonials/kevin-byrne.jpeg",
+    quote: "I liked the published schedule so that I could pick the topics most relevant to my needs. I also liked the quality of the content. Well done!"
   },
   {
-    name: "Brian Rowland",
-    avatarImage: "/assets/images/testimonials/brian-rowland.jpeg",
-    quote: "The speakers and content were fantastic.  The organizers are awesome!",
-    profile: "https://www.linkedin.com/in/brian-rowland-7151168/",
-  },
-  {
-    name: "Nelu Tomsa",
-    avatarImage: "/assets/images/testimonials/nelu-tomsa.jpeg",
-    quote: "Everything was very well organized and the information was delivered in a very friendly manner, which was pleasant to see/hear.",
-    profile: "https://www.linkedin.com/in/nelutomsa/",
+    name: 'Simone Williams',
+    quote: 'Hello! Just want to say glad to be able to have access and experience this. Thanks to everyone for putting this together!',
+    link: 'https://thenulledge.com/2025/conference/#event-chat',
   },
   {
     name: "Chuck Tomasi",
@@ -154,6 +104,72 @@ Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
     quote: "Great event!"
   },
   {
+    name: "Chad Hayes",
+    avatarImage: "/assets/images/testimonials/chad-hayes.jpeg",
+    quote: "Everything."
+  },
+  // waiting for the below still 
+  // chat messages
+  /*
+  {
+    name: 'Kalisha Moore',
+    avatarImage: "/assets/images/testimonials/kalisha-moore.jpeg",
+    quote: 'Awesome content like always!',
+    link: 'https://thenulledge.com/2025/conference/5-things-i-do-to-new-many-to-many-tables/#event-chat',
+  },
+  {
+    name: 'Brad Hicks',
+    avatarImage: "/assets/images/testimonials/brad-hicks.jpeg",
+    quote: 'definitely recommend doing this again. This is extremely helpful! Thank you to everyone who made this happen.',
+    link: 'https://thenulledge.com/2025/conference/closing-remarks/#event-chat',
+  },
+  {
+    name: 'James Chang',
+    quote: 'Really appreciate everyone who organized this great event!',
+    link: 'https://thenulledge.com/2025/conference/#event-chat',
+  },
+  {
+    name: 'Jeff Jessie',
+    avatarImage: "/assets/images/contributors/jeff-jessie.jpeg",
+    quote: 'Networking has been awesome.',
+    link: 'https://thenulledge.com/2025/conference/#event-chat',
+  },
+  //linkedIn posts
+  {
+    name: "Cory Wesley",
+    avatarImage: "/assets/images/testimonials/cory-wesley.jpeg",
+    quote: `If you missed some of the hashtag#nullEDGE 2025 sessions like I did, you're in luck! Jace and crew have archived them all so you can catch up on all the sessions you missed! This is amazing work. Full Stop. I appreciate the ludicrous levels of time, effort, and dedication the team put into pulling this conference off, archiving it all for easy access, and bringing the community together. Well Done. 👏🏾🙌🏾 hashtag#ServiceNow hashtag#ServiceNowCommunity`,
+    link: "https://www.linkedin.com/posts/cjwesley_nulledge-2025-retrospective-heres-all-activity-7388631241618731009-Lx9_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
+  },
+  {
+    name: "Robert Fedoruk",
+    avatarImage: "/assets/images/testimonials/robert-fedoruk.jpeg",
+    quote: `I was there at the beginning. As good as today's hashtag#ServiceNow Knowledge conferences are (and they're amazing). There was a magic to the earliest ones. A sense that we were all building the ecosystem together. Nobody could read the future, but we all felt the vibe... the possibility of what could be. Peers sharing insights.
+
+Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
+    link: "https://www.linkedin.com/posts/rfedoruk_the-nulledge-conference-last-week-still-has-activity-7387093143072038913--bms?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
+  },
+  {
+    name: "Brian Rowland",
+    avatarImage: "/assets/images/testimonials/brian-rowland.jpeg",
+    quote: "The speakers and content were fantastic.  The organizers are awesome!",
+    profile: "https://www.linkedin.com/in/brian-rowland-7151168/",
+  },
+  {
+    name: "Nelu Tomsa",
+    avatarImage: "/assets/images/testimonials/nelu-tomsa.jpeg",
+    quote: "Everything was very well organized and the information was delivered in a very friendly manner, which was pleasant to see/hear.",
+    profile: "https://www.linkedin.com/in/nelutomsa/",
+  },
+  
+  // podcast
+  {
+    name: "Robert Fedoruk",
+    avatarImage: "/assets/images/testimonials/robert-fedoruk.jpeg",
+    quote: "It's a whose who and then some of people who've always got valuable stuff to say.",
+    link: "https://www.cjandtheduke.com/podcast/episode/1dfcf540/have-you-heard-of-the-servicenow-nulledge-conference"
+  },
+  {
     name: "Trey Carroll",
     avatarImage: "/assets/images/testimonials/trey-carroll.jpeg",
     quote: "The freedom of the presenters to candidly say what they really thought.  The absence of the deluge of marketing information.  The actual focus on development.   The real-world applicability of the content"
@@ -167,11 +183,6 @@ Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
     name: "Martin Reintgen",
     avatarImage: "/assets/images/testimonials/martin-reintgen.jpeg",
     quote: "Many different sessions for very different topics"
-  },
-  {
-    name: "Chad Hayes",
-    avatarImage: "/assets/images/testimonials/chad-hayes.jpeg",
-    quote: "Everything."
   },
   {
     name: "Eli Makovetski",
@@ -194,11 +205,6 @@ Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
     quote: "The team"
   },
   {
-    name: "Kevin Byrne",
-    avatarImage: "/assets/images/testimonials/kevin-byrne.jpeg",
-    quote: "I liked the published schedule so that I could pick the topics most relevant to my needs. I also liked the quality of the content. Well done!"
-  },
-  {
     name: "Craig Talbert",
     avatarImage: "/assets/images/testimonials/craig-talbert.jpeg",
     quote: "Good timing and good platform."
@@ -213,6 +219,7 @@ Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
     avatarImage: "/assets/images/testimonials/viviane-brasil-roseira.jpeg",
     quote: "The demos and the technical tips, recommendations about practices, are really great!"
   }
+    */
 ];
 
 export default shuffleArray(testimonials);
