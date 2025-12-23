@@ -108,6 +108,16 @@ https://lnkd.in/d4JzixGt`,
     avatarImage: "/assets/images/testimonials/chad-hayes.jpeg",
     quote: "Everything."
   },
+  {
+    name: "Martin Reintgen",
+    avatarImage: "/assets/images/testimonials/martin-reintgen.jpeg",
+    quote: "Many different sessions for very different topics"
+  },
+  {
+    name: "Eli Makovetski",
+    avatarImage: "/assets/images/testimonials/eli-makovetsky.jpeg",
+    quote: "It was amazing!"
+  },
   // waiting for the below still 
   // chat messages
   /*
@@ -178,16 +188,6 @@ Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
     name: "Robert Fedoruk",
     avatarImage: "/assets/images/testimonials/robert-fedoruk.jpeg",
     quote: "Loved the interface and the chat.  In the future it would be awesome if sessions could be longer.  You'd have to make some sessions simultaneous, but I think the payoff is worth it."
-  },
-  {
-    name: "Martin Reintgen",
-    avatarImage: "/assets/images/testimonials/martin-reintgen.jpeg",
-    quote: "Many different sessions for very different topics"
-  },
-  {
-    name: "Eli Makovetski",
-    avatarImage: "/assets/images/testimonials/eli-makovetsky.jpeg",
-    quote: "It was amazing!"
   },
   {
     name: "Mary Ann	Erskine Pourier",
