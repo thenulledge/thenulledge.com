@@ -4,8 +4,8 @@ export default async function () {
   id: "2026-nullhub",
   name: "nullHUB",
   when: {
-    start: "2026-01-22T15:00:00-05:00",
-    end: "2026-01-22T16:30:00-05:00"
+    start: "2026-02-05T15:00:00-05:00",
+    end: "2026-02-05T16:30:00-05:00"
   },
   type: "networking",
   url: "/2026/nullhub",
