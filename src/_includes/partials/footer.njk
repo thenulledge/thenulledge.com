@@ -5,7 +5,6 @@
         <span class="footer-copyright">&copy; {% year %}</span>
         <a href="/" {{ indicateActiveHome }} class="footer-brand">
           <span class="site-name">{{ meta.siteName }}</span>
-          <small class="version">v{{ pkg.version }}</small>
         </a>
 
         {% for item in navigation.bottom %}
@@ -24,21 +23,14 @@
       </nav>
     </div>
 
-    <aside class="footer-credit">
-      Made with <span class="visually-hidden">love</span><span class="heart-icon"><i class="fa-solid fa-heart"></i></span> and
-      <a href="https://www.11ty.dev/" title="Eleventy">
-        <span class="visually-hidden">Eleventy</span>
-        <i class="fa-solid fa-code"></i>
-      </a>
-      by {{ meta.emailName }}
-    </aside>
+
   </div>
 </footer>
 
 <style>
   .site-footer {
-    margin-top: 4rem;
-    padding: 2rem 1rem;
+    margin-top: 2rem;
+    padding: 1rem;
     border-top: 2px solid hsl(var(--border));
     background: hsl(var(--muted) / 0.3);
   }
@@ -53,8 +45,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 1rem;
   }
 
   .footer-nav {
@@ -62,7 +53,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
-    font-size: var(--size-step-0);
+    font-size: var(--size-step--1);
   }
 
   .footer-copyright {
@@ -136,40 +127,6 @@
     height: 1.25rem;
   }
 
-  .footer-credit {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 2px solid hsl(var(--border));
-    font-size: var(--size-step--1);
-    color: hsl(var(--muted-foreground));
-  }
-
-  .footer-credit a {
-    color: hsl(var(--foreground));
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .footer-credit a:hover {
-    color: hsl(var(--primary));
-  }
-
-  .footer-credit svg, .footer-credit i {
-    width: 1rem;
-    height: 1rem;
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  .heart-icon {
-    color: hsl(var(--destructive));
-  }
-
   .visually-hidden {
     position: absolute;
     width: 1px;
@@ -184,7 +141,7 @@
 
   @media (max-width: 768px) {
     .site-footer {
-      padding: 1.5rem 1rem;
+      padding: 1rem;
     }
 
     .footer-content {

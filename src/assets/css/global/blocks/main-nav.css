@@ -15,7 +15,7 @@
   --cluster-vertical-alignment: normal;
   --cluster-wrap: wrap;
   --cluster-direction: column;
-  --nav-list-background: var(--color-bg);
+  --nav-list-background: hsl(0 0% 0%);
   --nav-list-shadow: -5px 0 11px 0 hsl(0 0% 0% / 0.2);
   --nav-list-height: 100dvh;
   --nav-list-padding-block: var(--space-2xl);
@@ -65,7 +65,7 @@
 .mainnav [data-drawer-toggle] {
   --gutter: var(--space-2xs);
   --cluster-vertical-alignment: center;
-  background: var(--color-bg);
+  background: hsl(0 0% 0%);
   display: var(--nav-button-display, inline-flex);
   position: relative;
   z-index: 2;
@@ -147,14 +147,14 @@ body:has([data-drawer-toggle][aria-expanded='true']) {
 
 .mainnav [aria-current='page'],
 .mainnav [data-state='active'] {
-  --nav-item-background: var(--color-bg);
+  --nav-item-background: hsl(0 0% 0%);
   --nav-item-text-color: var(--color-primary);
   --nav-item-decoration-color: var(--color-primary);
 }
 
 /* current parent (if submenu) */
 li:has(ul a[aria-current='page']) > [data-submenu-toggle] {
-  --nav-item-background: var(--color-bg);
+  --nav-item-background: hsl(0 0% 0%);
   --nav-item-text-color: var(--color-text);
   --nav-item-decoration-color: var(--color-text);
 }
@@ -169,7 +169,7 @@ li:has(ul a[aria-current='page']) > [data-submenu-toggle] {
   --gutter: 0;
   --cluster-direction: column;
   --nav-sublist-position: relative;
-  --nav-sublist-background: var(--color-bg);
+    --nav-sublist-background: hsl(0 0% 0%);
   --nav-sublist-width: 100%;
   --nav-list-visibility: visible;
   --nav-list-opacity: 1;
@@ -228,7 +228,7 @@ li:has(ul a[aria-current='page']) > [data-submenu-toggle] {
 
   .mainnav .nav-sublist {
     --nav-sublist-position: absolute;
-    --nav-sublist-background: var(--color-bg);
+  --nav-sublist-background: hsl(0 0% 0%);
     --nav-sublist-border: var(--color-text);
     --nav-sublist-width: max-content;
     --nav-list-padding-block: var(--space-xs);

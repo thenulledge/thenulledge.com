@@ -15,6 +15,10 @@ export default {
     {
       text: 'Sponsors',
       url: '/sponsors/'
+    },
+    {
+      text: 'Shop',
+      url: 'https://shop.thenulledge.com'
     }
   ],
   bottom: [
@@ -25,6 +29,10 @@ export default {
     {
       text: 'Event Terms',
       url: '/event-terms/'
+    },
+    {
+      text: 'Shop',
+      url: 'https://shop.thenulledge.com'
     }
   ]
 };

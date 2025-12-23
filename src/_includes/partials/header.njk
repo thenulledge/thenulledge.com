@@ -14,7 +14,7 @@
   .site-header {
     padding: 1rem;
     border-bottom: 2px solid hsl(var(--border));
-    background: hsl(var(--background));
+    background: hsl(0 0% 0%);
   }
 
   .header-container {
@@ -52,6 +52,12 @@
 
   .site-name {
     font-family: var(--font-display);
+  }
+
+  @media (max-width: 768px) {
+    .site-name {
+      display: none;
+    }
   }
 
   /* Skip link accessibility */
