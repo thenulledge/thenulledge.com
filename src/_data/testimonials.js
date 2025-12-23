@@ -118,6 +118,13 @@ https://lnkd.in/d4JzixGt`,
     avatarImage: "/assets/images/testimonials/eli-makovetsky.jpeg",
     quote: "It was amazing!"
   },
+  {
+    name: "Brian Rowland",
+    avatarImage: "/assets/images/testimonials/brian-rowland.jpeg",
+    quote: "The speakers and content were fantastic.  The organizers are awesome!",
+    profile: "https://www.linkedin.com/in/brian-rowland-7151168/",
+  },
+
   // waiting for the below still 
   // chat messages
   /*
@@ -158,12 +165,6 @@ https://lnkd.in/d4JzixGt`,
 
 Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
     link: "https://www.linkedin.com/posts/rfedoruk_the-nulledge-conference-last-week-still-has-activity-7387093143072038913--bms?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
-  },
-  {
-    name: "Brian Rowland",
-    avatarImage: "/assets/images/testimonials/brian-rowland.jpeg",
-    quote: "The speakers and content were fantastic.  The organizers are awesome!",
-    profile: "https://www.linkedin.com/in/brian-rowland-7151168/",
   },
   {
     name: "Nelu Tomsa",
