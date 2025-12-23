@@ -8,6 +8,7 @@
   layout: "event",
   schema: "Event",
   eleventyComputed: {
+    faqs: (data) => data.eventData.faqs,
     title: (data) => {
       const date = new Date(data.eventData.when.start);
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -19,7 +20,12 @@
     ctaTitle: (data) => data.eventData.registrationUrl ? "Register Now" : "Stay Tuned",
     ctaDescription: (data) => data.eventData.registrationUrl ? (data.eventData.ctaDescription || `Save your spot for ${data.eventData.name}`) : `Registration opens soon for ${data.eventData.name}`,
     region: (data) => data.eventData.region || 'global',
-    event: (data) => data.eventData
+    event: (data) => data.eventData,
+    breadcrumb: (data) => ({
+      parent: 'Home',
+      parentUrl: '/',
+      current: data.eventData.name
+    })
   }
 }
 ---

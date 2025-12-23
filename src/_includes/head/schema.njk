@@ -4,6 +4,10 @@
   {%- include "schemas/" + schema + ".njk" -%}
 {% endif %}
 
+{% if faqs and faqs.length > 0 %}
+  {%- include "schemas/FAQPage.njk" -%}
+{% endif %}
+
 {% if breadcrumb %}
   {%- include "schemas/BreadcrumbList.njk" -%}
 {% endif %}

@@ -1,0 +1,17 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "{{ meta.url }}{{ person.url | default('/speakers/#' + (person.name | slugify)) }}#person",
+    "name": "{{ person.name }}"{% if person.jobTitle %},
+    "jobTitle": "{{ person.jobTitle }}"{% endif %}{% if person.company %},
+    "worksFor": {
+      "@type": "Organization",
+      "name": "{{ person.company }}"
+    }{% endif %}{% if person.image %},
+    "image": "{{ meta.url }}{{ person.image }}"{% endif %}{% if person.bio %},
+    "description": "{{ person.bio }}"{% endif %}{% if person.url %},
+    "url": "{{ meta.url }}{{ person.url }}"{% endif %}{% if person.sameAs %},
+    "sameAs": {{ person.sameAs | dump | safe }}{% endif %}
+  }
+</script>

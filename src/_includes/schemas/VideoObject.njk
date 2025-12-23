@@ -2,15 +2,23 @@
   {
     "@context": "https://schema.org",
     "@type": "VideoObject",
+    "@id": "{{ meta.url }}{{ page.url }}#video",
     "name": "{{ session.title }}",
     "description": "{{ description }}",
-    "thumbnailUrl": "{{ meta.url }}/assets/og-images/session-{{ session.title | slugify }}-preview.jpeg",
+    "thumbnailUrl": [
+      "{{ meta.url }}/assets/og-images/session-{{ session.title | slugify }}-preview.jpeg",
+      "https://img.youtube.com/vi/{{ session.id }}/maxresdefault.jpg"
+    ],
     "uploadDate": "{{ session.published | toIsoString }}",
     "duration": "PT{{ session.duration }}M",
     "embedUrl": "https://www.youtube.com/embed/{{ session.id }}",
     "contentUrl": "https://www.youtube.com/watch?v={{ session.id }}",
+    "isAccessibleForFree": true,
+    "isFamilyFriendly": true,
+    "inLanguage": "{{ meta.lang }}",
+    "educationalUse": "Professional Development",
+    "learningResourceType": "Presentation",
     "publisher": {
-      "@type": "Organization",
       "@id": "{{ meta.url }}#organization"
     }{% if session.speakers and session.speakers.length > 0 %},
     "author": [
@@ -24,7 +32,9 @@
     "isPartOf": {
       "@type": "Event",
       "name": "nullEDGE 2025",
-      "url": "{{ meta.url }}/2025/conference"
+      "url": "{{ meta.url }}/2025/conference",
+      "startDate": "2025-10-18T09:00:00-04:00",
+      "endDate": "2025-10-18T17:00:00-04:00"
     }
   }
 </script>

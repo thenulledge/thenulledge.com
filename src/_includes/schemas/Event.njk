@@ -2,28 +2,34 @@
   {
     "@context": "https://schema.org",
     "@type": "Event",
+    "@id": "{{ meta.url }}{{ eventData.url }}#event",
     "name": "{{ eventData.name }}",
     "description": "{{ eventData.description }}",
     "startDate": "{{ eventData.when.start }}",
     "endDate": "{{ eventData.when.end }}",
     "eventStatus": "https://schema.org/EventScheduled",
     "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "inLanguage": "{{ meta.lang }}",
+    "isAccessibleForFree": true,
     "location": {
       "@type": "VirtualLocation",
       "url": "{{ meta.url }}{{ eventData.url }}"
     },
-    "image": "{{ meta.url }}/assets/og-images/event-{{ eventData.id }}-preview.jpeg",
+    "image": [
+      "{{ meta.url }}/assets/og-images/event-{{ eventData.id }}-preview.jpeg"
+    ],
     "organizer": {
-      "@type": "Organization",
-      "name": "{{ meta.siteName }}",
-      "url": "{{ meta.url }}"
+      "@id": "{{ meta.url }}#organization"
     },
     "offers": {
       "@type": "Offer",
       "url": "{{ eventData.registrationUrl }}",
       "price": "0",
       "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/InStock",
+      "validFrom": "{{ eventData.when.start }}",
+      "category": "Free"{% if eventData.registrationUrl %},
+      "availabilityStarts": "{{ eventData.when.start }}"{% endif %}
     }{% if eventData.featuredSpeakers and eventData.featuredSpeakers.length > 0 %},
     "performer": [
       {%- for speaker in eventData.featuredSpeakers %}
@@ -31,9 +37,16 @@
         "@type": "Person",
         "name": "{{ speaker.name }}"{% if speaker.image %},
         "image": "{{ meta.url }}{{ speaker.image }}"{% endif %}{% if speaker.bio %},
-        "description": "{{ speaker.bio }}"{% endif %}
+        "description": "{{ speaker.bio }}"{% endif %}{% if speaker.jobTitle %},
+        "jobTitle": "{{ speaker.jobTitle }}"{% endif %}{% if speaker.company %},
+        "worksFor": {
+          "@type": "Organization",
+          "name": "{{ speaker.company }}"
+        }{% endif %}
       }{% if not loop.last %},{% endif %}
       {%- endfor %}
-    ]{% endif %}
+    ]{% endif %}{% if eventData.sessionCount %},
+    "maximumAttendeeCapacity": 1000,
+    "typicalAgeRange": "18-65"{% endif %}
   }
 </script>
