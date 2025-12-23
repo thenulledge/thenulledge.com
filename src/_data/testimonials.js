@@ -127,7 +127,7 @@ https://lnkd.in/d4JzixGt`,
   {
     name: "Trey Carroll",
     avatarImage: "/assets/images/testimonials/trey-carroll.jpeg",
-    quote: "The freedom of the presenters to candidly say what they really thought.  The absence of the deluge of marketing information.  The actual focus on development.   The real-world applicability of the content"
+    quote: "The freedom of the presenters to candidly say what they really thought, the absence of the deluge of marketing information, the actual focus on development, and the real-world applicability of the content."
   },
   // waiting for the below still 
   // chat messages
