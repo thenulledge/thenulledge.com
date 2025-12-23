@@ -13,6 +13,12 @@ function shuffleArray(array) {
 }
 const testimonials = [
   {
+    name: 'Casey Ferguson',
+    avatarImage: "/assets/images/testimonials/casey-ferguson.jpeg",
+    quote: 'Jace Benson the format, parallel chat, and pacing is perfect',
+    link: 'https://thenulledge.com/2025/conference/#event-chat',
+  },
+  {
     name: 'Ty Roach',
     avatarImage: "/assets/images/speakers/ty-roach.jpg",
     quote: '344 people online 8 minutes in...awesome!',
@@ -35,12 +41,6 @@ const testimonials = [
     avatarImage: "/assets/images/testimonials/kalisha-moore.jpeg",
     quote: 'Awesome content like always!',
     link: 'https://thenulledge.com/2025/conference/5-things-i-do-to-new-many-to-many-tables/#event-chat',
-  },
-  {
-    name: 'Casey Ferguson',
-    avatarImage: "/assets/images/testimonials/casey-ferguson.jpeg",
-    quote: 'Jace Benson the format, parallel chat, and pacing is perfect',
-    link: 'https://thenulledge.com/2025/conference/#event-chat',
   },
   {
     name: 'Brad Hicks',
@@ -69,12 +69,6 @@ const testimonials = [
     avatarImage: "/assets/images/contributors/jeff-jessie.jpeg",
     quote: 'Networking has been awesome.',
     link: 'https://thenulledge.com/2025/conference/#event-chat',
-  },
-  {
-    name: 'Naz Ashrafi',
-    avatarImage: "/assets/images/testimonials/naz-ashrafi.jpg",
-    quote: "Idek what this conference is about but I'm excited for you 😁🙌🙌",
-    link: 'https://x.com/nazanin_ashrafi/status/1957500371108262325'
   },
   {
     name: "Kevin Clark",
@@ -170,10 +164,6 @@ Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
     quote: "Great event!"
   },
   {
-    name: "Revm Flythe",
-    quote: "The concept is good, and the program is useful. Productive. Smart."
-  },
-  {
     name: "Trey Carroll",
     avatarImage: "/assets/images/testimonials/trey-carroll.jpeg",
     quote: "The freedom of the presenters to candidly say what they really thought.  The absence of the deluge of marketing information.  The actual focus on development.   The real-world applicability of the content"
@@ -219,17 +209,9 @@ Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
     quote: "I liked the published schedule so that I could pick the topics most relevant to my needs. I also liked the quality of the content. Well done!"
   },
   {
-    name: "Vijay Reddy",
-    quote: "Organised well and Neetworking is good"
-  },
-  {
     name: "Craig Talbert",
     avatarImage: "/assets/images/testimonials/craig-talbert.jpeg",
     quote: "Good timing and good platform."
-  },
-  {
-    name: "brandon chung",
-    quote: "very good informational presentation."
   },
   {
     name: "Pavel Mishev",

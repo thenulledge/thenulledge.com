@@ -19,8 +19,12 @@ export default {
   ],
   bottom: [
     {
-      text: 'Privacy',
-      url: '/privacy/'
+      text: 'Privacy Policy',
+      url: '/privacy-policy/'
+    },
+    {
+      text: 'Event Terms',
+      url: '/event-terms/'
     }
   ]
 };

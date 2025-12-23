@@ -91,7 +91,7 @@ permalink: /sponsors/
           </div>
           <div class="benefit-item">
             <i class="fa-solid fa-circle-check"></i>
-            <span>Virtual booth with all attendee details</span>
+            <span>Virtual booth visible to all attendees</span>
           </div>
         </div>
         
@@ -206,6 +206,94 @@ permalink: /sponsors/
         <span class="sponsor-name-label">{{ sponsor.name }}</span>
       </a>
       {% endfor %}
+    </div>
+  </section>
+
+  {# Sponsor FAQ #}
+  <section class="region flow">
+    <div class="text-center prose">
+      <h2>Sponsor FAQ</h2>
+      <p class="lead">Common questions about sponsoring nullEDGE events</p>
+    </div>
+    
+    <div class="faq-grid">
+      <div class="card flow">
+        <h3>Do sponsors get attendee contact lists?</h3>
+        <p><strong>No.</strong> We don't sell or share attendee contact lists. nullEDGE is a community conference, not a lead-generation business.</p>
+        <p class="text-sm text-muted">Attendees value their privacy, and we respect that. Your sponsorship supports the community, not a database transaction.</p>
+      </div>
+
+      <div class="card flow">
+        <h3>How do I generate leads then?</h3>
+        <p><strong>Through genuine engagement at your virtual booth:</strong></p>
+        <ul class="benefits-list">
+          <li class="benefit-item">
+            <i class="fa-solid fa-gift"></i>
+            <span><strong>Run giveaways:</strong> "Enter your email for a chance to win X" - attendees opt in</span>
+          </li>
+          <li class="benefit-item">
+            <i class="fa-solid fa-comments"></i>
+            <span><strong>Offer value:</strong> Free trials, demo bookings, white papers, tool downloads</span>
+          </li>
+          <li class="benefit-item">
+            <i class="fa-solid fa-video"></i>
+            <span><strong>Host booth demos:</strong> Live Q&A sessions where attendees can book time with your team</span>
+          </li>
+          <li class="benefit-item">
+            <i class="fa-solid fa-trophy"></i>
+            <span><strong>Interactive content:</strong> Quizzes, challenges, certification prep - collect emails for results</span>
+          </li>
+        </ul>
+        <p class="text-sm text-muted mt-m">These leads are higher quality because people chose to engage with you, not because we forced them to hand over contact info.</p>
+      </div>
+
+      <div class="card flow">
+        <h3>What metrics do sponsors receive?</h3>
+        <p><strong>You'll get aggregate event data:</strong></p>
+        <ul class="text-sm">
+          <li>Total event attendance</li>
+          <li>Booth visit counts (how many people viewed your booth)</li>
+          <li>Engagement rates (average time at booth, clicks, interactions)</li>
+          <li>Session attendance (if you have a speaking slot)</li>
+          <li>Chat mentions and engagement</li>
+        </ul>
+        <p class="text-sm text-muted mt-m">All metrics are aggregated and anonymized - we share insights, not individual attendee data.</p>
+      </div>
+
+      <div class="card flow">
+        <h3>Can I contact attendees who visit my booth?</h3>
+        <p><strong>Only if they give you their contact info directly.</strong></p>
+        <p>Set up forms in your booth, run giveaways, offer resources - any method where attendees voluntarily provide their email. We provide the platform and traffic; you provide the value proposition that earns their contact info.</p>
+        <p class="text-sm text-muted mt-m">Think of it like a physical conference booth - you can't demand the attendee list, but you can collect business cards from people who stop by.</p>
+      </div>
+
+      <div class="card flow">
+        <h3>Is this worth it without a contact list?</h3>
+        <p><strong>If you're building brand presence in the ServiceNow community, absolutely.</strong></p>
+        <p>Our 2025 events had 746 attendees, 2,701 chat messages, and a 9.2/10 satisfaction rating. That's an engaged audience who chose to be there.</p>
+        <ul class="text-sm">
+          <li><strong>Brand visibility:</strong> Logo on site, ceremonies, and all event materials</li>
+          <li><strong>Community goodwill:</strong> Supporting free education for ServiceNow folks</li>
+          <li><strong>Thought leadership:</strong> Speaking slots (Premium/Elite sponsors)</li>
+          <li><strong>Quality leads:</strong> From people who engaged with your booth content</li>
+        </ul>
+        <p class="text-sm text-muted mt-m">We attract sponsors who value the community, not just a lead list. If you need guaranteed contacts, there are other conferences for that.</p>
+      </div>
+
+      <div class="card flow">
+        <h3>Can I sponsor multiple events?</h3>
+        <p><strong>Yes!</strong> We have four global conferences in 2026 (nullEDGE, nullHub, nullStack Alpha, nullStack Beta).</p>
+        <p>Multi-event sponsors get:</p>
+        <ul class="text-sm">
+          <li>Year-round homepage presence</li>
+          <li>Priority booth placement at all events</li>
+          <li>Bundled pricing discounts</li>
+          <li>Multiple speaking opportunities</li>
+        </ul>
+        <p class="text-sm text-muted mt-m">
+          <a href="mailto:{{ meta.email }}?subject=Multi-Event%20Sponsorship" class="link-primary">Contact us</a> to discuss custom packages.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -349,5 +437,36 @@ permalink: /sponsors/
 
   .font-semibold {
     font-weight: 600;
+  }
+
+  /* FAQ Grid */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+    gap: var(--space-l);
+  }
+
+  .faq-grid .card h3 {
+    font-size: var(--size-step-1);
+    margin-bottom: 0.75rem;
+    color: hsl(var(--primary));
+  }
+
+  .faq-grid .card ul {
+    margin: 1rem 0;
+    padding-left: 0;
+  }
+
+  .faq-grid .card ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  .link-primary {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+  }
+
+  .link-primary:hover {
+    color: hsl(var(--primary) / 0.8);
   }
 </style>
