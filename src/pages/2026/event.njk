@@ -34,7 +34,6 @@
 {% from "partials/timezone-display.njk" import timezoneDisplay %}
 {% from "partials/speaker-highlights.njk" import speakerHighlights %}
 {% from "partials/event-faq.njk" import eventFaq %}
-{% from "partials/registration-form.njk" import registrationForm %}
 
 {# Hero Section #}
 {{ hero(
@@ -43,7 +42,7 @@
   imageUrl=eventData.heroImage or "",
   imageAlt=eventData.name ~ " Event",
   primaryCtaText="Register Free",
-  primaryCtaLink="#registration",
+  primaryCtaLink=eventData.registrationUrl,
   secondaryCtaText="Become a Sponsor",
   secondaryCtaLink="/sponsors"
 ) }}
@@ -206,56 +205,14 @@
 ) }}
 {% endif %}
 
-{# Registration Form - Shows if widget ID and iframe src are provided #}
-{% if eventData.registrationWidgetId and eventData.registrationIframeSrc %}
-<section class="registration-section" id="registration">
-  <div class="container">
-    <div class="registration-header">
-      <h2>Register for {{ eventData.name }}</h2>
-      <p>Secure your spot for this free virtual event</p>
-    </div>
-    {{ registrationForm(
-      widgetId=eventData.registrationWidgetId,
-      iframeSrc=eventData.registrationIframeSrc
-    ) }}
-  </div>
-</section>
-
-<style>
-  .registration-section {
-    padding: 4rem 1rem;
-    background: hsl(var(--muted) / 0.3);
-  }
-  
-  .registration-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .registration-header h2 {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-  
-  .registration-header p {
-    font-size: var(--size-step-1);
-    color: hsl(var(--muted-foreground));
-  }
-  
-  .hopin-container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  
-  .hopin-container iframe {
-    width: 100%;
-    min-height: 600px;
-    border: none;
-    border-radius: var(--radius);
-    box-shadow: 0 4px 12px hsl(var(--foreground) / 0.1);
-  }
-</style>
+{# Registration CTA - Shows if registration URL is provided #}
+{% if eventData.registrationUrl %}
+{{ ctaBanner(
+  title="Register for " ~ eventData.name,
+  description="Secure your spot for this free virtual event. Registration takes less than a minute.",
+  primaryButtonText="Register Now",
+  primaryButtonLink=eventData.registrationUrl
+) }}
 {% endif %}
 
 {# Related Events Section #}

@@ -45,8 +45,16 @@ Usage:
 
       {# CTA Buttons #}
       <div class="cta-buttons">
+        {% if primaryCtaLink.startsWith('http') %}
+        <a href="{{ primaryCtaLink }}" class="btn btn-lg btn-primary" target="_blank" rel="noopener noreferrer">{{ primaryCtaText }}</a>
+        {% else %}
         <a href="{{ primaryCtaLink }}" class="btn btn-lg btn-primary">{{ primaryCtaText }}</a>
+        {% endif %}
+        {% if secondaryCtaLink.startsWith('http') %}
+        <a href="{{ secondaryCtaLink }}" class="btn btn-lg btn-outline" target="_blank" rel="noopener noreferrer">{{ secondaryCtaText }}</a>
+        {% else %}
         <a href="{{ secondaryCtaLink }}" class="btn btn-lg btn-outline">{{ secondaryCtaText }}</a>
+        {% endif %}
       </div>
     </div>
   </div>

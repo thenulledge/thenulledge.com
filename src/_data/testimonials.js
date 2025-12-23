@@ -19,6 +19,24 @@ const testimonials = [
     link: 'https://thenulledge.com/2025/conference/#event-chat',
   },
   {
+    name: "Jan Rijk",
+    avatarImage: "/assets/images/testimonials/jan-rijk.jpeg",
+    quote: `Today I attended the very first edition of NullEdge, a fantastic online community conference packed with insightful knowledge sessions covering a wide range of ServiceNow topics and perspectives. The event was organized by Jace Benson, with support from Chuck Tomasi, Carleen Carter, and Justin Meadows. 
+
+While I took away valuable insights from many sessions, a few definitely stood out and left me wanting to explore their topics in more depth. I’m thinking in particular of James Neale’s session on Xplore, Chris Schuh - The ServiceNow Magician on 2-Week Upgrades, Arnoud Kooi on SN Utils, Jillian Howell on UI Builder, and Chuck Tomasi on Many-to-Many Tables.
+
+There were a few minor technical hiccups here and there, and with so many great sessions running in parallel, choosing between them wasn’t always easy. Fortunately, all session recordings will be available later on the Nulledge YouTube channel (https://lnkd.in/eug-SAxM).
+
+All in all, it was a highly valuable and inspiring evening. Many thanks to the organizers and speakers, I’m already looking forward to the next edition!`,
+    link: "https://www.linkedin.com/posts/janrijk_today-i-attended-the-very-first-edition-of-activity-7385058126267363329-gzX8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
+  },
+  {
+    name: 'Sharon Van Luyn-Prater',
+    avatarImage: "/assets/images/testimonials/Sharon-Van-Luyn-Prater.jpeg",
+    quote: 'THANK YOU to all the presenters! What a great event...fast paced and FUN',
+    link: 'https://thenulledge.com/2025/conference/closing-remarks/#event-chat',
+  },
+  {
     name: 'Ty Roach',
     avatarImage: "/assets/images/speakers/ty-roach.jpg",
     quote: '344 people online 8 minutes in...awesome!',
@@ -59,12 +77,6 @@ const testimonials = [
     link: 'https://thenulledge.com/2025/conference/#event-chat',
   },
   {
-    name: 'Sharon VanLuyn-Prater',
-    avatarImage: "/assets/images/testimonials/Sharon-Van-Luyn-Prater.jpeg",
-    quote: 'THANK YOU to all the presenters! What a great event...fast paced and FUN',
-    link: 'https://thenulledge.com/2025/conference/closing-remarks/#event-chat',
-  },
-  {
     name: 'Jeff Jessie',
     avatarImage: "/assets/images/contributors/jeff-jessie.jpeg",
     quote: 'Networking has been awesome.',
@@ -75,28 +87,6 @@ const testimonials = [
     avatarImage: "/assets/images/testimonials/kevin-clark.jpeg",
     quote: "Year one nullEDGE attendance = 5% of a Knowledge… what growth curve will we see in future years?",
     link: 'https://www.linkedin.com/feed/update/urn:li:activity:7387614835640999936/?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7387614835640999936%2C7387666455959494656%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287387666455959494656%2Curn%3Ali%3Aactivity%3A7387614835640999936%29',
-  },
-  {
-    name: "Jan Rijk",
-    avatarImage: "/assets/images/testimonials/jan-rijk.jpeg",
-    quote: `Today I attended the very first edition of NullEdge, a fantastic online community conference packed with insightful knowledge sessions covering a wide range of ServiceNow topics and perspectives. The event was organized by Jace Benson, with support from Chuck Tomasi, Carleen Carter, and Justin Meadows. 
-
-While I took away valuable insights from many sessions, a few definitely stood out and left me wanting to explore their topics in more depth. I’m thinking in particular of James Neale’s session on Xplore, Chris Schuh - The ServiceNow Magician on 2-Week Upgrades, Arnoud Kooi on SN Utils, Jillian Howell on UI Builder, and Chuck Tomasi on Many-to-Many Tables.
-
-There were a few minor technical hiccups here and there, and with so many great sessions running in parallel, choosing between them wasn’t always easy. Fortunately, all session recordings will be available later on the Nulledge YouTube channel (https://lnkd.in/eug-SAxM).
-
-All in all, it was a highly valuable and inspiring evening. Many thanks to the organizers and speakers, I’m already looking forward to the next edition!`,
-    link: "https://www.linkedin.com/posts/janrijk_today-i-attended-the-very-first-edition-of-activity-7385058126267363329-gzX8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
-  },
-  {
-    name: "Robert Fedoruk",
-    avatarImage: "/assets/images/testimonials/robert-fedoruk.jpeg",
-    quote: `If you weren’t lucky enough to attend the hashtag#servicenow nullEDGE conference, here’s the ultra fast 15 min demo of hashtag#ReleaseOps Jace asked me to do.
-
-There’s SO much more to show. Hope you’re as excited about this feature as I am.
-
-https://lnkd.in/gT-aZnxC`,
-    link: "https://www.linkedin.com/posts/rfedoruk_releaseops-confident-qc-automated-releases-activity-7389300067968479233-IEoY?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
   },
   {
     name: "Cory Wesley",
