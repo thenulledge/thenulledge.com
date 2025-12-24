@@ -27,7 +27,6 @@ export default async function (eleventyConfig) {
 
   // --------------------- custom wtach targets
   eleventyConfig.addWatchTarget('./src/assets/**/*.{css,js,svg,png,jpeg}');
-  eleventyConfig.addWatchTarget('./src/_includes/**/*.{webc}');
   eleventyConfig.addWatchTarget('./src/pages/**/*.js');
 
   //	---------------------  Collections
@@ -39,11 +38,6 @@ export default async function (eleventyConfig) {
   // ---------------------  Plugins
   eleventyConfig.addPlugin(plugins.htmlConfig);
   eleventyConfig.addPlugin(plugins.drafts);
-
-  eleventyConfig.addPlugin(plugins.webc, {
-    components: ['./src/_includes/webc/**/*.webc'],
-    useTransform: true
-  });
 
   eleventyConfig.addPlugin(plugins.eleventyImageTransformPlugin, {
     formats: ['webp', 'jpeg'],
@@ -60,6 +54,7 @@ export default async function (eleventyConfig) {
 
   // ---------------------  bundle
   eleventyConfig.addBundle('css', {hoist: true});
+  eleventyConfig.addBundle('js', {hoist: true});
 
   // 	--------------------- Library and Data
   eleventyConfig.setLibrary('md', plugins.markdownLib);

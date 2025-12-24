@@ -3,7 +3,6 @@ import path from 'node:path';
 import postcss from 'postcss';
 import postcssImport from 'postcss-import';
 import postcssImportExtGlob from 'postcss-import-ext-glob';
-import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import fg from 'fast-glob';
@@ -14,7 +13,6 @@ const buildCss = async (inputPath, outputPaths) => {
   const result = await postcss([
     postcssImportExtGlob,
     postcssImport,
-    tailwindcss,
     autoprefixer,
     cssnano
   ]).process(inputContent, {from: inputPath});
