@@ -10,6 +10,21 @@ The official website for **nullEDGE** - a 100% free, community-driven ServiceNow
 
 ---
 
+## 🎯 Recent Simplification (December 2024)
+
+This project was simplified following **[Getting Real](https://basecamp.com/gettingreal)** principles by Basecamp:
+
+**What was removed:**
+- **Tailwind CSS** - Not used for utility classes, switched to static CSS custom properties
+- **WebC plugin** - Unused custom web components  
+- **AVIF image format** - WebP + JPEG sufficient for our needs
+- **Design token JSON pipeline** - Complex build process replaced with direct CSS variables
+- **56 npm dependencies** - Reduced from 37 to 20 packages
+
+**Result:** -1,519 lines of code, -45% dependencies, same functionality. The site is now simpler, faster to build, and easier to maintain.
+
+---
+
 ## 🎯 What is nullEDGE?
 
 nullEDGE hosts multiple free virtual events throughout the year:
@@ -79,7 +94,6 @@ src/
 │   └── utils/                  # Helper utilities
 │
 ├── _data/                      # Global data files
-│   ├── designTokens/           # Design system tokens (colors, spacing, fonts)
 │   ├── companies.js            # Sponsor/company information
 │   ├── events.js               # Events data aggregator
 │   ├── meta.js                 # Site metadata
@@ -88,8 +102,7 @@ src/
 │
 ├── _includes/                  # Reusable templates
 │   ├── partials/               # Template partials (header, footer, hero, etc.)
-│   ├── schemas/                # Schema.org structured data
-│   └── webc/                   # WebC custom components
+│   └── schemas/                # Schema.org structured data
 │
 ├── _layouts/                   # Page layouts
 │   ├── base.njk                # Base HTML template
@@ -245,18 +258,16 @@ const companies = {
 - Click-through links to sponsor websites
 - Consistent display across all events
 
-### 🎨 Design System
+### 🎨 CSS Architecture
 
-The site uses a **design token system** with Tailwind CSS integration.
+The site uses **CSS custom properties** (CSS variables) for design consistency.
 
-**Design Tokens** (JSON files in `src/_data/designTokens/`):
-- `colors.json` - Color palette (primary, secondary, accent, neutrals)
-- `spacing.json` - Spacing scale (xs, sm, md, lg, xl, 2xl, etc.)
-- `textSizes.json` - Font size scale with fluid typography
-- `textWeights.json` - Font weights (light, regular, medium, bold, black)
-- `fonts.json` - Font family definitions
-- `borderRadius.json` - Border radius values
-- `viewports.json` - Breakpoint definitions
+**CSS Variables** (defined in `src/assets/css/global/base/variables.css`):
+- Colors: `--color-primary`, `--color-secondary`, `--color-accent`, etc.
+- Spacing: `--space-xs`, `--space-sm`, `--space-md`, `--space-lg`, `--space-xl`, `--space-2xl`, etc.
+- Typography: `--size-step-0` through `--size-step-6` (fluid type scale)
+- Font weights: `--font-light`, `--font-regular`, `--font-medium`, `--font-bold`, `--font-black`
+- Font families: `--font-base`, `--font-serif`
 
 **CSS Architecture**:
 ```
@@ -274,8 +285,7 @@ src/assets/css/
 **Important CSS Rules**:
 - ❌ **No inline styles** - Never use `style=""` attributes
 - ✅ **Check before creating** - Search `blocks/` for existing components first
-- ✅ **Use Tailwind utilities** - Prefer utility classes over custom CSS
-- ✅ **Design tokens as CSS vars** - Access via `var(--color-primary)`, `var(--space-xl)`, etc.
+- ✅ **Use CSS custom properties** - Access via `var(--color-primary)`, `var(--space-xl)`, etc.
 
 ### 📊 SEO & Performance
 
@@ -288,7 +298,7 @@ src/assets/css/
 - Canonical URLs
 
 **Performance Optimizations**:
-- Responsive images with webp/avif formats
+- Responsive images with webp and jpeg formats
 - Lazy loading for images and videos
 - Lite-youtube for video embeds (3x faster than iframe)
 - Minified CSS, JS, and HTML in production
@@ -296,7 +306,7 @@ src/assets/css/
 - Critical CSS inlined in `<head>`
 
 **Build Pipeline**:
-- PostCSS: import-ext-glob → import → tailwindcss → autoprefixer → cssnano
+- PostCSS: import-ext-glob → import → autoprefixer → cssnano
 - esbuild for JavaScript bundling (ES modules)
 - eleventy-img for image optimization
 - sharp for image processing
@@ -495,14 +505,13 @@ These directories are auto-generated and gitignored:
 | Category | Tools |
 |----------|-------|
 | **Static Site Generator** | [Eleventy 3.x](https://www.11ty.dev/) (ES modules) |
-| **CSS Framework** | [Tailwind CSS 3.x](https://tailwindcss.com/) (custom config, no preflight) |
-| **CSS Processing** | PostCSS + autoprefixer + cssnano |
+| **CSS** | Custom CSS with PostCSS (autoprefixer + cssnano) |
 | **JavaScript Bundler** | [esbuild](https://esbuild.github.io/) |
-| **Templating** | [Nunjucks](https://mozilla.github.io/nunjucks/) (.njk), [WebC](https://www.11ty.dev/docs/languages/webc/) |
+| **Templating** | [Nunjucks](https://mozilla.github.io/nunjucks/) (.njk) |
 | **Markdown** | [markdown-it](https://github.com/markdown-it/markdown-it) with plugins |
-| **Image Optimization** | [@11ty/eleventy-img](https://www.11ty.dev/docs/plugins/image/), [sharp](https://sharp.pixelplumbing.com/) |
+| **Image Optimization** | [@11ty/eleventy-img](https://www.11ty.dev/docs/plugins/image/), [sharp](https://sharp.pixelplumbing.com/) (webp, jpeg) |
 | **Date Handling** | [dayjs](https://day.js.org/) with UTC, timezone, advancedFormat plugins |
-| **Code Formatting** | [Prettier](https://prettier.io/) with Jinja template support |
+| **Code Formatting** | [Prettier](https://prettier.io/) |
 | **Deployment** | [Netlify](https://www.netlify.com/) (automatic deploys from `main` branch) |
 | **Version Control** | Git + GitHub |
 
