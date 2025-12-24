@@ -1,5 +1,16 @@
 # Coding Agent Reference for nullEDGE Conference Site
 
+## Recent Simplification (Dec 2024)
+
+This project was simplified following **Getting Real** principles:
+- **Removed Tailwind CSS** - Not using utility classes, switched to static CSS vars
+- **Removed WebC plugin** - Unused custom web components
+- **Removed @11ty/is-land** - Island architecture not needed
+- **Removed AVIF format** - WebP + JPEG sufficient
+- **Result**: -1,519 lines of code, -56 npm dependencies (37→20), same functionality
+
+The site is now simpler, faster to build, and easier to maintain. All CSS custom properties are directly in `variables.css` instead of being generated through a complex JSON → JS → Tailwind pipeline.
+
 ## Build/Dev Commands
 - `npm start` - Start dev server with live reload at http://localhost:8080 (runs `dev:11ty`)
 - `npm run build` - Production build (cleans, then runs `build:11ty`)
@@ -10,13 +21,14 @@
 
 ## Tech Stack
 - **Static Site Generator**: Eleventy 3.x with ES modules (requires Node >= 20.x)
-- **CSS**: Tailwind CSS 3.x (custom config, preflight disabled)
-- **PostCSS Pipeline**: postcss-import-ext-glob → postcss-import → tailwindcss → autoprefixer → cssnano
-- **Templates**: Nunjucks (.njk), WebC components (.webc), Markdown (.md) with markdown-it
+- **CSS**: Custom CSS with PostCSS (NO Tailwind - removed in simplification)
+- **PostCSS Pipeline**: postcss-import-ext-glob → postcss-import → autoprefixer → cssnano
+- **Templates**: Nunjucks (.njk), Markdown (.md) with markdown-it (WebC removed)
 - **JavaScript**: esbuild for bundling, ES modules only
-- **Images**: @11ty/eleventy-img for optimization (webp, jpeg), sharp for processing
+- **Images**: @11ty/eleventy-img for optimization (webp, jpeg only - avif removed)
 - **Dates**: dayjs with utc, timezone, and advancedFormat plugins
 - **Build Tools**: fast-glob for file finding, rimraf for cleaning
+- **Dependencies**: 20 packages (down from 37 - simplified Dec 2024)
 
 ## Code Style
 
@@ -111,7 +123,6 @@
 ### Templates & Assets
 - **Layouts**: `src/_layouts/*.njk` - Base page templates (base.njk, page.njk, event.njk)
 - **Partials**: `src/_includes/partials/*.njk` - Reusable template chunks (header, footer, hero)
-- **WebC**: `src/_includes/webc/*.webc` - Custom web components
 - **CSS**: See CSS Architecture section below
 - **Scripts**: `src/assets/scripts/bundle/*.js` - Bundled by esbuild on build
 - **Images**: `src/assets/images/` - Organized by type (companies, people, template, favicon)
@@ -130,9 +141,8 @@
 ### CSS Conventions
 - **NO inline styles**: Never use `style=""` attributes in HTML
 - **Check before creating**: Always search `src/assets/css/global/blocks/` before adding new page-specific CSS
-- **Tailwind integration**: Use Tailwind utilities in templates, custom CSS for complex components
-- **Custom properties**: Design tokens available as CSS vars (--color-primary, --space-xl, --size-2xl)
-- **Class naming**: Follow BEM-like patterns or utility-first approach
+- **Custom properties**: CSS vars defined in variables.css (--color-primary, --space-xl, --size-2xl)
+- **Class naming**: Follow BEM-like patterns or semantic naming
 - **Build output**: CSS bundled to `src/_includes/css/` (included in templates) and `dist/assets/css/`
 
 ## Key Conventions
@@ -153,7 +163,7 @@
 ### Image Processing
 - **Shortcode**: Use `{% image %}` shortcode, never raw `<img>` tags for content images
 - **Path handling**: Shortcode auto-prepends `./src` to paths if missing
-- **Optimization**: Generates webp, avif, and jpeg at multiple widths (650, 960, 1400px)
+- **Optimization**: Generates webp and jpeg at multiple widths (650, 960, 1400px)
 - **Output**: Processed to `dist/assets/images/` with format `{name}-{width}w.{format}`
 - **Attributes**: Always include alt text, use loading="lazy" by default
 
@@ -195,10 +205,9 @@
 - **Don't edit eleventy.config.js directly**: Use `src/_config/` subdirectories
 - **Don't forget .js in imports**: ES modules require explicit extensions
 - **Don't use sync file operations**: Always use async/await with fs/promises
-- **Don't create inline styles**: Use CSS classes or Tailwind utilities
-- **Don't hardcode dates**: Use filters and design tokens
+- **Don't create inline styles**: Use CSS classes
+- **Don't hardcode dates**: Use filters and CSS custom properties
 - **Don't skip JSDoc**: Required for all exported functions
-- **Don't use preflight**: Tailwind preflight is disabled in this project
 - **Build artifacts are gitignored**: `dist/`, `src/_includes/css/`, `src/_includes/scripts/`
 
 ## Performance Notes
