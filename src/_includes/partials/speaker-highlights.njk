@@ -6,20 +6,15 @@ Usage:
 {{ speakerHighlights(
   title="Featured Speakers",
   subtitle="Learn from experienced ServiceNow folks",
-  speakers=[
-    {
-      name: "John Doe",
-      title: "Principal Architect",
-      company: "Acme Corp",
-      image: "/assets/images/speakers/john-doe.jpg",
-      bio: "15+ years of ServiceNow experience..."
-    }
-  ],
-  viewAllLink="/speakers"
+  speakers=["John Doe", "Jane Smith"],
+  viewAllLink="/speakers",
+  people=people
 ) }}
+
+Note: The speakers parameter should be an array of names that exist as keys in the people global data object.
 #}
 
-{% macro speakerHighlights(title="Featured Speakers", subtitle="", speakers=[], viewAllLink="") %}
+{% macro speakerHighlights(title="Featured Speakers", subtitle="", speakers=[], viewAllLink="", people={}) %}
 {% if speakers and speakers.length > 0 %}
 <section class="speaker-highlights-section">
   <div class="container">
@@ -29,11 +24,12 @@ Usage:
     {% endif %}
     
     <div class="speakers-grid">
-      {% for speaker in speakers %}
+      {% for speakerName in speakers %}
+      {%- set speaker = people[speakerName] %}
       <div class="speaker-card">
         {% if speaker.image %}
         <div class="speaker-image-wrapper">
-          <img src="{{ speaker.image }}" alt="{{ speaker.name }}" class="speaker-image" />
+          <img src="{{ speaker.image }}" alt="{{ speakerName }}" class="speaker-image" />
         </div>
         {% else %}
         <div class="speaker-image-wrapper speaker-placeholder">
@@ -41,7 +37,7 @@ Usage:
         </div>
         {% endif %}
         <div class="speaker-info">
-          <h3 class="speaker-name">{{ speaker.name }}</h3>
+          <h3 class="speaker-name">{{ speakerName }}</h3>
           {% if speaker.title %}
           <p class="speaker-title">{{ speaker.title }}</p>
           {% endif %}

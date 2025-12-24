@@ -1,8 +1,8 @@
 ---
 fontDisplay: "'Red Hat Display', 'Arial Black', sans-serif"
 fontBody: "'Atkinson Hyperlegible', Arial, sans-serif"
-background: '#efdf53'
-text: '#1a1a1a'
+background: '#1a1a1a'
+text: '#efdf53'
 siteUrl: 'thenulledge.com'
 pagination:
   data: collections.sessions2025
@@ -20,96 +20,128 @@ eleventyExcludeFromCollections: true
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
 >
-  {% set titleInLines = session.title | splitlines(30) %}
-  {% set numberOfLines = titleInLines.length %}
-  {% if numberOfLines == 1 %}
-    {% set verticalStartingPoint = 280 %}
-    {% set fontSize = 72 %}
-  {% elseif numberOfLines == 2 %}
-    {% set verticalStartingPoint = 240 %}
-    {% set fontSize = 68 %}
-  {% elseif numberOfLines == 3 %}
-    {% set verticalStartingPoint = 210 %}
-    {% set fontSize = 60 %}
-  {% else %}
-    {% set verticalStartingPoint = 190 %}
-    {% set fontSize = 54 %}
-  {% endif %}
+  {% set titleInLines = session.title | splitlines(35) %}
+  {% set speakerText = session.speakers | join(", ") %}
+  {% set speakerLines = speakerText | splitlines(45) %}
+  {% set speakerCount = session.speakers | length %}
+  {% set logoBase64 = '/assets/images/nullEDGElogo.png' | imageToBase64 %}
 
   <!-- Background -->
   <rect id="bg" width="100%" height="100%" fill="{{ background }}" />
 
-  <!-- Top Bar with Logo and Year -->
-  <g id="header">
-    <!-- Logo Text (simplified, since we can't easily embed PNG in SVG for 11ty) -->
-    <text
-      font-family="{{ fontDisplay }}"
-      font-size="32"
-      font-weight="900"
-      fill="{{ text }}"
-      letter-spacing="-0.5"
-    >
-      <tspan x="60" y="80">nullEDGE</tspan>
-    </text>
-    
-    <!-- Year -->
-    <text
-      font-family="{{ fontBody }}"
-      font-size="28"
-      font-weight="600"
-      fill="{{ text }}"
-      opacity="0.8"
-    >
-      <tspan x="1080" y="80">2025</tspan>
-    </text>
+  <!-- nullEDGE Logo (vertical, left side) -->
+  {% if logoBase64 %}
+  <g transform="translate(40, 315) rotate(-90)">
+    <image 
+      href="{{ logoBase64 }}" 
+      x="-250" 
+      y="-40" 
+      width="500" 
+      height="80"
+      preserveAspectRatio="xMidYMid meet"
+    />
   </g>
+  {% endif %}
 
-  <!-- Session Title -->
+  <!-- Session Title (centered, above image) -->
   <text
     id="title"
     font-family="{{ fontDisplay }}"
-    font-size="{{ fontSize }}"
+    font-size="42"
     font-weight="900"
     fill="{{ text }}"
-    letter-spacing="-2"
+    letter-spacing="-1.5"
+    text-anchor="middle"
   >
     {% for line in titleInLines %}
-      <tspan x="60" y="{{ verticalStartingPoint + loop.index0 * (fontSize + 15) }}">{{ line }}</tspan>
+      {% if loop.index0 < 2 %}
+        <tspan x="600" y="{{ 120 + loop.index0 * 48 }}">{{ line }}</tspan>
+      {% endif %}
     {% endfor %}
   </text>
 
-  <!-- Speaker Info -->
-  <g id="speaker-info">
-    {% set speakerText = session.speakers | join(", ") %}
-    {% set speakerLines = speakerText | splitlines(40) %}
-    
-    <text
-      font-family="{{ fontBody }}"
-      font-size="28"
-      font-weight="500"
-      fill="{{ text }}"
-      opacity="0.85"
-      letter-spacing="-0.5"
-    >
-      {% for line in speakerLines %}
-        <tspan x="60" y="{{ 480 + loop.index0 * 36 }}">{{ line }}</tspan>
+  {% if speakerCount == 1 %}
+    <!-- Single Speaker Layout -->
+    {% set speakerImagePath = people[session.speakers[0]].image %}
+    {% set speakerImageBase64 = speakerImagePath | imageToBase64 if speakerImagePath %}
+    {% if speakerImageBase64 %}
+    <defs>
+      <clipPath id="roundedSquare">
+        <rect x="475" y="240" width="250" height="250" rx="20" ry="20"/>
+      </clipPath>
+    </defs>
+    <image 
+      href="{{ speakerImageBase64 }}" 
+      x="475" 
+      y="240" 
+      width="250" 
+      height="250"
+      clip-path="url(#roundedSquare)"
+      preserveAspectRatio="xMidYMid slice"
+    />
+    {% endif %}
+  {% elif speakerCount <= 4 %}
+    <!-- Multiple Speaker Horizontal Layout (1x4 row, left to right) -->
+    {% set photoSize = 150 %}
+    {% set spacing = 20 %}
+    {% set totalWidth = (speakerCount * photoSize) + ((speakerCount - 1) * spacing) %}
+    {% set startX = (1200 - totalWidth) / 2 %}
+    {% set yPos = 280 %}
+    <defs>
+      {% for speaker in session.speakers %}
+        {% if loop.index0 < 4 %}
+          {% set xPos = startX + (loop.index0 * (photoSize + spacing)) %}
+          <clipPath id="roundedSquare{{ loop.index0 }}">
+            <rect x="{{ xPos }}" y="{{ yPos }}" width="{{ photoSize }}" height="{{ photoSize }}" rx="15" ry="15"/>
+          </clipPath>
+        {% endif %}
       {% endfor %}
-    </text>
-  </g>
+    </defs>
+    {% for speaker in session.speakers %}
+      {% if loop.index0 < 4 %}
+        {% set speakerImagePath = people[speaker].image %}
+        {% set speakerImageBase64 = speakerImagePath | imageToBase64 if speakerImagePath %}
+        {% if speakerImageBase64 %}
+          {% set xPos = startX + (loop.index0 * (photoSize + spacing)) %}
+          <image 
+            href="{{ speakerImageBase64 }}" 
+            x="{{ xPos }}" 
+            y="{{ yPos }}" 
+            width="{{ photoSize }}" 
+            height="{{ photoSize }}"
+            clip-path="url(#roundedSquare{{ loop.index0 }})"
+            preserveAspectRatio="xMidYMid slice"
+          />
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 
-  <!-- Footer URL -->
+  <!-- Speaker Name (centered, below image) -->
   <text
     font-family="{{ fontBody }}"
-    font-size="24"
-    font-weight="500"
+    font-size="28"
+    font-weight="600"
     fill="{{ text }}"
-    opacity="0.7"
     letter-spacing="-0.5"
+    text-anchor="middle"
   >
-    <tspan x="60" y="580">{{ siteUrl }}</tspan>
+    {% for line in speakerLines %}
+      <tspan x="600" y="{{ 520 + loop.index0 * 36 }}">{{ line }}</tspan>
+    {% endfor %}
   </text>
 
-  <!-- Decorative Element (corner accent) -->
-  <rect x="0" y="0" width="8" height="630" fill="{{ text }}" opacity="0.15" />
+  <!-- Footer URL (bottom right) -->
+  <text
+    font-family="{{ fontBody }}"
+    font-size="22"
+    font-weight="500"
+    fill="{{ text }}"
+    opacity="0.6"
+    letter-spacing="-0.5"
+    text-anchor="end"
+  >
+    <tspan x="1140" y="590">{{ siteUrl }}</tspan>
+  </text>
 
 </svg>

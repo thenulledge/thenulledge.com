@@ -37,7 +37,7 @@
         <i class="fa-solid fa-comments"></i>
         <span>Event Chat</span>
       </a>
-      <a href="#contributors" class="toc-card">
+      <a href="#team" class="toc-card">
         <i class="fa-solid fa-users"></i>
         <span>Our Team</span>
       </a>
@@ -105,39 +105,33 @@
 
   {# Event Chat #}
   <section id="event-chat" class="region flow">
-    {{ chatDisplay(eventChat) }}
+      {{ chatDisplay(eventChat) }}
+
   </section>
 
-  {# Contributors Section #}
-  <section id="contributors" class="region flow">
+  {# Team Section #}
+  <section id="team" class="region flow">
     <div class="section-header">
       <h2>Made Possible By Our Team</h2>
       <p class="text-muted">The dedicated volunteers who brought nullEDGE 2025 to life</p>
     </div>
 
-    <div class="contributors-grid">
-      {% set contributors = [
-        { name: "Jace Benson", role: "Founder" },
-        { name: "Jeff Jessie", role: "Contributor" },
-        { name: "Kalisha Moore", role: "Contributor" },
-        { name: "Arlesha Moore", role: "Contributor" },
-        { name: "Josh Bohn", role: "Contributor" },
-        { name: "Kevin Eldridge", role: "Contributor" },
-        { name: "Kourtney B.", role: "Contributor" },
-        { name: "Matt Warwick", role: "Contributor" },
-        { name: "Mike Hradek", role: "Contributor" },
-        { name: "Rhyanna", role: "Contributor" },
-        { name: "Slava Savitsky", role: "Contributor" },
-        { name: "Sydney James", role: "Contributor" },
-        { name: "Tiffany", role: "Contributor" },
-        { name: "Tim Molloy", role: "Contributor" }
-      ] %}
-      
-      {% for contributor in contributors %}
-        <div class="contributor-card">
-          <div class="contributor-info">
-            <h3 class="contributor-name">{{ contributor.name }}</h3>
-            <p class="contributor-role">{{ contributor.role }}</p>
+    <div class="team-grid">
+      {% for member in nullEDGE.team %}
+        {%- set person = people[member.name] %}
+        <div class="team-card">
+          {% if person and person.image %}
+          <div class="team-image-wrapper">
+            <img src="{{ person.image }}" alt="{{ member.name }}" class="team-image" loading="lazy">
+          </div>
+          {% else %}
+          <div class="team-image-wrapper team-placeholder">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          {% endif %}
+          <div class="team-info">
+            <h3 class="team-name">{{ member.name }}</h3>
+            <p class="team-role">{{ member.role }}</p>
           </div>
         </div>
       {% endfor %}
@@ -152,11 +146,12 @@
     </div>
 
     <div class="sponsors-grid">
-      {% for sponsor in nullEDGE.sponsors %}
+      {% for sponsorName in nullEDGE.sponsors %}
+      {%- set company = companies[sponsorName] %}
       <div class="sponsor-item">
-        <a href="{{ sponsor.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-link">
-          <img src="/assets/images{{ sponsor.logo }}" alt="{{ sponsor.name }}" loading="lazy" width="200" height="auto">
-          <p class="sponsor-name">{{ sponsor.name }}</p>
+        <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-link">
+          <img src="{{ company.image }}" alt="{{ sponsorName }}" eleventy:ignore loading="lazy" width="200" height="auto">
+          <p class="sponsor-name">{{ sponsorName }}</p>
         </a>
       </div>
       {% endfor %}
@@ -393,40 +388,68 @@
     font-size: var(--size-step--1);
   }
 
-  .contributors-grid {
+  .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
     gap: var(--space-m);
   }
 
-  .contributor-card {
+  .team-card {
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
     padding: var(--space-m);
     transition: transform 0.2s, box-shadow 0.2s;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-s);
   }
 
-  .contributor-card:hover {
+  .team-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  .contributor-info {
+  .team-image-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--color-bg);
+    flex-shrink: 0;
+  }
+
+  .team-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .team-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--primary) / 0.2));
+    color: hsl(var(--primary));
+    font-size: 2rem;
+  }
+
+  .team-info {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
   }
 
-  .contributor-name {
+  .team-name {
     font-size: var(--size-step-0);
     font-weight: 600;
     margin: 0;
     color: var(--color-text);
   }
 
-  .contributor-role {
+  .team-role {
     font-size: var(--size-step--1);
     color: var(--color-text-muted);
     margin: 0;
@@ -489,7 +512,7 @@
       grid-template-columns: 1fr;
     }
 
-    .contributors-grid {
+    .team-grid {
       grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
     }
 

@@ -15,10 +15,18 @@ ogImageAlt: 'nullEDGE - Free ServiceNow Conference'
   subtitle="Deep technical sessions, real code, zero sales pitches. Four free events in 2026.",
   videoId="dU6JY136vTg",
   videoCaption="Watch highlights from nullEDGE 2025",
-  primaryCtaText="View 2026 Events",
-  primaryCtaLink="#events",
+  primaryCtaText="Submit a Session",
+  primaryCtaLink="/submit-session/",
   secondaryCtaText="Become a Sponsor",
   secondaryCtaLink="/sponsors"
+) }}
+
+{% from "partials/events-timeline.njk" import eventsTimeline %}
+{{ eventsTimeline(
+  title="2026 Event Series",
+  subtitle="Four events throughout 2026, connecting ServiceNow folks around the globe.",
+  year="2026",
+  eventsData=events['2026']
 ) }}
 
 {% from "partials/stats.njk" import stats %}
@@ -35,20 +43,13 @@ ogImageAlt: 'nullEDGE - Free ServiceNow Conference'
 
 {% from "partials/sponsor-carousel.njk" import sponsorCarousel %}
 {{ sponsorCarousel(
-  sponsors=event2025.expoBooths
+  sponsors=event2025.sponsors,
+  companies=companies
 ) }}
 
 {% set testimonialsTitle = "Loved by the Community" %}
 {% set testimonialsSubtitle = "What attendees said about nullEDGE 2025" %}
 {% include "partials/testimonials-section.njk" %}
-
-{% from "partials/events-timeline.njk" import eventsTimeline %}
-{{ eventsTimeline(
-  title="2026 Event Series",
-  subtitle="Four events throughout 2026, connecting ServiceNow folks around the globe.",
-  year="2026",
-  eventsData=events['2026']
-) }}
 
 <style>
   /* Lite YouTube Embed Styles */

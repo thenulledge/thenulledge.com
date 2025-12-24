@@ -1,44 +1,95 @@
 {% macro chatDisplay(messages) %}
   {% if messages and messages.length > 0 %}
     <section class="chat-section region">
-      <h2 class="text-3xl font-bold mb-4">Session Chat Transcript</h2>
-      <p class="text-muted-foreground mb-6">
-        {{ messages.length }} messages from the live session
-      </p>
-      
-      <div class="chat-container">
-        {% for message in messages %}
-          <div class="chat-message">
-            {% set timeStr = message.time %}
-            {% set timeParts = timeStr.split('T') %}
-            {% if timeParts[1] %}
-              {% set timePart = timeParts[1].split(':') %}
-              {% set hour = timePart[0] | int %}
-              {% set minute = timePart[1] %}
-              {% set ampm = 'AM' if hour < 12 else 'PM' %}
-              {% set displayHour = hour if hour <= 12 else (hour - 12) %}
-              {% set displayHour = 12 if displayHour == 0 else displayHour %}
-              <span class="chat-time">{{ displayHour }}:{{ minute }} {{ ampm }}</span>
-            {% endif %}
-            {% if message.linkedin %}
-              <a href="{{ message.linkedin }}" target="_blank" rel="noopener noreferrer" class="chat-author">
-                {{ message.firstName }} {{ message.lastName }}
-              </a>
-            {% else %}
-              <span class="chat-author-plain">{{ message.firstName }} {{ message.lastName }}</span>
-            {% endif %}
-            <span class="chat-text">: 
-              {% if message.text.includes('giphy.com/gifs/') %}
-                {% set giphyUrl = message.text.trim() %}
-                {% set giphyId = giphyUrl.split('/gifs/')[1].split('-') | last %}
-                <br><a href="{{ giphyUrl }}" target="_blank" rel="noopener noreferrer" class="chat-giphy-link"><img src="https://i.giphy.com/media/{{ giphyId }}/giphy.webp" alt="GIF" class="chat-giphy" loading="lazy"></a>
-              {% else %}
-                {{ message.text }}
+      <details class="chat-details">
+        <summary>
+          <h2 class="text-3xl font-bold mb-4">Session Chat Transcript</h2>
+          <p class="text-muted-foreground mb-6">
+            {{ messages.length }} messages from the live session
+          </p>
+        </summary>
+        
+        <div class="chat-container">
+          {% for message in messages %}
+            <div class="chat-message">
+              {% set timeStr = message.time %}
+              {% set timeParts = timeStr.split('T') %}
+              {% if timeParts[1] %}
+                {% set timePart = timeParts[1].split(':') %}
+                {% set hour = timePart[0] | int %}
+                {% set minute = timePart[1] %}
+                {% set ampm = 'AM' if hour < 12 else 'PM' %}
+                {% set displayHour = hour if hour <= 12 else (hour - 12) %}
+                {% set displayHour = 12 if displayHour == 0 else displayHour %}
+                <span class="chat-time">{{ displayHour }}:{{ minute }} {{ ampm }}</span>
               {% endif %}
-            </span>
-          </div>
-        {% endfor %}
-      </div>
+              {% if message.linkedin %}
+                <a href="{{ message.linkedin }}" target="_blank" rel="noopener noreferrer" class="chat-author">
+                  {{ message.firstName }} {{ message.lastName }}
+                </a>
+              {% else %}
+                <span class="chat-author-plain">{{ message.firstName }} {{ message.lastName }}</span>
+              {% endif %}
+              <span class="chat-text">: 
+                {% if message.text.includes('giphy.com/gifs/') %}
+                  {% set giphyUrl = message.text.trim() %}
+                  {% set giphyId = giphyUrl.split('/gifs/')[1].split('-') | last %}
+                  <br><a href="{{ giphyUrl }}" target="_blank" rel="noopener noreferrer" class="chat-giphy-link"><img src="https://i.giphy.com/media/{{ giphyId }}/giphy.webp" alt="GIF" class="chat-giphy" loading="lazy"></a>
+                {% else %}
+                  {{ message.text }}
+                {% endif %}
+              </span>
+            </div>
+          {% endfor %}
+        </div>
+      </details>
     </section>
+
+    <style>
+      .chat-details {
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+        padding: var(--space-m);
+        background: hsl(var(--card));
+      }
+
+      .chat-details summary {
+        cursor: pointer;
+        list-style: none;
+        position: relative;
+        padding-right: 2rem;
+        user-select: none;
+      }
+
+      .chat-details summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .chat-details summary::after {
+        content: "▼";
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 1.2rem;
+        transition: transform 0.2s ease;
+        color: hsl(var(--primary));
+      }
+
+      .chat-details[open] summary::after {
+        transform: rotate(180deg);
+      }
+
+      .chat-details summary:hover {
+        color: hsl(var(--primary));
+      }
+
+      .chat-details summary h2 {
+        display: inline;
+      }
+
+      .chat-container {
+        margin-top: var(--space-m);
+      }
+    </style>
   {% endif %}
 {% endmacro %}

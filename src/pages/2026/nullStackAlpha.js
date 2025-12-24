@@ -1,4 +1,5 @@
 import * as meta from '../../_data/meta.js';
+
 export default async function () {
     return {
   id: "2026-nullstack-alpha",
@@ -48,17 +49,20 @@ export default async function () {
       answer: "No! All nullEDGE events are completely free, thanks to our generous sponsors."
     }
   ],
-    featuredSpeakers: [
-    {
-      name: "Jace Benson",
-      title: "Founder",
-      company: "nullEDGE, AI In A Box",
-      image: "/assets/images/speakers/jace-benson.jpg",
-      bio: "I make the things I want to exist."
-    }
-  ],
+    featuredSpeakers: ["Jace Benson"],
   stats: {},
   sponsors: [],
+  team: [
+    { name: "Ben Forrest-Green", role: "Contributor" },
+    { name: "Carleen Carter", role: "Contributor" },
+    { name: "Chuck Tomasi", role: "Contributor" },
+    { name: "Danny Castro", role: "Contributor" },
+    { name: "Iven Betev", role: "Contributor" },
+    { name: "Jace Benson", role: "Founder" },
+    { name: "Jeff Jessie", role: "Contributor" },
+    { name: "Kalisha Moore", role: "Contributor" },
+    { name: "Slava Savitsky", role: "Contributor" }
+  ],
   sessions: []
 };
 }

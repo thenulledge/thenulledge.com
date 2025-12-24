@@ -13,6 +13,7 @@
     "clean:og": "rimraf src/assets/og-images",
     "dev:11ty": "cross-env ELEVENTY_ENV=development eleventy --serve",
     "build:11ty": "cross-env ELEVENTY_ENV=production eleventy",
+    "build:og": "cross-env FORCE_OG_REGEN=true npm run build:11ty",
     "start": "npm run dev:11ty",
     "build": "npm run clean && npm run build:11ty"
   },

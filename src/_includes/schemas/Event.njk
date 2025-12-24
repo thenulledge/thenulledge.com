@@ -32,13 +32,14 @@
       "availabilityStarts": "{{ eventData.when.start }}"{% endif %}
     }{% if eventData.featuredSpeakers and eventData.featuredSpeakers.length > 0 %},
     "performer": [
-      {%- for speaker in eventData.featuredSpeakers %}
+      {%- for speakerName in eventData.featuredSpeakers %}
+      {%- set speaker = people[speakerName] %}
       {
         "@type": "Person",
-        "name": "{{ speaker.name }}"{% if speaker.image %},
+        "name": "{{ speakerName }}"{% if speaker.image %},
         "image": "{{ meta.url }}{{ speaker.image }}"{% endif %}{% if speaker.bio %},
-        "description": "{{ speaker.bio }}"{% endif %}{% if speaker.jobTitle %},
-        "jobTitle": "{{ speaker.jobTitle }}"{% endif %}{% if speaker.company %},
+        "description": "{{ speaker.bio }}"{% endif %}{% if speaker.title %},
+        "jobTitle": "{{ speaker.title }}"{% endif %}{% if speaker.company %},
         "worksFor": {
           "@type": "Organization",
           "name": "{{ speaker.company }}"

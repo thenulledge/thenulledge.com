@@ -51,10 +51,10 @@ Set these variables before including:
         {% endif %}
         
           <div class="testimonial-header">
-            {# Avatar image - only show if avatarImage exists #}
-            {% if testimonial.avatarImage %}
+            {# Avatar image - only show if person exists in people.js #}
+            {% if people[testimonial.name] and people[testimonial.name].image %}
               <div class="testimonial-avatar">
-                <img src="{{ testimonial.avatarImage }}" alt="{{ testimonial.name }}" class="testimonial-avatar-img">
+                <img src="{{ people[testimonial.name].image }}" alt="{{ testimonial.name }}" class="testimonial-avatar-img">
               </div>
             {% endif %}
             

@@ -4,11 +4,7 @@ fontBody: "'Atkinson Hyperlegible', Arial, sans-serif"
 background: '#1a1a1a'
 text: '#efdf53'
 siteUrl: 'thenulledge.com'
-pagination:
-  data: collections.events2026
-  size: 1
-  alias: event
-permalink: '/assets/og-images/event-{{ event.id }}-preview.svg'
+permalink: '/assets/og-images/page-speakers-preview.svg'
 eleventyExcludeFromCollections: true
 ---
 
@@ -20,75 +16,49 @@ eleventyExcludeFromCollections: true
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
 >
-  {% set eventDate = event.when.start | formatDate('MMMM D, YYYY') %}
-  {% set titleInLines = event.name | splitlines(30) %}
-  {% set descriptionInLines = event.description | splitlines(45) %}
+  {% set titleInLines = "Speak at nullEDGE 2026" | splitlines(35) %}
+  {% set descriptionInLines = "Share your ServiceNow expertise with folks worldwide" | splitlines(50) %}
 
   <!-- Background -->
   <rect id="bg" width="100%" height="100%" fill="{{ background }}" />
 
-  <!-- Event Badge at Top -->
+  <!-- nullEDGE Branding -->
   <text
-    font-family="{{ fontBody }}"
-    font-size="20"
-    font-weight="600"
-    fill="{{ text }}"
-    opacity="0.8"
-    letter-spacing="1"
-  >
-    <tspan x="60" y="60">nullEDGE 2026</tspan>
-  </text>
-
-  <!-- Event Name -->
-  <text
-    id="event-name"
     font-family="{{ fontDisplay }}"
-    font-size="76"
+    font-size="48"
     font-weight="900"
     fill="{{ text }}"
-    letter-spacing="-2"
+    letter-spacing="-1"
+  >
+    <tspan x="60" y="100">nullEDGE</tspan>
+  </text>
+
+  <!-- Page Title -->
+  <text
+    id="title"
+    font-family="{{ fontDisplay }}"
+    font-size="64"
+    font-weight="900"
+    fill="{{ text }}"
+    letter-spacing="-1.5"
   >
     {% for line in titleInLines %}
-      <tspan x="60" y="{{ 180 + loop.index0 * 90 }}">{{ line }}</tspan>
+      <tspan x="60" y="{{ 240 + loop.index0 * 75 }}">{{ line }}</tspan>
     {% endfor %}
   </text>
 
-  <!-- Event Date -->
+  <!-- Description -->
   <text
     font-family="{{ fontBody }}"
-    font-size="32"
-    font-weight="600"
-    fill="{{ text }}"
-    opacity="0.85"
-    letter-spacing="-0.5"
-  >
-    <tspan x="60" y="380">📅 {{ eventDate }}</tspan>
-  </text>
-
-  <!-- Virtual Event -->
-  <text
-    font-family="{{ fontBody }}"
-    font-size="32"
-    font-weight="600"
-    fill="{{ text }}"
-    opacity="0.85"
-    letter-spacing="-0.5"
-  >
-    <tspan x="60" y="425">🌍 Virtual Event</tspan>
-  </text>
-
-  <!-- Event Description -->
-  <text
-    font-family="{{ fontBody }}"
-    font-size="24"
+    font-size="28"
     font-weight="400"
     fill="{{ text }}"
-    opacity="0.7"
+    opacity="0.75"
     letter-spacing="-0.3"
   >
     {% for line in descriptionInLines %}
       {% if loop.index0 < 2 %}
-        <tspan x="60" y="{{ 485 + loop.index0 * 32 }}">{{ line }}</tspan>
+        <tspan x="60" y="{{ 470 + loop.index0 * 36 }}">{{ line }}</tspan>
       {% endif %}
     {% endfor %}
   </text>

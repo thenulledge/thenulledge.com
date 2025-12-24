@@ -3,6 +3,7 @@ layout: base
 title: "Sponsor nullEDGE 2026 | Partnership Opportunities"
 description: "Connect with ServiceNow folks through authentic, community-focused events. Explore sponsorship packages for nullEDGE 2026."
 permalink: /sponsors/
+ogImage: /assets/og-images/page-sponsors-preview.png
 schema: CollectionPage
 breadcrumb:
   parent: Home
@@ -218,11 +219,12 @@ faqs:
       These organizations made nullEDGE 2025 possible and kept it free for all attendees
     </p>
     <div class="sponsors-grid">
-      {% for sponsor in sponsors %}
-      <a href="{{ sponsor.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
-        <img src="/assets/images{{ sponsor.logo }}" alt="{{ sponsor.name }}" class="sponsor-logo">
-        <span class="sponsor-name-label">{{ sponsor.name }}</span>
-      </a>
+      {% for sponsorName in events["2025-nullEDGE"].sponsors %}
+        {%- set company = companies[sponsorName] %}
+        <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
+          <img src="{{ company.image }}" alt="{{ sponsorName }}" class="sponsor-logo" eleventy:ignore>
+          <span class="sponsor-name-label">{{ sponsorName }}</span>
+        </a>
       {% endfor %}
     </div>
   </section>

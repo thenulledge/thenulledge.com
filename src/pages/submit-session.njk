@@ -1,0 +1,415 @@
+---
+layout: base
+title: "Speak at nullEDGE 2026 | Call for Proposals"
+description: "Share your ServiceNow expertise with folks. Submit your talk for nullEDGE 2026 events."
+permalink: /submit-session/
+ogImage: /assets/og-images/page-speakers-preview.png
+schema: CollectionPage
+breadcrumb:
+  parent: Home
+  parentUrl: /
+  current: Submit Session
+faqs:
+  - question: "How long should my session be?"
+    answer: "Sessions are 15 minutes. We're looking for concise, focused talks that get to the point quickly."
+  - question: "Do I need to be an expert?"
+    answer: "No! If you've built something interesting, solved a tough problem, or learned valuable lessons, you have something to share. Authenticity matters more than credentials."
+  - question: "Will sessions be recorded?"
+    answer: "Yes, all sessions are recorded and published on our YouTube channel. This helps extend your reach beyond the live event."
+  - question: "Can I submit multiple proposals?"
+    answer: "Absolutely! Feel free to submit multiple topics. We appreciate speakers with multiple areas of expertise."
+---
+
+<div class="container wrapper flow">
+  {# Hero Section #}
+  <section class="prose text-center">
+    <span class="badge">Call for Proposals</span>
+    <h1>Speak at nullEDGE 2026</h1>
+    <p class="lead">
+      Share your ServiceNow expertise with folks worldwide. 
+      No sales pitches—just real code and actual implementations.
+    </p>
+    
+    <div class="button-group">
+      <a href="#events" class="btn btn-lg btn-primary">View Events & Submit</a>
+    </div>
+  </section>
+
+  {# Why Speak Section #}
+  <section class="region flow">
+    <h2 class="text-center">Why Speak at nullEDGE?</h2>
+    <div class="grid-3col gap-l">
+      <div class="card flow">
+        <div class="card-icon">
+          <span class="fa-solid fa-users"></span>
+        </div>
+        <h3>Reach Folks</h3>
+        <p>Connect with ServiceNow developers, admins, and architects who are eager to learn from your experience.</p>
+      </div>
+      
+      <div class="card flow">
+        <div class="card-icon">
+          <span class="fa-solid fa-bullhorn"></span>
+        </div>
+        <h3>Build Your Brand</h3>
+        <p>Establish yourself as a thought leader in the ServiceNow community. All sessions are recorded and promoted.</p>
+      </div>
+      
+      <div class="card flow">
+        <div class="card-icon">
+          <span class="fa-solid fa-plane-departure"></span>
+        </div>
+        <h3>Zero Pressure</h3>
+        <p>Virtual format means no travel required. Casual, practitioner-focused environment—be yourself and share what you know.</p>
+      </div>
+    </div>
+  </section>
+
+  {# What We're Looking For #}
+  <section class="region flow">
+    <h2 class="text-center">What We're Looking For</h2>
+    <div class="card flow">
+      <div class="flow gap-m">
+        <div class="checklist-item">
+          <span class="fa-regular fa-circle-check checklist-icon"></span>
+          <div>
+            <p class="font-semibold">Real-World Implementations</p>
+            <p class="text-muted">Production code, actual architectures, and lessons learned from live systems</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <span class="fa-regular fa-circle-check checklist-icon"></span>
+          <div>
+            <p class="font-semibold">Technical Deep Dives</p>
+            <p class="text-muted">Show us the code, walk through the logic, explain the technical decisions</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <span class="fa-regular fa-circle-check checklist-icon"></span>
+          <div>
+            <p class="font-semibold">Problem-Solving Stories</p>
+            <p class="text-muted">How you solved a tough challenge, what didn't work, and what you'd do differently</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <span class="fa-regular fa-circle-check checklist-icon"></span>
+          <div>
+            <p class="font-semibold">Community Contributions</p>
+            <p class="text-muted">Open source tools, scripts, frameworks, or methodologies you've built and shared</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <span class="fa-regular fa-circle-check checklist-icon"></span>
+          <div>
+            <p class="font-semibold">Practitioner Perspectives</p>
+            <p class="text-muted">Your experience in the trenches—what works, what doesn't, and why</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="alert alert-warning">
+        <p class="font-semibold">What We DON'T Want:</p>
+        <p class="text-sm text-muted">
+          Sales presentations, marketing pitches, or theoretical overviews.
+          nullEDGE is 100% practitioner-focused—keep it technical and authentic.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {# Events with CFP #}
+  <section id="events" class="region flow">
+    <h2 class="text-center">2026 Events Accepting Proposals</h2>
+    
+    {% set events2026Sorted = events['2026'] | eventsToArray %}
+    {% set cfpEvents = [] %}
+    {% for event in events2026Sorted %}
+      {% if event.speakerRegistrationUrl %}
+        {% set cfpEvents = (cfpEvents.push(event), cfpEvents) %}
+      {% endif %}
+    {% endfor %}
+    
+    {% if cfpEvents.length > 0 %}
+      <div class="grid-2col gap-l">
+        {% for event in cfpEvents %}
+        <div class="card flow">
+          <div class="card-header">
+            <div class="flex-between">
+              <h3 class="h4">{{ event.name }}</h3>
+              <span class="badge">CFP Available</span>
+            </div>
+            <p class="text-muted">{{ event.description }}</p>
+          </div>
+          
+          <div class="card-body flow gap-s">
+            <div class="info-item">
+              <span class="fa-regular fa-calendar"></span>
+              <span>Event: {{ event.when.start | formatDate("MMMM D, YYYY") }}</span>
+            </div>
+            
+            <div class="info-item">
+              <span class="fa-solid fa-presentation-screen"></span>
+              <span>
+                {% if event.type == 'full-day' %}
+                  Seeking {{event.sessionCount}} sessions
+                {% elif event.type == 'sessions' %}
+                  Seeking {{event.sessionCount}} sessions
+                {% elif event.sessionCount > 0 %}
+                  {{ event.sessionCount }} sessions planned
+                {% else %}
+                  Multiple sessions
+                {% endif %}
+              </span>
+            </div>
+            
+            {% if event.speakerSubmissionStart and event.speakerSubmissionEnd %}
+            <div class="info-item">
+              <span class="fa-regular fa-clock"></span>
+              <span>CFP: {{ event.speakerSubmissionStart | formatDate("MMM D") }} - {{ event.speakerSubmissionEnd | formatDate("MMM D, YYYY") }}</span>
+            </div>
+            {% endif %}
+            
+            <a href="{{ event.speakerRegistrationUrl }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              Submit Your Talk
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="card flow cfp-placeholder">
+        <div class="cfp-placeholder-icon">
+          <span class="fa-regular fa-calendar-plus"></span>
+        </div>
+        <h3 class="text-center">Call for Proposals Opening Soon</h3>
+        <p class="text-muted text-center">
+          We'll be accepting speaker proposals for our 2026 events starting early next year. 
+          Check back in January 2026 or follow us on social media for the announcement.
+        </p>
+        
+        <div class="cfp-timeline">
+          <h4>Upcoming CFP Dates</h4>
+          <div class="flow gap-s">
+            {% for event in events2026Sorted %}
+              {% if event.speakerSubmissionStart and event.speakerSubmissionEnd %}
+              <div class="cfp-timeline-item">
+                <div class="cfp-timeline-header">
+                  <span class="font-semibold">{{ event.name }}</span>
+                  <span class="badge badge-sm">{{ event.when.start | formatDate("MMM D, YYYY") }}</span>
+                </div>
+                <p class="text-muted">
+                  CFP Opens: <strong>{{ event.speakerSubmissionStart | formatDate("MMMM D, YYYY") }}</strong><br>
+                  CFP Closes: <strong>{{ event.speakerSubmissionEnd | formatDate("MMMM D, YYYY") }}</strong>
+                </p>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        
+        <div class="button-group">
+          <a href="/" class="btn btn-outline">View Event Schedule</a>
+        </div>
+      </div>
+    {% endif %}
+  </section>
+
+  {# FAQ Section #}
+  <section class="region flow">
+    <h2 class="text-center">Speaker FAQ</h2>
+    <div class="flow gap-m faq-container">
+      <div class="card flow">
+        <h3 class="h4">How long should my session be?</h3>
+        <p class="text-muted">
+          Sessions are 15 minutes.  We're looking for concise, focused talks that get to the point quickly.
+        </p>
+      </div>
+      
+      <div class="card flow">
+        <h3 class="h4">Do I need to be an expert?</h3>
+        <p class="text-muted">
+          No! If you've built something interesting, solved a tough problem, or learned valuable lessons, you have something to share. Authenticity matters more than credentials.
+        </p>
+      </div>
+      
+      <div class="card flow">
+        <h3 class="h4">Will sessions be recorded?</h3>
+        <p class="text-muted">
+          Yes, all sessions are recorded and published on our YouTube channel. This helps extend your reach beyond the live event.
+        </p>
+      </div>
+      
+      <div class="card flow">
+        <h3 class="h4">Can I submit multiple proposals?</h3>
+        <p class="text-muted">
+          Absolutely! Feel free to submit multiple topics. We appreciate speakers with multiple areas of expertise.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {# CTA Section #}
+  <section class="region text-center">
+    <div class="card flow prose cta-container">
+      <h2>Ready to Share Your Knowledge?</h2>
+      <p>Join 40+ speakers who presented at nullEDGE 2025. The community is waiting to learn from your experience.</p>
+      <div class="button-group">
+        <a href="#events" class="btn btn-lg btn-primary">Submit Your Talk</a>
+        <a href="/" class="btn btn-lg btn-outline">View Upcoming Events</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  /* Speakers-specific styles only - Global components in src/assets/css/global/ */
+  /* See: badge.css, card.css, button-group.css, grids.css for reusable components */
+
+  /* Content width constraints */
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .checklist-icon {
+    font-size: 24px;
+    color: hsl(var(--primary));
+    margin-top: 0.25rem;
+  }
+
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .checklist-item svg {
+    flex-shrink: 0;
+    color: hsl(var(--primary));
+    margin-top: 0.25rem;
+    font-size: 24px;
+  }
+
+  .checklist-item .font-semibold {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: hsl(var(--muted-foreground));
+    font-size: var(--size-step--1);
+  }
+
+  .info-item svg, .info-item span.fa-solid, .info-item span.fa-regular {
+    flex-shrink: 0;
+    color: hsl(var(--primary));
+    font-size: 32px;
+  }
+
+  .alert {
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin-top: 1.5rem;
+    border: 2px solid hsl(var(--border));
+  }
+
+  .alert-warning {
+    background: hsl(var(--muted) / 0.5);
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  .text-muted {
+    color: hsl(var(--muted-foreground));
+    font-size: var(--size-step--1);
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .gap-l {
+    gap: var(--space-l);
+  }
+
+  .gap-m {
+    gap: var(--space-m);
+  }
+
+  .gap-s {
+    gap: var(--space-s);
+  }
+
+  .cfp-placeholder {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cfp-placeholder-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    background: hsl(var(--primary) / 0.1);
+    border-radius: 50%;
+    color: hsl(var(--primary));
+    margin: 0 auto 1.5rem;
+    font-size: 48px;
+  }
+
+  .cfp-timeline {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: hsl(var(--muted) / 0.3);
+    border-radius: var(--radius);
+    text-align: left;
+  }
+
+  .cfp-timeline h4 {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .cfp-timeline-item {
+    padding: 1rem;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: calc(var(--radius) - 2px);
+  }
+
+  .cfp-timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .badge-sm {
+    font-size: var(--size-step--2);
+    padding: 0.125rem 0.5rem;
+  }
+</style>

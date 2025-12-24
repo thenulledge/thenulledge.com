@@ -112,86 +112,36 @@ export default async function () {
             sydney: "12:00 AM - 8:00 AM AEDT"
         },
         faqs: [],
-        featuredSpeakers: [
-            {
-                name: "Jace Benson",
-                title: "Founder",
-                company: "nullEDGE, AI In A Box",
-                image: "/assets/images/speakers/jace-benson.jpg",
-                bio: "I make the things I want to exist."
-            }
-        ],
+        featuredSpeakers: ["Jace Benson","Chuck Tomasi", "Carleen Carter", "Justin Meadows", "Jeff Jessie"],
         stats: {
             attendees: "746",
             sessions: "37",
             sponsors: "13"
         },
+        team: [
+            { name: "Carleen Carter", role: "Contributor" },
+            { name: "Chuck Tomasi", role: "Contributor" },
+            { name: "Jace Benson", role: "Founder" },
+            { name: "Jeff Jessie", role: "Contributor" },
+            { name: "Justin Meadows", role: "Contributor" },
+            { name: "Kalisha Moore", role: "Contributor" },
+            { name: "Kourtney B.", role: "Contributor" },
+            { name: "Slava Savitsky", role: "Contributor" }
+        ],
         sponsors: [
-            {
-                "name": "AI In A Box",
-                "website": "https://getaiinabox.com",
-                "logo": "/expoBooths/aiinabox-logo.png"
-            },
-            {
-                "name": "BizSolutions.Tech",
-                "website": "https://BizSolutions.Tech",
-                "logo": "/expoBooths/bizsolutionstech-logo.png"
-            },
-            {
-                "name": "Kinetic Data",
-                "website": "https://kineticdata.com/schedule-a-demo",
-                "logo": "/expoBooths/kinetic_data_logo_square.webp"
-            },
-            {
-                "name": "Apricot Jam Technologies",
-                "website": "https://apricotjam.com/",
-                "logo": "/expoBooths/apricot-jam-logo.jpg"
-            },
-            {
-                "name": "CitrusFlows",
-                "website": "https://www.citrusflows.com",
-                "logo": "/expoBooths/citrisflows-logo.png"
-            },
-            {
-                "name": "SNow Pro Consultants",
-                "website": "https://snowproconsultants.com",
-                "logo": "/expoBooths/snow_pro_consultants_logo.png"
-            },
-            {
-                "name": "Genus Technologies",
-                "website": "https://www.genustechnologies.com",
-                "logo": "/expoBooths/genus.png"
-            },
-            {
-                "name": "ShareLogic",
-                "website": "https://sharelogic.com",
-                "logo": "/expoBooths/ShareLogic-Logo.png"
-            },
-            {
-                "name": "Serenity EHS",
-                "website": "https://serenityehs.com",
-                "logo": "/expoBooths/serenity.jpg"
-            },
-            {
-                "name": "Echelon AI",
-                "website": "https://www.echelonai.com",
-                "logo": "/expoBooths/echelonai.png"
-            },
-            {
-                "name": "ChecklistPRO",
-                "website": "https://checklistpro.com",
-                "logo": "/expoBooths/checklistpro.png"
-            },
-            {
-                "name": "Intellective",
-                "website": "https://www.intellective.com",
-                "logo": "/expoBooths/intellective.png"
-            },
-            {
-                "name": "CJ & The Duke",
-                "website": "https://www.cjandtheduke.com",
-                "logo": "/expoBooths/cjandtheduke.webp"
-            }
+            "AI In A Box",
+            "BizSolutions.Tech",
+            "Kinetic Data",
+            "Apricot Jam Technologies",
+            "CitrusFlows",
+            "SNow Pro Consultants",
+            "Genus Technologies",
+            "ShareLogic",
+            "Serenity EHS",
+            "Echelon AI",
+            "ChecklistPRO",
+            "Intellective",
+            "CJ & The Duke"
         ],
         sessions: [
             {

@@ -12,7 +12,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 //  config import
-import {showInSitemap, sessions2025, events2026} from './src/_config/collections.js';
+import {showInSitemap, sessions2025, events2026, speakers} from './src/_config/collections.js';
 import events from './src/_config/events.js';
 import filters from './src/_config/filters.js';
 import plugins from './src/_config/plugins.js';
@@ -34,6 +34,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addCollection('showInSitemap', showInSitemap);
   eleventyConfig.addCollection('sessions2025', sessions2025);
   eleventyConfig.addCollection('events2026', events2026);
+  eleventyConfig.addCollection('speakers', speakers);
 
   // ---------------------  Plugins
   eleventyConfig.addPlugin(plugins.htmlConfig);
@@ -73,20 +74,20 @@ export default async function (eleventyConfig) {
   eleventyConfig.addFilter('eventsToArray', filters.eventsToArray);
   eleventyConfig.addFilter('urlEncode', filters.urlEncode);
   eleventyConfig.addFilter('nlToBr', filters.nlToBr);
+  eleventyConfig.addFilter('imageToBase64', filters.imageToBase64);
 
   // --------------------- Shortcodes
   eleventyConfig.addShortcode('image', shortcodes.imageShortcode);
   eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`);
 
   // --------------------- Events: after build
-  if (process.env.ELEVENTY_RUN_MODE === 'serve') {
-    eleventyConfig.on('eleventy.after', events.svgToJpeg);
-  }
+  // Convert SVG OG images to PNG (skipped in development mode via NODE_ENV check)
+  eleventyConfig.on('eleventy.after', events.svgToJpeg);
 
   // --------------------- Passthrough File Copy
 
   // -- same path
-  ['src/assets/fonts/', 'src/assets/images/template', 'src/assets/images/expoBooths', 'src/assets/images/og.png', 'src/assets/og-images'].forEach(path =>
+  ['src/assets/fonts/', 'src/assets/images/template', 'src/assets/images/companies', 'src/assets/images/people', 'src/assets/images/og.png'].forEach(path =>
     eleventyConfig.addPassthroughCopy(path)
   );
 

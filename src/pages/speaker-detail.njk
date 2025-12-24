@@ -1,0 +1,442 @@
+---js
+{
+  pagination: {
+    data: "collections.speakers",
+    size: 1,
+    alias: "speakerEntry"
+  },
+  layout: "base",
+  schema: "Person",
+  eleventyComputed: {
+    speakerName: (data) => data.speakerEntry?.[0] || '',
+    speakerData: (data) => data.speakerEntry?.[1] || {},
+    title: (data) => {
+      const name = data.speakerEntry?.[0];
+      return name ? `${name} - Speaker Profile` : 'Speaker Profile';
+    },
+    description: (data) => {
+      const name = data.speakerEntry?.[0];
+      const value = data.speakerEntry?.[1];
+      if (!value) return 'Speaker profile at nullEDGE conferences.';
+      const bio = value.bio || `${name} is a speaker at nullEDGE conferences.`;
+      return bio.substring(0, 160);
+    },
+    slugifyTitle: () => (title) => {
+      return title
+        .toLowerCase()
+        .replace(/[#,&,+()$~%.'":*¿?¡!<>{}]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+    },
+    slugifyString: () => (str) => {
+      return str
+        .toLowerCase()
+        .replace(/[#,&,+()$~%.'":*¿?¡!<>{}]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+    },
+    permalink: (data) => {
+      // Inline slugify logic (can't use filters in frontmatter)
+      const name = data.speakerEntry?.[0];
+      if (!name) return false;
+      const slug = name
+        .toLowerCase()
+        .replace(/[#,&,+()$~%.'":*¿?¡!<>{}]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+      return `/speakers/${slug}/`;
+    },
+    person: (data) => {
+      const name = data.speakerEntry?.[0];
+      const value = data.speakerEntry?.[1];
+      if (!name || !value) return {};
+      const slug = name
+        .toLowerCase()
+        .replace(/[#,&,+()$~%.'":*¿?¡!<>{}]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+      return {
+        name: name,
+        jobTitle: value.title,
+        company: value.company,
+        image: value.image,
+        bio: value.bio,
+        url: slug ? `/speakers/${slug}/` : undefined
+      };
+    },
+      speakerSessions: (data) => {
+      // Find all sessions where this speaker presented
+      const sessions = [];
+      const speakerName = data.speakerEntry?.[0];
+      if (!speakerName) return sessions;
+      
+      // Check 2025 nullEDGE conference - accessing via events global data
+      if (data.events && data.events["2025"] && data.events["2025"]["nullEDGE"]) {
+        const nullEDGE2025 = data.events["2025"]["nullEDGE"];
+        if (nullEDGE2025.sessions) {
+          nullEDGE2025.sessions.forEach(session => {
+            if (session.speakers && session.speakers.includes(speakerName)) {
+              sessions.push({
+                ...session,
+                eventName: "nullEDGE 2025",
+                eventSlug: "2025-nulledge",
+                eventUrl: "/2025/conference",
+                year: "2025"
+              });
+            }
+          });
+        }
+      }
+      
+      return sessions;
+    },
+    breadcrumb: (data) => ({
+      parent: "Speakers",
+      parentUrl: "/speakers",
+      current: data.speakerEntry?.[0] || 'Speaker'
+    })
+  }
+}
+---
+
+<div class="container wrapper flow">
+  {# Breadcrumb #}
+  <nav class="breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="/speakers">Speakers</a>
+    <span>/</span>
+    <span>{{ speakerName }}</span>
+  </nav>
+
+  {# Speaker Profile Header #}
+  <header class="speaker-profile-header">
+    <div class="speaker-profile-image">
+      <img 
+        src="{{ speakerData.image }}" 
+        alt="{{ speakerName }}"
+        eleventy:ignore
+      />
+    </div>
+    
+    <div class="speaker-profile-info flow">
+      <h1>{{ speakerName }}</h1>
+      
+      {% if speakerData.title %}
+        <p class="speaker-title">{{ speakerData.title }}</p>
+      {% endif %}
+      
+      {% if speakerData.company %}
+        <p class="speaker-company">
+          <i class="fa-solid fa-building"></i>
+          {{ speakerData.company }}
+        </p>
+      {% endif %}
+      
+      {% if speakerData.linkedin %}
+        <p class="speaker-linkedin">
+          <a href="{{ speakerData.linkedin }}" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+            <i class="fa-brands fa-linkedin"></i>
+            Connect on LinkedIn
+          </a>
+        </p>
+      {% endif %}
+      
+      {% if speakerData.bio %}
+        <div class="speaker-bio">
+          <p>{{ speakerData.bio }}</p>
+        </div>
+      {% endif %}
+    </div>
+  </header>
+
+  {# Sessions Section #}
+  {% if speakerSessions.length > 0 %}
+    <section class="speaker-sessions region flow">
+      <h2>Sessions by {{ speakerName }}</h2>
+      
+      <div class="sessions-grid">
+        {% for session in speakerSessions %}
+          <div class="session-card card">
+            <div class="session-card-header">
+              <span class="badge">{{ session.eventName }}</span>
+              {% if session.duration %}
+                <span class="session-duration">
+                  <i class="fa-solid fa-clock"></i>
+                  {{ session.duration }} min
+                </span>
+              {% endif %}
+            </div>
+            
+            <h3 class="h4">
+              <a href="/{{ session.year }}/conference/{{ slugifyTitle(session.title) }}/">
+                {{ session.title }}
+              </a>
+            </h3>
+            
+            {% if session.speakers.length > 1 %}
+              <p class="session-speakers">
+                <i class="fa-solid fa-users"></i>
+                Co-presented with: 
+                {% for coSpeaker in session.speakers %}
+                  {% if coSpeaker !== speakerName %}
+                    <a href="/speakers/{{ slugifyString(coSpeaker) }}/">{{ coSpeaker }}</a>{% if not loop.last %}, {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </p>
+            {% endif %}
+            
+            {% if session.id %}
+              <div class="session-actions">
+                <a href="https://www.youtube.com/watch?v={{ session.id }}" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="btn btn-sm btn-outline">
+                  <i class="fa-brands fa-youtube"></i>
+                  Watch on YouTube
+                </a>
+                <a href="/{{ session.year }}/conference/{{ slugifyTitle(session.title) }}/" 
+                   class="btn btn-sm btn-primary">
+                  View Session Details
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% else %}
+    <section class="no-sessions region">
+      <div class="card flow text-center">
+        <div class="no-sessions-icon">
+          <i class="fa-regular fa-calendar-plus"></i>
+        </div>
+        <h2>No Sessions Yet</h2>
+        <p class="text-muted">
+          {{ speakerName }} hasn't presented at a nullEDGE conference yet, but check back soon!
+        </p>
+        <div class="button-group">
+          <a href="/speakers" class="btn btn-outline">View All Speakers</a>
+          <a href="/" class="btn btn-primary">Upcoming Events</a>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {# Back to Speakers #}
+  <section class="back-navigation">
+    <a href="/speakers" class="btn btn-outline">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back to Speakers
+    </a>
+  </section>
+</div>
+
+<style>
+  /* Speaker profile styles */
+  .speaker-profile-header {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--space-l);
+    align-items: start;
+    margin-bottom: var(--space-2xl);
+  }
+
+  @media (max-width: 768px) {
+    .speaker-profile-header {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    
+    .speaker-profile-image {
+      margin: 0 auto;
+    }
+  }
+
+  .speaker-profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid hsl(var(--primary) / 0.2);
+  }
+
+  .speaker-profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .speaker-title {
+    font-size: var(--size-step-1);
+    color: hsl(var(--primary));
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .speaker-company {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: hsl(var(--muted-foreground));
+    font-size: var(--size-step-0);
+    margin: 0;
+  }
+
+  .speaker-linkedin {
+    margin: 0;
+  }
+
+  .linkedin-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0077b5;
+    text-decoration: none;
+    font-size: var(--size-step-0);
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .linkedin-link:hover {
+    color: #005582;
+    text-decoration: underline;
+  }
+
+  .linkedin-link i {
+    font-size: 1.2em;
+  }
+
+  .speaker-bio {
+    margin-top: var(--space-m);
+    padding-top: var(--space-m);
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  .speaker-bio p {
+    color: hsl(var(--foreground));
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sessions Grid */
+  .sessions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
+    gap: var(--space-l);
+  }
+
+  .session-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    height: 100%;
+  }
+
+  .session-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-s);
+  }
+
+  .session-duration {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: var(--size-step--1);
+    color: hsl(var(--muted-foreground));
+  }
+
+  .session-card h3 {
+    margin: 0;
+  }
+
+  .session-card h3 a {
+    color: hsl(var(--foreground));
+    text-decoration: none;
+  }
+
+  .session-card h3 a:hover {
+    color: hsl(var(--primary));
+  }
+
+  .session-speakers {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--size-step--1);
+    color: hsl(var(--muted-foreground));
+    margin: 0;
+    flex-wrap: wrap;
+  }
+
+  .session-speakers a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+  }
+
+  .session-speakers a:hover {
+    text-decoration: underline;
+  }
+
+  .session-actions {
+    display: flex;
+    gap: var(--space-s);
+    margin-top: auto;
+    flex-wrap: wrap;
+  }
+
+  /* No sessions state */
+  .no-sessions .card {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .no-sessions-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    background: hsl(var(--primary) / 0.1);
+    border-radius: 50%;
+    color: hsl(var(--primary));
+    margin: 0 auto 1rem;
+    font-size: 48px;
+  }
+
+  /* Back navigation */
+  .back-navigation {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-l);
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--size-step--1);
+    color: hsl(var(--muted-foreground));
+    margin-bottom: var(--space-l);
+  }
+
+  .breadcrumb a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb span:not(.badge) {
+    color: hsl(var(--muted-foreground));
+  }
+</style>
