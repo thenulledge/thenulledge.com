@@ -129,6 +129,13 @@ https://lnkd.in/d4JzixGt`,
     avatarImage: "/assets/images/testimonials/trey-carroll.jpeg",
     quote: "The freedom of the presenters to candidly say what they really thought, the absence of the deluge of marketing information, the actual focus on development, and the real-world applicability of the content."
   },
+  {
+    name: 'Brad Hicks',
+    avatarImage: "/assets/images/testimonials/brad-hicks.jpeg",
+    quote: 'definitely recommend doing this again. This is extremely helpful! Thank you to everyone who made this happen.',
+    link: 'https://thenulledge.com/2025/conference/closing-remarks/#event-chat',
+  },
+  
   // waiting for the below still 
   // chat messages
   /*
@@ -137,12 +144,6 @@ https://lnkd.in/d4JzixGt`,
     avatarImage: "/assets/images/testimonials/kalisha-moore.jpeg",
     quote: 'Awesome content like always!',
     link: 'https://thenulledge.com/2025/conference/5-things-i-do-to-new-many-to-many-tables/#event-chat',
-  },
-  {
-    name: 'Brad Hicks',
-    avatarImage: "/assets/images/testimonials/brad-hicks.jpeg",
-    quote: 'definitely recommend doing this again. This is extremely helpful! Thank you to everyone who made this happen.',
-    link: 'https://thenulledge.com/2025/conference/closing-remarks/#event-chat',
   },
   {
     name: 'James Chang',
