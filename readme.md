@@ -52,8 +52,8 @@ All events are:
 
 ```bash
 # Clone the repository
-git clone https://github.com/jjnulledge/redux.git
-cd redux
+git clone https://github.com/thenulledge/thenulledge.com.git
+cd thenulledge.com
 
 # Install dependencies
 npm install
@@ -557,7 +557,7 @@ Special thanks to our sponsors who make these free events possible:
 
 - 🌐 **Website**: [theNullEDGE.com](https://thenulledge.com)
 - 📺 **YouTube**: [@theNullEDGE](https://www.youtube.com/@thenulledge)
-- 💼 **GitHub**: [jjnulledge/redux](https://github.com/thenulledge/thenulledge.com)
+- 💼 **GitHub**: [thenulledge/thenulledge.com](https://github.com/thenulledge/thenulledge.com)
 - 📧 **Email**: team@getaiinabox.com
 
 ---

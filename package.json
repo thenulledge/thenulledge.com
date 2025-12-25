@@ -24,7 +24,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jjnulledge/redux.git"
+    "url": "https://github.com/thenulledge/thenulledge.com.git"
   },
   "dependencies": {
     "@11ty/eleventy": "^3.1.2",
