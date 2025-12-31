@@ -134,6 +134,11 @@ https://lnkd.in/d4JzixGt`,
     quote: 'Awesome content like always!',
     link: 'https://thenulledge.com/2025/conference/5-things-i-do-to-new-many-to-many-tables/#event-chat',
   },
+  {
+    name: "Cory Wesley",
+    quote: `If you missed some of the hashtag#nullEDGE 2025 sessions like I did, you're in luck! Jace and crew have archived them all so you can catch up on all the sessions you missed! This is amazing work. Full Stop. I appreciate the ludicrous levels of time, effort, and dedication the team put into pulling this conference off, archiving it all for easy access, and bringing the community together. Well Done. 👏🏾🙌🏾 hashtag#ServiceNow hashtag#ServiceNowCommunity`,
+    link: "https://www.linkedin.com/posts/cjwesley_nulledge-2025-retrospective-heres-all-activity-7388631241618731009-Lx9_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
+  }
   // waiting for the below still 
   // chat messages
   /*
@@ -148,11 +153,6 @@ https://lnkd.in/d4JzixGt`,
     link: 'https://thenulledge.com/2025/conference/#event-chat',
   },
   //linkedIn posts
-  {
-    name: "Cory Wesley",
-    quote: `If you missed some of the hashtag#nullEDGE 2025 sessions like I did, you're in luck! Jace and crew have archived them all so you can catch up on all the sessions you missed! This is amazing work. Full Stop. I appreciate the ludicrous levels of time, effort, and dedication the team put into pulling this conference off, archiving it all for easy access, and bringing the community together. Well Done. 👏🏾🙌🏾 hashtag#ServiceNow hashtag#ServiceNowCommunity`,
-    link: "https://www.linkedin.com/posts/cjwesley_nulledge-2025-retrospective-heres-all-activity-7388631241618731009-Lx9_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
-  },
   {
     name: "Robert Fedoruk",
     quote: `I was there at the beginning. As good as today's hashtag#ServiceNow Knowledge conferences are (and they're amazing). There was a magic to the earliest ones. A sense that we were all building the ecosystem together. Nobody could read the future, but we all felt the vibe... the possibility of what could be. Peers sharing insights.
