@@ -54,7 +54,7 @@
 ) }}
 
 {# Event Info Badges #}
-{{ infoBadges(items=[
+{% set badgeItems = [
   {
     iconClass: "fa-solid fa-calendar",
     label: "Date",
@@ -75,7 +75,46 @@
     label: "Cost",
     value: "100% Free"
   }
-]) }}
+] %}
+{{ infoBadges(items=badgeItems) }}
+
+{# Registration count badge - populated via client-side JS #}
+<div id="registration-badge" data-event-id="{{ eventData.id }}" style="display: none;">
+  <section class="info-badges-section" style="padding-top: 0;">
+    <div class="info-badges-grid">
+      <div class="info-badge">
+        <div class="info-badge-icon">
+          <span class="fa-solid fa-users"></span>
+        </div>
+        <div class="info-badge-content">
+          <div class="info-badge-label">Registered</div>
+          <div class="info-badge-value" id="registration-count">...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  (async function() {
+    const badge = document.getElementById('registration-badge');
+    const eventId = badge?.dataset.eventId;
+    if (!eventId) return;
+
+    try {
+      const res = await fetch('/api/registrations');
+      if (!res.ok) return;
+      const data = await res.json();
+      const reg = data[eventId];
+      if (reg && reg.display) {
+        document.getElementById('registration-count').textContent = reg.display;
+        badge.style.display = 'block';
+      }
+    } catch (e) {
+      // Silently fail - registration count is nice-to-have
+    }
+  })();
+</script>
 
 {# Timezone Display #}
 {% if eventData.niceDatesTimes %}
