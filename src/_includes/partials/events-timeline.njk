@@ -40,11 +40,38 @@ Usage:
           </div>
         </div>
         <p class="event-description">{{ event.description }}</p>
+        <p class="event-registrations" data-event-id="{{ event.id }}" style="display: none;">
+          <i class="fa-solid fa-users"></i>
+          <span class="reg-text"></span>
+        </p>
       </a>
       {% endfor %}
     </div>
   </div>
 </section>
+
+<script>
+  (async function() {
+    try {
+      const res = await fetch('/api/registrations');
+      if (!res.ok) return;
+      const data = await res.json();
+      
+      document.querySelectorAll('.event-registrations[data-event-id]').forEach(el => {
+        const eventId = el.dataset.eventId;
+        const reg = data[eventId];
+        if (reg && reg.count > 0) {
+          const textEl = el.querySelector('.reg-text');
+          // Different text based on event type context
+          textEl.textContent = reg.count === 1 ? '1 person registered' : `${reg.display} people registered`;
+          el.style.display = 'flex';
+        }
+      });
+    } catch (e) {
+      // Silently fail - registration count is nice-to-have
+    }
+  })();
+</script>
 
 <style>
   /* Events Section Styles */
@@ -155,6 +182,16 @@ Usage:
   .event-description {
     color: hsl(var(--muted-foreground));
     line-height: 1.6;
+  }
+
+  .event-registrations {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    font-size: var(--size-step--1);
+    color: hsl(var(--primary));
+    font-weight: 500;
   }
 
   /* Mobile Responsive */

@@ -30,8 +30,10 @@ async function fetchEventRegistrations(slug) {
   const html = await response.text();
 
   // Look for registrationsCount in the data-react-props JSON
-  // Format: registrationsCount&quot;:3 (number, with HTML-encoded quotes)
-  const match = html.match(/registrationsCount&quot;:(\d+)/);
+  // Format can be either:
+  //   registrationsCount&quot;:3 (unquoted number)
+  //   registrationsCount&quot;:&quot;14&quot; (quoted string)
+  const match = html.match(/registrationsCount&quot;:(?:&quot;)?(\d+)/);
   if (match) {
     return parseInt(match[1], 10);
   }
