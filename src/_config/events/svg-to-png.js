@@ -4,18 +4,18 @@ import path from 'node:path';
 
 /**
  * Convert SVG OG images to PNG format
- * - Skips in development (ENV=dev) unless FORCE_OG_REGEN=true
+ * - Skips in development (ELEVENTY_ENV=development) unless FORCE_OG_REGEN=true
  * - Regenerates all PNGs if FORCE_OG_REGEN=true
  * - Otherwise only generates missing PNGs
  * @param {boolean} force - Force regeneration of all PNGs
  */
 export const svgToJpeg = async (force = false) => {
-  const isDev = process.env.ENV === 'dev';
+  const isDev = process.env.ELEVENTY_ENV === 'development';
   const forceRegen = process.env.FORCE_OG_REGEN === 'true' || force;
 
   // Skip in development mode unless forced
   if (isDev && !forceRegen) {
-    console.log('⚠ Skipping OG image PNG generation in development mode (ENV=dev)');
+    console.log('⚠ Skipping OG image PNG generation in development mode');
     console.log('  Run with FORCE_OG_REGEN=true to regenerate anyway');
     return;
   }

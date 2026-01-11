@@ -7,7 +7,7 @@ Set these variables before including:
   <div class="container">
     <h2 class="section-title">{{ testimonialsTitle }}</h2>
     {% if testimonialsSubtitle %}
-    <p class="section-subtitle">{{ testimonialsSubtitle }}</p>
+    <p class="section-subtitle">{{ testimonialsSubtitle | safe }}</p>
     {% endif %}
     
     <div class="testimonials-masonry">
@@ -122,6 +122,17 @@ Set these variables before including:
     color: hsl(var(--muted-foreground));
     max-width: 800px;
     margin: 0 auto 3rem;
+  }
+
+  .section-subtitle a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .section-subtitle a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
   }
 
   /* Masonry layout using CSS columns */

@@ -17,7 +17,7 @@ Usage:
 {% macro stats(title, subtitle="", statItems=[], primaryCtaText="", primaryCtaLink="") %}
 <section class="stats-section">
   <div class="container">
-    <h2 class="section-title">{{ title }}</h2>
+    <h2 class="section-title">{{ title | safe }}</h2>
     <p class="section-subtitle">{{ subtitle }}</p>
     
     <div class="stats-grid">
@@ -29,9 +29,11 @@ Usage:
       {% endfor %}
     </div>
     
+    {% if primaryCtaText and primaryCtaLink %}
     <div class="text-center" style="margin-top: 2rem;">
       <a href="{{ primaryCtaLink }}" class="btn btn-lg btn-outline">{{ primaryCtaText }}</a>
     </div>
+    {% endif %}
   </div>
 </section>
 
@@ -46,6 +48,17 @@ Usage:
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     margin-bottom: 1rem;
+  }
+
+  .section-title a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .section-title a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
   }
 
   .section-subtitle {

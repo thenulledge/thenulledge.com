@@ -31,14 +31,16 @@ ogImageAlt: 'nullEDGE - Free ServiceNow Conference'
 
 {% from "partials/stats.njk" import stats %}
 {{ stats(
-  title="nullEDGE 2025 Retrospective",
+  title="<a href='/2025/conference/'>nullEDGE 2025</a> Retrospective",
   subtitle="A community that showed up and engaged",
   statItems=[
     { label: "Attendees", value: "746" },
-    { label: "Connections Made", value: "57" },
+    { label: "Sessions Presented", value: "30" },
     { label: "Chat Messages", value: "2,701" },
     { label: "Satisfaction", value: "9.2/10" }
-  ]
+  ],
+  primaryCtaText="View 2025 Conference",
+  primaryCtaLink="/2025/conference/"
 ) }}
 
 {% from "partials/sponsor-carousel.njk" import sponsorCarousel %}
@@ -48,7 +50,7 @@ ogImageAlt: 'nullEDGE - Free ServiceNow Conference'
 ) }}
 
 {% set testimonialsTitle = "Loved by the Community" %}
-{% set testimonialsSubtitle = "What attendees said about nullEDGE 2025" %}
+{% set testimonialsSubtitle = "What attendees said about <a href='/2025/conference/'>nullEDGE 2025</a>" %}
 {% include "partials/testimonials-section.njk" %}
 
 <style>
