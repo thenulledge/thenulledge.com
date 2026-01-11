@@ -39,18 +39,21 @@ export default async function (eleventyConfig) {
   eleventyConfig.addPlugin(plugins.htmlConfig);
   eleventyConfig.addPlugin(plugins.drafts);
 
-  eleventyConfig.addPlugin(plugins.eleventyImageTransformPlugin, {
-    formats: ['webp', 'jpeg'],
-    widths: ['auto'],
-    htmlOptions: {
-      imgAttributes: {
-        loading: 'lazy',
-        decoding: 'async',
-        sizes: 'auto'
-      },
-      pictureAttributes: {}
-    }
-  });
+  // Skip image transform plugin in dev mode for faster starts
+  if (process.env.ELEVENTY_RUN_MODE !== 'serve') {
+    eleventyConfig.addPlugin(plugins.eleventyImageTransformPlugin, {
+      formats: ['webp', 'jpeg'],
+      widths: ['auto'],
+      htmlOptions: {
+        imgAttributes: {
+          loading: 'lazy',
+          decoding: 'async',
+          sizes: 'auto'
+        },
+        pictureAttributes: {}
+      }
+    });
+  }
 
   // ---------------------  bundle
   eleventyConfig.addBundle('css', {hoist: true});

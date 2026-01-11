@@ -10,7 +10,7 @@ export default async function () {
     },
     type: "full-day",
     url: "/2026/conference",
-    registrationUrl: "https://events.ringcentral.com/events/nulledge-2026-10-17",
+    registrationUrl: "https://events.ringcentral.com/events/nulledge-26",
     speakerRegistrationUrl: "https://forms.office.com/Pages/ResponsePage.aspx?id=mveVCahapEaaoboD6HueK6O-tP9N2HBKraN2Rz16GXpURVVXVk5MU0lPRjUwVTFPTksxVEZBMjBLSS4u&r287d312e29d34ecca64b070a4a439b7b=%22nullEDGE%22",
     speakerRegistrationIframeSrc: "https://forms.office.com/Pages/ResponsePage.aspx?id=mveVCahapEaaoboD6HueK6O-tP9N2HBKraN2Rz16GXpURVVXVk5MU0lPRjUwVTFPTksxVEZBMjBLSS4u&embed=true",
     speakerSubmissionStart: "2026-02-01T00:00:00-05:00",

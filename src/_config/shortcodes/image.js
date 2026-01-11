@@ -1,6 +1,8 @@
 import Image from '@11ty/eleventy-img';
 import path from 'node:path';
 
+const isDev = process.env.ELEVENTY_RUN_MODE === 'serve';
+
 const stringifyAttributes = attributeMap => {
   return Object.entries(attributeMap)
     .map(([attribute, value]) => {
@@ -31,6 +33,12 @@ const processImage = async options => {
   // Prepend "./src" if not present
   if (!src.startsWith('./src')) {
     src = `./src${src}`;
+  }
+
+  // In dev mode, skip processing and return a simple img tag
+  if (isDev) {
+    const devSrc = src.replace('./src', '');
+    return `<img src="${devSrc}" alt="${alt}" loading="${loading}"${imageClass ? ` class="${imageClass}"` : ''}>`;
   }
 
   const metadata = await Image(src, {

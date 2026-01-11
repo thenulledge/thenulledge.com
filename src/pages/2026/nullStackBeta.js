@@ -5,8 +5,8 @@ export default async function () {
     id: "2026-nullstack-beta",
     name: "nullSTACK Beta",
     when: {
-      start: "2026-07-23T04:30:00-04:00",
-      end: "2026-07-23T07:30:00-04:00"
+      start: "2026-07-23T15:00:00-04:00",
+      end: "2026-07-23T18:00:00-04:00"
     },
     type: "sessions",
     url: "/2026/nullstack-beta",
@@ -21,10 +21,10 @@ export default async function () {
     sessionCount: 5,
     timezone: "America/New_York",
     niceDatesTimes: {
-      atlanta: "4:30 AM EDT",
-      london: "9:30 AM BST",
-      india: "2:00 PM IST",
-      sydney: "6:30 PM AEST"
+      atlanta: "3:00 PM EDT",
+      london: "8:00 PM BST",
+      india: "12:30 AM IST (+1 day)",
+      sydney: "5:00 AM AEST (+1 day)"
     },
     region: "APAC",
     faqs: [
