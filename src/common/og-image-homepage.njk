@@ -16,19 +16,22 @@ eleventyExcludeFromCollections: true
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
 >
+  {% set logoBase64 = '/assets/images/nullEDGElogo.png' | imageToBase64 %}
+  
   <!-- Background -->
   <rect id="bg" width="100%" height="100%" fill="{{ background }}" />
 
-  <!-- Conference Name (Top Left) -->
-  <text
-    font-family="{{ fontDisplay }}"
-    font-size="90"
-    font-weight="900"
-    fill="{{ text }}"
-    letter-spacing="-2"
-  >
-    <tspan x="60" y="120">nullEDGE</tspan>
-  </text>
+  <!-- nullEDGE Logo (Top Left) -->
+  {% if logoBase64 %}
+  <image 
+    href="{{ logoBase64 }}" 
+    x="60" 
+    y="60" 
+    width="400" 
+    height="66.67"
+    preserveAspectRatio="xMidYMid meet"
+  />
+  {% endif %}
 
   <!-- Year Badge -->
   <text
@@ -38,7 +41,7 @@ eleventyExcludeFromCollections: true
     fill="{{ text }}"
     letter-spacing="1"
   >
-    <tspan x="60" y="180">2026</tspan>
+    <tspan x="470" y="110">2026</tspan>
   </text>
 
   <!-- Tagline -->
@@ -50,7 +53,7 @@ eleventyExcludeFromCollections: true
     opacity="0.9"
     letter-spacing="-0.5"
   >
-    <tspan x="60" y="260">Free ServiceNow Conference</tspan>
+    <tspan x="60" y="180">Free ServiceNow Conference</tspan>
   </text>
 
   <!-- Main Event Date -->
@@ -62,7 +65,7 @@ eleventyExcludeFromCollections: true
     opacity="0.85"
     letter-spacing="-0.5"
   >
-    <tspan x="60" y="330">October 16, 2026</tspan>
+    <tspan x="60" y="250">October 16, 2026</tspan>
   </text>
 
   <!-- Event Series Info -->
@@ -74,7 +77,7 @@ eleventyExcludeFromCollections: true
     opacity="0.8"
     letter-spacing="-0.3"
   >
-    <tspan x="60" y="390">4 Virtual Events • 1,000+ Attendees</tspan>
+    <tspan x="60" y="310">4 Virtual Events • 1,000+ Attendees</tspan>
   </text>
 
   <!-- Description -->
@@ -86,8 +89,8 @@ eleventyExcludeFromCollections: true
     opacity="0.7"
     letter-spacing="-0.3"
   >
-    <tspan x="60" y="450">Deep technical sessions, real code,</tspan>
-    <tspan x="60" y="485">zero sales pitches. 100% free.</tspan>
+    <tspan x="60" y="370">Deep technical sessions, real code,</tspan>
+    <tspan x="60" y="405">zero sales pitches. 100% free.</tspan>
   </text>
 
   <!-- Call to Action -->
@@ -98,7 +101,7 @@ eleventyExcludeFromCollections: true
     fill="{{ text }}"
     letter-spacing="0.5"
   >
-    <tspan x="60" y="550">Join the Community →</tspan>
+    <tspan x="60" y="470">Join the Community →</tspan>
   </text>
 
   <!-- Footer URL (bottom right) -->
