@@ -3,7 +3,24 @@
 
   <div class="header-container">
     <a href="/" class="site-logo" {{ indicateActiveHome }}>
-      <img src="/assets/images/nullEDGEicon.png" alt="nullEDGE logo" class="logo-image">
+      <!-- Wide text logo for large screens -->
+      <img 
+        src="/assets/images/nullEDGElogo.png" 
+        alt="nullEDGE logo" 
+        class="logo-image logo-wide"
+        width="512"
+        height="85"
+        loading="eager"
+      >
+      <!-- Square icon for medium/small screens -->
+      <img 
+        src="/assets/images/nullEDGEicon.png" 
+        alt="nullEDGE logo" 
+        class="logo-image logo-square"
+        width="512"
+        height="512"
+        loading="eager"
+      >
       <span class="site-name">{{ meta.siteName }}</span>
     </a>
     {% include "partials/main-nav.njk" %}
@@ -40,11 +57,38 @@
     font-weight: 600;
   }
 
-  .logo-image {
-    width: 2rem;
-    height: 2rem;
-    object-fit: contain;
-  }
+   .logo-image {
+     object-fit: contain;
+   }
+
+   .logo-wide {
+     width: 8rem; /* Wider for text logo */
+     height: 1.333rem; /* Maintain 6:1 aspect ratio (8/1.333 = 6) */
+   }
+
+   .logo-square {
+     width: 2rem;
+     height: 2rem;
+   }
+
+   /* Show wide logo on large screens, square on others */
+   @media (min-width: 1024px) {
+     .logo-wide {
+       display: inline-block;
+     }
+     .logo-square {
+       display: none;
+     }
+   }
+
+   @media (max-width: 1023px) {
+     .logo-wide {
+       display: none;
+     }
+     .logo-square {
+       display: inline-block;
+     }
+   }
 
   .site-logo:hover {
     color: hsl(var(--primary));
@@ -54,11 +98,10 @@
     font-family: var(--font-display);
   }
 
-  @media (max-width: 768px) {
-    .site-name {
-      display: none;
-    }
-  }
+   /* Hide site name text - we show it in the logo instead */
+   .site-name {
+     display: none;
+   }
 
   /* Skip link accessibility */
   .skip-link {
