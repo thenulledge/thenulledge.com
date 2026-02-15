@@ -238,6 +238,42 @@
       }
     ]
   ) }}
+
+  {# Sessions placeholder (server-rendered sessions kept for SEO; client will enhance) #}
+  <section id="event-sessions" class="region flow" data-event-id="{{ eventData.id }}" data-event-slug="{{ eventData.registrationUrl | replace('https://events.ringcentral.com/events/','') }}">
+    <div class="sessions-grid">
+      {# Server-rendered sessions if available #}
+      {% if eventData.sessions and eventData.sessions.length %}
+        {% for s in eventData.sessions %}
+          <article class="card session-card" id="session-{{ s.external_id }}">
+            <h3 class="h5">{{ s.name }}</h3>
+            {% if s.time_start or s.time_end %}
+              <div class="meta">{{ s.time_start | formatDateShort(eventData.timezone) }}{% if s.time_end %} — {{ s.time_end | formatDateShort(eventData.timezone) }}{% endif %}</div>
+            {% endif %}
+            {% if s.description %}
+              <div class="session-desc">{{ s.description | safe }}</div>
+            {% endif %}
+            {% if s.speakers and s.speakers.length %}
+              <div class="session-speakers">
+                {% for sp in s.speakers %}
+                  <div class="session-speaker">
+                    {% if sp.thumb_picture_url %}
+                      <img src="{{ sp.thumb_picture_url }}" alt="{{ sp.name }}" width="40" height="40">
+                    {% endif %}
+                    <div><strong>{{ sp.name }}</strong>{% if sp.headline %}<div class="muted">{{ sp.headline }}</div>{% endif %}</div>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </article>
+        {% endfor %}
+      {% else %}
+        <p class="muted">Sessions will be published here once the schedule is available.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <script type="module" src="/assets/scripts/event-schedule.js"></script>
 {% endif %}
 
 {# Speaker Highlights - Shows for any event type if speakers exist #}
