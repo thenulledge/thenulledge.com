@@ -74,22 +74,22 @@
       const speakerName = data.speakerEntry?.[0];
       if (!speakerName) return sessions;
       
-      // Check 2025 nullEDGE conference - accessing via events global data
-      if (data.events && data.events["2025"] && data.events["2025"]["nullEDGE"]) {
-        const nullEDGE2025 = data.events["2025"]["nullEDGE"];
-        if (nullEDGE2025.sessions) {
-          nullEDGE2025.sessions.forEach(session => {
-            if (session.speakers && session.speakers.includes(speakerName)) {
+      // Search schedules data first (populated by fetch:schedules during build)
+      if (data.schedules) {
+        Object.entries(data.schedules).forEach(([eventId, info]) => {
+          const evSessions = info.sessions || [];
+          evSessions.forEach(session => {
+            if (session.speakers && session.speakers.find(s => s.name === speakerName)) {
               sessions.push({
                 ...session,
-                eventName: "nullEDGE 2025",
-                eventSlug: "2025-nulledge",
-                eventUrl: "/2025/conference",
-                year: "2025"
+                eventName: eventId,
+                eventSlug: eventId,
+                eventUrl: `/${eventId.replace('2026-','2026/')}`,
+                year: eventId.split('-')[0]
               });
             }
           });
-        }
+        });
       }
       
       return sessions;

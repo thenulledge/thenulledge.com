@@ -12,6 +12,14 @@ const __dirname = path.dirname(__filename);
 export default async function() {
   const eventsData = {};
   const pagesDir = path.join(__dirname, '..', 'pages');
+  // Load schedules data if available so we can merge sessions into events at build time
+  let schedules = {};
+  try {
+    const schedulesModule = await import('./schedules.js');
+    schedules = await schedulesModule.default();
+  } catch (e) {
+    schedules = {};
+  }
   
   // Find all year directories (2025, 2026, etc.)
   const yearDirs = fs.readdirSync(pagesDir)
@@ -34,9 +42,15 @@ export default async function() {
       const filePath = path.join(yearDir, file);
       const module = await import(filePath);
       const eventData = await module.default();
-      
       // Use the event name as the key (e.g., "nullEDGE", "nullHUB")
       const eventKey = eventData.name.replace(/\s+/g, '');
+
+      // Merge schedule sessions when available (schedules keyed by event ID)
+      const scheduleKey = eventData.id;
+      if (schedules && schedules[scheduleKey] && schedules[scheduleKey].sessions && schedules[scheduleKey].sessions.length) {
+        eventData.sessions = schedules[scheduleKey].sessions;
+      }
+
       eventsData[year][eventKey] = eventData;
     }
   }

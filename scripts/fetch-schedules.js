@@ -11,6 +11,7 @@ const EVENT_SLUGS = {
 };
 
 const OUT_PATH = path.join(process.cwd(), 'src', '_data', 'schedules.json');
+const REG_OUT_PATH = path.join(process.cwd(), 'src', '_data', 'registrations.json');
 
 /**
  * Normalize a RingCentral schedule item into our site-friendly shape
@@ -71,11 +72,33 @@ async function main() {
     }
   }
 
+  // Also fetch registration counts for each slug
+  const regResults = {};
+  for (const [eventId, info] of Object.entries(results)) {
+    const slug = info.slug;
+    try {
+      console.log(`Fetching registration count for ${slug}`);
+      const pageRes = await fetch(`https://events.ringcentral.com/events/${slug}`);
+      if (!pageRes.ok) throw new Error(`status ${pageRes.status}`);
+      const html = await pageRes.text();
+      const match = html.match(/registrationsCount&quot;:(?:&quot;)?(\d+)/);
+      const count = match ? parseInt(match[1], 10) : null;
+      const display = count === null ? null : (count < 100 ? `${count}` : `${Math.floor(count / 10) * 10}+`);
+      regResults[eventId] = { slug, count, display };
+    } catch (err) {
+      console.error(`Error fetching registrations for ${slug}:`, err.message);
+      regResults[eventId] = { slug, count: null, display: null };
+    }
+    await new Promise(r => setTimeout(r, 250));
+  }
+
   // Ensure output dir exists
   const outDir = path.dirname(OUT_PATH);
   await fs.mkdir(outDir, { recursive: true });
   await fs.writeFile(OUT_PATH, JSON.stringify(results, null, 2), 'utf8');
+  await fs.writeFile(REG_OUT_PATH, JSON.stringify(regResults, null, 2), 'utf8');
   console.log(`Wrote schedules to ${OUT_PATH}`);
+  console.log(`Wrote registrations to ${REG_OUT_PATH}`);
 }
 
 main().catch(err => {

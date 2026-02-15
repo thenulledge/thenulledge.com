@@ -35,6 +35,11 @@ export const events2026 = collection => {
 /** All speakers as an array for pagination - only people who have presented */
 export const speakers = async (collection) => {
   // Import events data dynamically
+  // Load built schedules (may be empty if not fetched)
+  const schedulesModule = await import('../_data/schedules.js');
+  const schedules = await schedulesModule.default();
+
+  // Import events data dynamically
   const eventsModule = await import('../_data/events.js');
   const events = await eventsModule.default();
   
@@ -57,13 +62,15 @@ export const speakers = async (collection) => {
   // Check 2026 events (if they have sessions in the future)
   if (events['2026']) {
     Object.values(events['2026']).forEach(event => {
-      if (event.sessions) {
-        event.sessions.forEach(session => {
-          if (session.speakers) {
-            session.speakers.forEach(speaker => speakerNames.add(speaker));
-          }
-        });
-      }
+      // prefer schedules merged content when available
+      const scheduleKey = event.id;
+      const scheduleData = schedules && schedules[scheduleKey];
+      const sessionsSource = (scheduleData && scheduleData.sessions) || event.sessions || [];
+      sessionsSource.forEach(session => {
+        if (session.speakers) {
+          session.speakers.forEach(sp => speakerNames.add(sp.name || sp));
+        }
+      });
     });
   }
   
@@ -77,4 +84,3 @@ export const speakers = async (collection) => {
   
   return speakersArray;
 };
-
