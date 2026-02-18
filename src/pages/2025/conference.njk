@@ -5,529 +5,200 @@
   description: "Retrospective for the nullEDGE 2025 conference: session videos, feedback and resources",
   permalink: "/2025/conference/",
   eleventyComputed: {
-    nullEDGE: (data) => {
-      // Find the nullEDGE event from events2025Array
-      return data.events2025Array.find(e => e.id === "2025-nulledge");
-    }
+    nullEDGE: (data) => data.events2025Array.find(e => e.id === "2025-nulledge")
   }
 }
 ---
 
-{# Import partials #}
 {% from "partials/chat.njk" import chatDisplay %}
 
 <div class="container wrapper flow">
-  {# Hero Section #}
   <section class="prose text-center">
-    <h1>nullEDGE Conference 2025 — Retrospective</h1>
-    <p class="lead">
-      A place to find session replays, feedback, resources and highlights from the 2025 conference.
-    </p>
+    <h1>nullEDGE 2025 — Retrospective</h1>
+    <p class="lead">Session replays, chat highlights, and thanks to everyone who made it happen.</p>
   </section>
 
-  {# Table of Contents #}
-  <nav class="toc-section">
-    <h2 class="toc-title">Quick Navigation</h2>
-    <div class="toc-grid">
-      <a href="#session-schedule" class="toc-card">
-        <i class="fa-solid fa-video"></i>
-        <span>Session Videos</span>
-      </a>
-      <a href="#event-chat" class="toc-card">
-        <i class="fa-solid fa-comments"></i>
-        <span>Event Chat</span>
-      </a>
-      <a href="#team" class="toc-card">
-        <i class="fa-solid fa-users"></i>
-        <span>Our Team</span>
-      </a>
-      <a href="#sponsors" class="toc-card">
-        <i class="fa-solid fa-handshake"></i>
-        <span>Sponsors</span>
-      </a>
-      <a href="mailto:{{ meta.email }}?subject=nullEDGE%202025%20Feedback" class="toc-card">
-        <i class="fa-solid fa-envelope"></i>
-        <span>Feedback</span>
-      </a>
-    </div>
-  </nav>
-
-  {# Session Schedule #}
-  <section id="session-schedule" class="region flow">
-    <div class="section-header">
-      <h2>Conference Schedule</h2>
-      <p class="text-muted">Click any session to watch the replay</p>
-    </div>
-
+  {# Sessions - Larger thumbnails, better layout #}
+  <section id="sessions" class="region flow">
+    <h2>Session Videos</h2>
     <div class="sessions-grid">
       {% for session in nullEDGE.sessions %}
         {% if session.id %}
-          <div class="session-card">
-            {# Session Thumbnail - Links to session page #}
-            <a href="/2025/conference/{{ session.title | slugify }}/" class="video-wrapper">
-              <img src="https://img.youtube.com/vi/{{ session.id }}/maxresdefault.jpg" 
-                   alt="{{ session.title }}" 
-                   loading="lazy"
-                   class="session-thumbnail">
-              <div class="play-overlay">
-                <i class="fa-solid fa-circle-play"></i>
-              </div>
-            </a>
-            
-            {# Session Info #}
-            <div class="session-info">
-              <h3 class="session-title">
-                <a href="/2025/conference/{{ session.title | slugify }}/">{{ session.title }}</a>
-              </h3>
-              
-              <div class="session-meta">
-                <div class="meta-item">
-                  <i class="fa-solid fa-clock"></i>
-                  <span>{{ session.duration }} min</span>
-                </div>
-                
-                <div class="meta-item">
-                  <i class="fa-solid fa-users"></i>
-                  <span>{{ session.speakers | join(", ") }}</span>
-                </div>
-              </div>
-              
-              <a href="/2025/conference/{{ session.title | slugify }}/" class="watch-link">
-                View Session & Chat →
-              </a>
-            </div>
+        <a href="/2025/conference/{{ session.title | slugify }}/" class="session-card">
+          <img src="https://img.youtube.com/vi/{{ session.id }}/mqdefault.jpg" alt="" loading="lazy" class="session-thumb">
+          <div class="session-info">
+            <strong>{{ session.title }}</strong>
+            <span>{{ session.speakers | join(", ") }}</span>
+            <span>{{ session.duration }} min</span>
           </div>
+        </a>
         {% endif %}
       {% endfor %}
     </div>
   </section>
 
-
-  {# Event Chat #}
-  <section id="event-chat" class="region flow">
-      {{ chatDisplay(eventChat) }}
-
+  {# Chat #}
+  <section id="chat" class="region flow">
+    {{ chatDisplay(eventChat) }}
   </section>
 
-  {# Team Section #}
+  {# Team - With photos #}
   <section id="team" class="region flow">
-    <div class="section-header">
-      <h2>Made Possible By Our Team</h2>
-      <p class="text-muted">The dedicated volunteers who brought nullEDGE 2025 to life</p>
-    </div>
-
+    <h2>The Team</h2>
     <div class="team-grid">
       {% for member in nullEDGE.team %}
         {%- set person = people[member.name] %}
+        {%- set linkedinUrl = person.linkedin if person and person.linkedin else None %}
+        {%- set websiteUrl = person.website if person and person.website else None %}
+        {%- set searchUrl = "https://www.linkedin.com/search/results/all/?keywords=" + (member.name | urlencode) %}
+        {%- set profileUrl = linkedinUrl or websiteUrl or searchUrl %}
         <div class="team-card">
           {% if person and person.image %}
-          <div class="team-image-wrapper">
-            <img src="{{ person.image }}" alt="{{ member.name }}" class="team-image" loading="lazy">
-          </div>
+            <img src="{{ person.image }}" alt="{{ member.name }}" class="team-photo" loading="lazy">
           {% else %}
-          <div class="team-image-wrapper team-placeholder">
-            <i class="fa-solid fa-user"></i>
-          </div>
+            <div class="team-photo-placeholder"></div>
           {% endif %}
           <div class="team-info">
-            <h3 class="team-name">{{ member.name }}</h3>
-            <p class="team-role">{{ member.role }}</p>
+            <a href="{{ profileUrl }}" target="_blank" rel="noopener noreferrer" class="team-name-link">{{ member.name }}</a>
+            <span>{{ member.role }}</span>
           </div>
         </div>
       {% endfor %}
     </div>
   </section>
 
-  {# Sponsors Section #}
+  {# Sponsors #}
   <section id="sponsors" class="region flow">
-    <div class="section-header">
-      <h2>Our 2025 Sponsors</h2>
-      <p class="text-muted">Thank you to these organizations for supporting community-driven learning</p>
-    </div>
-
-    <div class="sponsors-grid">
+    <h2>2025 Sponsors</h2>
+    <div class="sponsors-row">
       {% for sponsorName in nullEDGE.sponsors %}
-      {%- set company = companies[sponsorName] %}
-      <div class="sponsor-item">
-        <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-link">
-          <img src="{{ company.image }}" alt="{{ sponsorName }}" eleventy:ignore loading="lazy" width="200" height="auto">
-          <p class="sponsor-name">{{ sponsorName }}</p>
+        {%- set company = companies[sponsorName] %}
+        <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer">
+          <img src="{{ company.image }}" alt="{{ sponsorName }}" eleventy:ignore loading="lazy">
         </a>
-      </div>
       {% endfor %}
     </div>
   </section>
 
-  {# CTA Section #}
+  {# CTA #}
   <section class="region text-center">
-    <div class="card flow prose">
-      <h2>Join Us in 2026</h2>
-      <p>nullEDGE 2026 includes four events across the year. Register now for upcoming conferences.</p>
-      <div class="button-group">
-        <a href="/" class="button">View 2026 Events</a>
-        <a href="/speakers" class="button button-secondary">Submit a Talk</a>
-      </div>
-    </div>
+    <h2>Join Us in 2026</h2>
+    <p>Four events across the year. <a href="/">View 2026 Events →</a></p>
   </section>
 </div>
 
 <style>
-  /* Conference-specific styles only - Global components in src/assets/css/global/ */
-  /* See: card.css, button-group.css, section-header.css for reusable components */
-  
-  .toc-section {
-    background: var(--color-bg-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    padding: var(--space-m-l);
-    margin: var(--space-l) 0;
-  }
-
-  .toc-title {
-    text-align: center;
-    font-size: var(--size-step-1);
-    margin: 0 0 var(--space-m) 0;
-    color: var(--color-text);
-  }
-
-  .toc-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
-    gap: var(--space-s);
-  }
-
-  .toc-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: var(--space-s) var(--space-m);
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    color: var(--color-text);
-    transition: all 0.2s ease;
-  }
-
-  .toc-card:hover {
-    background: var(--color-primary);
-    color: var(--color-bg);
-    border-color: var(--color-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .toc-card i {
-    font-size: 24px;
-    color: var(--color-primary);
-    transition: color 0.2s ease;
-  }
-
-  .toc-card:hover i {
-    color: var(--color-bg);
-  }
-
-  .toc-card svg {
-    color: var(--color-primary);
-    transition: color 0.2s ease;
-  }
-
-  .toc-card:hover svg {
-    color: var(--color-bg);
-  }
-
-  .toc-card span {
-    font-size: var(--size-step--1);
-    font-weight: 500;
-    text-align: center;
-  }
-
-  .quick-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .quick-links a {
-    color: var(--color-primary);
-    text-decoration: none;
-  }
-
-  .quick-links a:hover {
-    text-decoration: underline;
-  }
-
   .sessions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: var(--space-l);
   }
 
   .session-card {
+    display: flex;
+    flex-direction: column;
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
     overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
 
   .session-card:hover {
-    transform: translateY(-2px);
+    border-color: var(--color-primary);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  .video-wrapper {
-    aspect-ratio: 16 / 9;
-    background: #000;
-    position: relative;
-    display: block;
-    overflow: hidden;
-    text-decoration: none;
-  }
-
-  .session-thumbnail {
+  .session-thumb {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .video-wrapper:hover .session-thumbnail {
-    transform: scale(1.05);
-  }
-
-  .play-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgba(255, 255, 255, 0.9);
-    transition: transform 0.2s ease, color 0.2s ease;
-    pointer-events: none;
-  }
-
-  .video-wrapper:hover .play-overlay {
-    transform: translate(-50%, -50%) scale(1.1);
-    color: rgba(255, 255, 255, 1);
   }
 
   .session-info {
     padding: var(--space-m);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.25rem;
   }
 
-  .session-title {
+  .session-info strong {
     font-size: var(--size-step-0);
-    font-weight: 600;
-    margin: 0;
-    line-height: 1.4;
+    color: var(--color-text);
+    line-height: 1.3;
   }
 
-  .session-title a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .session-title a:hover {
-    color: var(--color-primary);
-    text-decoration: underline;
-  }
-
-  .session-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .meta-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  .session-info span {
     font-size: var(--size-step--1);
     color: var(--color-text-muted);
-  }
-
-  .meta-item svg, .meta-item i {
-    flex-shrink: 0;
-    color: var(--color-primary);
-    font-size: 16px;
-  }
-
-  .play-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgba(255, 255, 255, 0.9);
-    transition: transform 0.2s ease, color 0.2s ease;
-    pointer-events: none;
-    font-size: 64px;
-  }
-
-  .watch-link {
-    display: inline-flex;
-    align-items: center;
-    color: var(--color-primary);
-    text-decoration: none;
-    font-size: var(--size-step--1);
-    font-weight: 500;
-    margin-top: 0.5rem;
-  }
-
-  .watch-link:hover {
-    text-decoration: underline;
-  }
-
-  .text-muted {
-    color: var(--color-text-muted);
-    font-size: var(--size-step--1);
   }
 
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: var(--space-m);
   }
 
   .team-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    padding: var(--space-s);
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
-    padding: var(--space-m);
-    transition: transform 0.2s, box-shadow 0.2s;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-s);
   }
 
-  .team-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .team-image-wrapper {
-    width: 80px;
-    height: 80px;
+  .team-photo {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    overflow: hidden;
-    background: var(--color-bg);
+    object-fit: cover;
     flex-shrink: 0;
   }
 
-  .team-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .team-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--primary) / 0.2));
-    color: hsl(var(--primary));
-    font-size: 2rem;
+  .team-photo-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--color-border);
+    flex-shrink: 0;
   }
 
   .team-info {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
   }
 
-  .team-name {
+  .team-name-link {
     font-size: var(--size-step-0);
     font-weight: 600;
-    margin: 0;
     color: var(--color-text);
+    text-decoration: none;
   }
 
-  .team-role {
+  .team-name-link:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .team-info span {
     font-size: var(--size-step--1);
     color: var(--color-text-muted);
-    margin: 0;
   }
 
-  .sponsors-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  .sponsors-row {
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--space-l);
     align-items: center;
+    justify-content: center;
   }
 
-  .sponsor-item {
-    text-align: center;
-    padding: var(--space-m);
-    background: var(--color-bg-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .sponsor-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .sponsor-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-xs);
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .sponsor-item img {
-    max-height: 80px;
+  .sponsors-row img {
+    height: 60px;
     width: auto;
-    max-width: 100%;
-  }
-
-  .sponsor-name {
-    font-size: var(--size-step--1);
-    font-weight: 500;
-    color: var(--color-text);
-    margin: 0;
-    margin-top: var(--space-xs);
-  }
-
-  @media (max-width: 768px) {
-    .toc-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .section-header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .sessions-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .team-grid {
-      grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
-    }
-
-    .sponsors-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .toc-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .sponsors-grid {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

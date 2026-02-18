@@ -51,10 +51,19 @@
     
     <h1>{{ eventData.title }}</h1>
     
-    <div class="session-meta">
+     <div class="session-meta">
       <div class="meta-item">
         <i class="fa-solid fa-users"></i>
-        <span>{{ eventData.speakers | join(", ") }}</span>
+        <span>
+          {%- for speakerName in eventData.speakers -%}
+            {%- set personData = people[speakerName] -%}
+            {%- set speakerLinkedin = personData.linkedin if personData and personData.linkedin else None -%}
+            {%- set speakerWebsite = personData.website if personData and personData.website else None -%}
+            {%- set speakerSearchUrl = "https://www.linkedin.com/search/results/all/?keywords=" + (speakerName | urlencode) -%}
+            {%- set speakerProfileUrl = speakerLinkedin or speakerWebsite or speakerSearchUrl -%}
+            <a href="{{ speakerProfileUrl }}" target="_blank" rel="noopener noreferrer">{{ speakerName }}</a>{% if not loop.last %}, {% endif %}
+          {%- endfor -%}
+        </span>
       </div>
       
       <div class="meta-item">
@@ -154,6 +163,15 @@
     gap: var(--space-xs);
     font-size: var(--size-step-0);
     color: var(--color-text);
+  }
+
+  .meta-item a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .meta-item a:hover {
+    text-decoration: underline;
   }
 
   .meta-item svg, .meta-item i {

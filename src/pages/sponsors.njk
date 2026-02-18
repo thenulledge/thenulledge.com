@@ -11,482 +11,144 @@ breadcrumb:
   current: Sponsors
 faqs:
   - question: "Do sponsors get attendee contact lists?"
-    answer: "No. We don't sell or share attendee contact lists. nullEDGE is a community conference, not a lead-generation business. Attendees value their privacy, and we respect that. Your sponsorship supports the community, not a database transaction."
+    answer: "No. We don't sell or share attendee contact lists. nullEDGE is a community conference, not a lead-generation business."
   - question: "How do I generate leads then?"
-    answer: "Through genuine engagement at your virtual booth. Run giveaways where attendees opt in, offer value like free trials or white papers, host booth demos with live Q&A sessions, or create interactive content like quizzes. These leads are higher quality because people chose to engage with you."
+    answer: "Through genuine engagement at your virtual booth. Run giveaways, offer value like free trials or white papers, host booth demos. These leads are higher quality because people chose to engage with you."
   - question: "What metrics do sponsors receive?"
-    answer: "You'll get aggregate event data including total event attendance, booth visit counts, engagement rates, session attendance if you have a speaking slot, and chat mentions. All metrics are aggregated and anonymized - we share insights, not individual attendee data."
-  - question: "Can I contact attendees who visit my booth?"
-    answer: "Only if they give you their contact info directly. Set up forms in your booth, run giveaways, offer resources - any method where attendees voluntarily provide their email. We provide the platform and traffic; you provide the value proposition that earns their contact info."
-  - question: "Is this worth it without a contact list?"
-    answer: "If you're building brand presence in the ServiceNow community, absolutely. Our 2025 events had 746 attendees, 2,701 chat messages, and a 9.2/10 satisfaction rating. That's an engaged audience who chose to be there. You get brand visibility, community goodwill, thought leadership opportunities, and quality leads from people who engaged with your booth content."
+    answer: "Aggregate event data: total attendance, booth visit counts, engagement rates, session attendance, and chat mentions. All metrics are aggregated and anonymized."
   - question: "Can I sponsor multiple events?"
-    answer: "Yes! We have four global conferences in 2026 (nullEDGE, nullHub, nullStack Alpha, nullStack Beta). Multi-event sponsors get year-round homepage presence, priority booth placement at all events, bundled pricing discounts, and multiple speaking opportunities."
+    answer: "Yes! We have four global conferences in 2026. Multi-event sponsors get year-round homepage presence, priority booth placement, bundled pricing, and multiple speaking opportunities."
 ---
 
 <div class="container wrapper flow">
   {# Hero Section #}
   <section class="prose text-center">
-    <span class="badge">Sponsorship Opportunities</span>
     <h1>Partner with nullEDGE 2026</h1>
     <p class="lead">
       Connect with ServiceNow folks through authentic, community-focused events across four global conferences.
     </p>
-    
-    <div class="button-group">
-      <a href="#packages" class="btn btn-primary">
-        Become a Sponsor
-      </a>
-      <a href="#donations" class="btn btn-outline">Support with a Donation</a>
-    </div>
   </section>
 
-  {# Why Sponsor #}
-  <section class="region flow">
-    <h2 class="text-center">Why Sponsor nullEDGE?</h2>
-    <div class="grid-3col gap-l">
-      <div class="card flow">
-        <div class="card-icon">
-          <i class="fa-solid fa-heart"></i>
-        </div>
-        <h3>Support the Community</h3>
-        <p>Help keep nullEDGE free for all attendees and support a grassroots initiative that brings real value to ServiceNow folks.</p>
-      </div>
-      
-      <div class="card flow">
-        <div class="card-icon">
-          <i class="fa-solid fa-users"></i>
-        </div>
-        <h3>Build Brand Presence</h3>
-        <p>Connect with ServiceNow developers, admins, and architects. Get your brand in front of folks actively building solutions.</p>
-      </div>
-      
-      <div class="card flow">
-        <div class="card-icon">
-          <i class="fa-solid fa-dollar-sign"></i>
-        </div>
-        <h3>Engage Through Content</h3>
-        <p>Share your story through LinkedIn Live interviews or featured social posts. Build authentic connections through quality content.</p>
-      </div>
-    </div>
-  </section>
-
-{% from "partials/stats.njk" import stats %}
-{{ stats(
-  title="2025 by the Numbers",
-  subtitle="A community that showed up and engaged",
-  statItems=[
-    { label: "Attendees", value: "746" },
-    { label: "Connections Made", value: "57" },
-    { label: "Chat Messages", value: "2,701" },
-    { label: "Satisfaction", value: "9.2/10" }
-  ]
-) }}
-
-  {# Sponsorship Packages #}
+  {# Sponsorship Tiers - Dynamic from Fourthwall #}
   <section id="packages" class="region flow">
-    <div class="text-center prose">
-      <h2>Sponsorship Tiers</h2>
-      <p class="lead">
-        Whether you want to support the community, build brand presence, or engage through content—we have flexible options for every goal and budget.
-      </p>
-    </div>
+    <h2 class="text-center">Sponsorship Tiers</h2>
     
-    <div class="grid-3col gap-l">
-      {# Sponsor - $1,000 #}
-      <div class="card flow">
-        <span class="badge badge-invisible" aria-hidden="true">&nbsp;</span>
-        <h3>Sponsor</h3>
-        <p class="text-muted">$1,000</p>
-        
-        <div class="benefits-list">
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Logo on event website</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Logo on opening/closing ceremony presentations</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Virtual booth visible to all attendees</span>
-          </div>
-        </div>
-        
-        <p class="text-sm text-muted mt-m">Build brand presence and connect with ServiceNow developers, admins, and architects actively building solutions.</p>
-        
-        <a href="mailto:{{ meta.email }}?subject=Sponsor%20Inquiry%20-%20$1k" class="btn btn-primary">
-          Get Started
+    <div class="tiers-grid">
+      {% for sponsor in fourthwallSponsors %}
+      <div class="tier-card{% if sponsor.bestValue %} tier-featured{% endif %}">
+        {% if sponsor.bestValue %}<span class="badge badge-primary">Best Value</span>{% endif %}
+        <h3>{{ sponsor.label }}</h3>
+        {% if sponsor.price %}
+        <p class="tier-price">${{ sponsor.price.value | thousands }}</p>
+        {% endif %}
+        <div class="tier-benefits">{{ sponsor.description | safe }}</div>
+        <a href="mailto:{{ meta.email }}?subject={{ sponsor.emailSubject | urlEncode }}{% if sponsor.emailBody %}&body={{ sponsor.emailBody | urlEncode }}{% endif %}" class="btn btn-primary">
+          {% if loop.first %}Get Started{% else %}Contact Us{% endif %}
         </a>
       </div>
-
-      {# Premium Sponsor - $2,000 #}
-      <div class="card flow card-featured">
-        <span class="badge badge-primary">Best Value</span>
-        <h3>Premium Sponsor</h3>
-        <p class="text-muted">$2,000</p>
-        
-        <div class="benefits-list">
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span class="font-semibold">All Sponsor tier benefits, plus:</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>More prominently displayed logos on opening/closing ceremonies</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>15-minute dev-centric technical session (subject to approval)</span>
-          </div>
-        </div>
-        
-        <p class="text-sm text-muted mt-m">Share your technical expertise through a developer-focused session that provides real value to the community.</p>
-        
-        <a href="mailto:{{ meta.email }}?subject=Premium%20Sponsor%20Inquiry%20-%20$2k" class="btn btn-primary">
-          Contact Us
-        </a>
-      </div>
-
-      {# Elite Sponsor - $5,000 #}
-      <div class="card flow">
-        <span class="badge badge-invisible" aria-hidden="true">&nbsp;</span>
-        <h3>Elite Sponsor</h3>
-        <p class="text-muted">$5,000</p>
-        
-        <div class="benefits-list">
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span class="font-semibold">All Premium Sponsor benefits, plus:</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Priority logo placement across all materials</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>15-minute session on your chosen topic</span>
-          </div>
-        </div>
-        
-        <p class="text-sm text-muted mt-m">Maximum visibility with the flexibility to present your solution, product, or story to the entire community.</p>
-        
-        <a href="mailto:{{ meta.email }}?subject=Elite%20Sponsor%20Inquiry%20-%20$5k" class="btn btn-primary">
-          Contact Us
-        </a>
-      </div>
-    </div>
-
-    {# Custom/Enterprise Sponsorships - Full Width #}
-    <div class="mt-l">
-      <div class="card flow">
-        <h3>Custom & Enterprise Sponsorships</h3>
-        <p class="text-muted">Have specific goals or want to sponsor multiple events?</p>
-        
-        <div class="benefits-list benefits-grid">
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Multi-event sponsorships</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Year-round homepage presence</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Priority booth placements</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Multiple speaking slots</span>
-          </div>
-        </div>
-        
-        <p class="text-sm text-muted mt-m">We're flexible and happy to create a custom package that works for your specific goals and budget.</p>
-        
-        <a href="mailto:{{ meta.email }}?subject=Custom%20Sponsorship%20Discussion" class="btn btn-outline">
-          Let's Talk
-        </a>
-      </div>
-    </div>
-  </section>
-
-  {# 2025 Sponsors #}
-  <section class="region flow text-center">
-    <h2>Thank You to Our 2025 Sponsors</h2>
-    <p class="lead text-muted">
-      These organizations made nullEDGE 2025 possible and kept it free for all attendees
-    </p>
-    <div class="sponsors-grid">
-      {% for sponsorName in events["2025-nullEDGE"].sponsors %}
-        {%- set company = companies[sponsorName] %}
-        <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
-          <img src="{{ company.image }}" alt="{{ sponsorName }}" class="sponsor-logo" eleventy:ignore>
-          <span class="sponsor-name-label">{{ sponsorName }}</span>
-        </a>
       {% endfor %}
     </div>
+
+    <p class="text-center text-muted">
+      Need something custom? Multi-event sponsorships, year-round presence, or other arrangements—<a href="mailto:{{ meta.email }}?subject=Custom%20Sponsorship%20Discussion">let's talk</a>.
+    </p>
   </section>
 
-  {# Sponsor FAQ #}
+  {# FAQ #}
   <section class="region flow">
-    <div class="text-center prose">
-      <h2>Sponsor FAQ</h2>
-      <p class="lead">Common questions about sponsoring nullEDGE events</p>
-    </div>
-    
-    <div class="faq-grid">
-      <div class="card flow">
-        <h3>Do sponsors get attendee contact lists?</h3>
-        <p><strong>No.</strong> We don't sell or share attendee contact lists. nullEDGE is a community conference, not a lead-generation business.</p>
-        <p class="text-sm text-muted">Attendees value their privacy, and we respect that. Your sponsorship supports the community, not a database transaction.</p>
+    <h2>Sponsor FAQ</h2>
+    <dl class="faq-list">
+      {% for faq in faqs %}
+      <div class="faq-item">
+        <dt>{{ faq.question }}</dt>
+        <dd>{{ faq.answer }}</dd>
       </div>
-
-      <div class="card flow">
-        <h3>How do I generate leads then?</h3>
-        <p><strong>Through genuine engagement at your virtual booth:</strong></p>
-        <ul class="benefits-list">
-          <li class="benefit-item">
-            <i class="fa-solid fa-gift"></i>
-            <span><strong>Run giveaways:</strong> "Enter your email for a chance to win X" - attendees opt in</span>
-          </li>
-          <li class="benefit-item">
-            <i class="fa-solid fa-comments"></i>
-            <span><strong>Offer value:</strong> Free trials, demo bookings, white papers, tool downloads</span>
-          </li>
-          <li class="benefit-item">
-            <i class="fa-solid fa-video"></i>
-            <span><strong>Host booth demos:</strong> Live Q&A sessions where attendees can book time with your team</span>
-          </li>
-          <li class="benefit-item">
-            <i class="fa-solid fa-trophy"></i>
-            <span><strong>Interactive content:</strong> Quizzes, challenges, certification prep - collect emails for results</span>
-          </li>
-        </ul>
-        <p class="text-sm text-muted mt-m">These leads are higher quality because people chose to engage with you, not because we forced them to hand over contact info.</p>
-      </div>
-
-      <div class="card flow">
-        <h3>What metrics do sponsors receive?</h3>
-        <p><strong>You'll get aggregate event data:</strong></p>
-        <ul class="text-sm">
-          <li>Total event attendance</li>
-          <li>Booth visit counts (how many people viewed your booth)</li>
-          <li>Engagement rates (average time at booth, clicks, interactions)</li>
-          <li>Session attendance (if you have a speaking slot)</li>
-          <li>Chat mentions and engagement</li>
-        </ul>
-        <p class="text-sm text-muted mt-m">All metrics are aggregated and anonymized - we share insights, not individual attendee data.</p>
-      </div>
-
-      <div class="card flow">
-        <h3>Can I contact attendees who visit my booth?</h3>
-        <p><strong>Only if they give you their contact info directly.</strong></p>
-        <p>Set up forms in your booth, run giveaways, offer resources - any method where attendees voluntarily provide their email. We provide the platform and traffic; you provide the value proposition that earns their contact info.</p>
-        <p class="text-sm text-muted mt-m">Think of it like a physical conference booth - you can't demand the attendee list, but you can collect business cards from people who stop by.</p>
-      </div>
-
-      <div class="card flow">
-        <h3>Is this worth it without a contact list?</h3>
-        <p><strong>If you're building brand presence in the ServiceNow community, absolutely.</strong></p>
-        <p>Our 2025 events had 746 attendees, 2,701 chat messages, and a 9.2/10 satisfaction rating. That's an engaged audience who chose to be there.</p>
-        <ul class="text-sm">
-          <li><strong>Brand visibility:</strong> Logo on site, ceremonies, and all event materials</li>
-          <li><strong>Community goodwill:</strong> Supporting free education for ServiceNow folks</li>
-          <li><strong>Thought leadership:</strong> Speaking slots (Premium/Elite sponsors)</li>
-          <li><strong>Quality leads:</strong> From people who engaged with your booth content</li>
-        </ul>
-        <p class="text-sm text-muted mt-m">We attract sponsors who value the community, not just a lead list. If you need guaranteed contacts, there are other conferences for that.</p>
-      </div>
-
-      <div class="card flow">
-        <h3>Can I sponsor multiple events?</h3>
-        <p><strong>Yes!</strong> We have four global conferences in 2026 (nullEDGE, nullHub, nullStack Alpha, nullStack Beta).</p>
-        <p>Multi-event sponsors get:</p>
-        <ul class="text-sm">
-          <li>Year-round homepage presence</li>
-          <li>Priority booth placement at all events</li>
-          <li>Bundled pricing discounts</li>
-          <li>Multiple speaking opportunities</li>
-        </ul>
-        <p class="text-sm text-muted mt-m">
-          <a href="mailto:{{ meta.email }}?subject=Multi-Event%20Sponsorship" class="link-primary">Contact us</a> to discuss custom packages.
-        </p>
-      </div>
-    </div>
+      {% endfor %}
+    </dl>
   </section>
 
-  {# Community Donations Section #}
+  {# Donations #}
   <section id="donations" class="region flow text-center">
-    <div class="card flow prose">
-      <h2>Support the Community</h2>
-      <p>Want to help keep nullEDGE free for all attendees? Make a donation of any amount to support our community-driven conferences.</p>
-      <div class="button-group">
-        <a href="https://shop.thenulledge.com/pages/donate" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-          Donate Now
-        </a>
-      </div>
-      <p class="text-sm text-muted">
-        Every contribution helps us maintain free, high-quality events for the ServiceNow community.
-      </p>
-    </div>
+    <h2>Support the Community</h2>
+    <p>Want to help keep nullEDGE free for all attendees?</p>
+    <a href="https://shop.thenulledge.com/pages/donate" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+      Donate Now
+    </a>
   </section>
 </div>
 
 <style>
-  /* Sponsors-specific styles only - Global components in src/assets/css/global/ */
-  /* See: badge.css, card.css, button-group.css, benefits-list.css, grids.css for reusable components */
-
-  .mt-m {
-    margin-top: 1rem;
-  }
-
-  .mt-l {
-    margin-top: var(--space-l);
-  }
-
-  /* Custom 2-column grid for benefits in enterprise section */
-  .benefits-grid {
+  .tiers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-    gap: 1rem;
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--space-l);
-    margin: 2rem 0;
+    margin: var(--space-l) 0;
   }
 
-  .stat-item {
+  .tier-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-l);
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
     text-align: center;
   }
 
-  .stat-number {
-    font-size: var(--size-step-4);
+  .tier-featured {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 1px hsl(var(--primary));
+  }
+
+  .tier-card h3 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--size-step-2);
+  }
+
+  .tier-price {
+    font-size: var(--size-step-3);
     font-weight: 700;
     color: hsl(var(--primary));
+    margin: 0 0 var(--space-m) 0;
+  }
+
+  .tier-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-l) 0;
+    text-align: left;
+    flex-grow: 1;
+  }
+
+  .tier-benefits li {
+    padding: var(--space-xs) 0;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .tier-benefits li:last-child {
+    border-bottom: none;
+  }
+
+  .faq-list {
+    margin: 0;
+  }
+
+  .faq-item {
+    padding: var(--space-m) 0;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .faq-item dt {
+    font-weight: 600;
     margin-bottom: 0.5rem;
   }
 
-  .stat-label {
-    color: hsl(var(--muted-foreground));
-  }
-
-  .sponsors-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    margin: 2rem 0;
-  }
-
-  .sponsors-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-l);
-    margin: 2rem auto;
-    max-width: 1000px;
-  }
-
-  @media (max-width: 768px) {
-    .sponsors-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .sponsors-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .sponsor-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding: var(--space-m);
-    background: hsl(var(--card));
-    border: 2px solid hsl(var(--border));
-    border-radius: var(--radius);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    min-height: 180px;
-  }
-
-  .sponsor-card:hover {
-    border-color: hsl(var(--primary));
-    box-shadow: 0 8px 16px hsl(var(--primary) / 0.1);
-    transform: translateY(-2px);
-  }
-
-  .sponsor-logo {
-    width: 100%;
-    height: 100px;
-    object-fit: contain;
-  }
-
-  .sponsor-name-label {
-    font-size: var(--size-step--1);
-    font-weight: 500;
-    color: hsl(var(--muted-foreground));
-    text-align: center;
-  }
-
-  .sponsor-card:hover .sponsor-name-label {
-    color: hsl(var(--primary));
-  }
-
-  .sponsor-name {
-    font-size: var(--size-step-0);
-    font-weight: 500;
+  .faq-item dd {
+    margin: 0;
     color: hsl(var(--muted-foreground));
   }
 
   .text-muted {
     color: hsl(var(--muted-foreground));
-  }
-
-  .text-primary {
-    color: hsl(var(--primary));
-  }
-
-  .font-semibold {
-    font-weight: 600;
-  }
-
-  /* FAQ Grid */
-  .faq-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
-    gap: var(--space-l);
-  }
-
-  .faq-grid .card h3 {
-    font-size: var(--size-step-1);
-    margin-bottom: 0.75rem;
-    color: hsl(var(--primary));
-  }
-
-  .faq-grid .card ul {
-    margin: 1rem 0;
-    padding-left: 0;
-  }
-
-  .faq-grid .card ul li {
-    margin-bottom: 0.5rem;
-  }
-
-  .link-primary {
-    color: hsl(var(--primary));
-    text-decoration: underline;
-  }
-
-  .link-primary:hover {
-    color: hsl(var(--primary) / 0.8);
   }
 </style>

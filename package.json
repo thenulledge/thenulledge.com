@@ -16,7 +16,9 @@
     "build:og": "cross-env FORCE_OG_REGEN=true npm run build:11ty",
     "start": "npm run dev:11ty",
     "build": "npm run clean && npm run build:11ty",
-    "fetch:schedules": "node ./scripts/fetch-schedules.js"
+    "fetch:schedules": "node ./scripts/fetch-schedules.js",
+    "getSponsorItems": "node ./scripts/get-sponsor-items.js",
+    "prebuild": "node ./scripts/get-sponsor-items.js"
   },
   "keywords": [
     "servicenow",

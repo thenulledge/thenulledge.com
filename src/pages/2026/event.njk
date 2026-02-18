@@ -8,7 +8,6 @@
   layout: "event",
   schema: "Event",
   eleventyComputed: {
-    faqs: (data) => data.eventData.faqs,
     title: (data) => {
       const date = new Date(data.eventData.when.start);
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -17,9 +16,6 @@
     },
     description: (data) => data.eventData.description,
     permalink: (data) => `${data.eventData.url}/`,
-    ctaTitle: (data) => data.eventData.registrationUrl ? "Register Now" : "Stay Tuned",
-    ctaDescription: (data) => data.eventData.registrationUrl ? (data.eventData.ctaDescription || `Save your spot for ${data.eventData.name}`) : `Registration opens soon for ${data.eventData.name}`,
-    region: (data) => data.eventData.region || 'global',
     event: (data) => data.eventData,
     breadcrumb: (data) => ({
       parent: 'Home',
@@ -30,294 +26,250 @@
 }
 ---
 
-{# Import all partials #}
-{% from "partials/hero.njk" import hero %}
-{% from "partials/info-badges.njk" import infoBadges %}
-{% from "partials/feature-grid.njk" import featureGrid %}
-{% from "partials/two-column-lists.njk" import twoColumnLists %}
-{% from "partials/cta-banner.njk" import ctaBanner %}
-{% from "partials/events-timeline.njk" import eventsTimeline %}
-{% from "partials/timezone-display.njk" import timezoneDisplay %}
-{% from "partials/speaker-highlights.njk" import speakerHighlights %}
-{% from "partials/event-faq.njk" import eventFaq %}
+{# Simple Event Page - No type conditionals, no client-side JS #}
 
-{# Hero Section #}
-{{ hero(
-  title=eventData.name,
-  subtitle=eventData.description,
-  imageUrl=eventData.heroImage or "",
-  imageAlt=eventData.name ~ " Event",
-  primaryCtaText="Register Free",
-  primaryCtaLink=eventData.registrationUrl,
-  secondaryCtaText="Become a Sponsor",
-  secondaryCtaLink="/sponsors"
-) }}
+<article class="event-page">
+  {# Hero #}
+  <header class="event-hero">
+    <h1>{{ eventData.name }}</h1>
+    <p class="event-description">{{ eventData.description }}</p>
+    
+    {% if eventData.registrationUrl %}
+      <a href="{{ eventData.registrationUrl }}" class="btn btn-lg btn-primary" target="_blank" rel="noopener noreferrer">
+        Register Free
+      </a>
+    {% endif %}
+  </header>
 
-{# Event Info Badges #}
-{% set badgeItems = [
-  {
-    iconClass: "fa-solid fa-calendar",
-    label: "Date",
-    value: eventData.when.start | formatDate('MMMM D, YYYY')
-  },
-  {
-    iconClass: "fa-solid fa-clock",
-    label: "Duration",
-    value: eventData.duration
-  },
-  {
-    iconClass: "fa-solid fa-globe",
-    label: "Location",
-    value: "Virtual Event"
-  },
-  {
-    iconClass: "fa-solid fa-ticket",
-    label: "Cost",
-    value: "100% Free"
-  }
-] %}
-{{ infoBadges(items=badgeItems) }}
-
-{# Registration count badge - populated via client-side JS #}
-<div id="registration-badge" data-event-id="{{ eventData.id }}" style="display: none;">
-  <section class="info-badges-section" style="padding-top: 0;">
-    <div class="info-badges-grid">
-      <div class="info-badge">
-        <div class="info-badge-icon">
-          <span class="fa-solid fa-users"></span>
-        </div>
-        <div class="info-badge-content">
-          <div class="info-badge-label">Registered</div>
-          <div class="info-badge-value" id="registration-count">...</div>
-        </div>
+  {# Event Details #}
+  <section class="event-details">
+    <dl class="event-meta">
+      <div class="meta-item">
+        <dt>Date</dt>
+        <dd>{{ eventData.when.start | formatDate('MMMM D, YYYY') }}</dd>
       </div>
-    </div>
+      <div class="meta-item">
+        <dt>Time</dt>
+        <dd>{{ eventData.when.start | formatSessionTime }}</dd>
+      </div>
+      <div class="meta-item">
+        <dt>Duration</dt>
+        <dd>{{ eventData.duration }}</dd>
+      </div>
+      <div class="meta-item">
+        <dt>Location</dt>
+        <dd>Virtual Event</dd>
+      </div>
+      <div class="meta-item">
+        <dt>Cost</dt>
+        <dd>Free</dd>
+      </div>
+    </dl>
   </section>
-</div>
 
-<script>
-  (async function() {
-    const badge = document.getElementById('registration-badge');
-    const eventId = badge?.dataset.eventId;
-    if (!eventId) return;
-
-    try {
-      const res = await fetch('/api/registrations');
-      if (!res.ok) return;
-      const data = await res.json();
-      const reg = data[eventId];
-      if (reg && reg.display) {
-        document.getElementById('registration-count').textContent = reg.display;
-        badge.style.display = 'block';
-      }
-    } catch (e) {
-      // Silently fail - registration count is nice-to-have
-    }
-  })();
-</script>
-
-{# Timezone Display #}
-{% if eventData.niceDatesTimes %}
-{{ timezoneDisplay(
-  title="Join us from anywhere in the world",
-  timezones=eventData.niceDatesTimes
-) }}
-{% endif %}
-
-{# Event Format/Details Section - Conditional based on event type #}
-{% if eventData.type == 'networking' %}
-  {# Networking Event Format #}
-  {{ featureGrid(
-    title="Event Format",
-    columns=4,
-    items=[
-      {
-        iconClass: "fa-solid fa-users",
-        title: "Pure Networking",
-        description: "This is a networking-focused event with no formal sessions. Join breakout rooms, participate in discussions, and connect with ServiceNow folks."
-      },
-      {
-        iconClass: "fa-solid fa-globe",
-        title: "Global Reach",
-        description: "Scheduled at a convenient time to accommodate participants across multiple timezones."
-      },
-      {
-        iconClass: "fa-solid fa-clock",
-        title: "90 Minutes",
-        description: "A focused 90-minute event that respects your time while providing meaningful networking opportunities."
-      },
-      {
-        iconClass: "fa-solid fa-hand-holding-dollar",
-        title: "100% Free",
-        description: "No registration fees. Supported by sponsors who believe in growing the ServiceNow community."
-      }
-    ]
-  ) }}
-
-  {# Who Should Attend #}
-  {{ twoColumnLists(
-    title="Who Should Attend",
-    leftTitle="Perfect For:",
-    leftItems=[
-      "ServiceNow developers and architects",
-      "Administrators looking to connect with peers",
-      "Consultants expanding their network",
-      "Anyone interested in the ServiceNow community",
-      "First-time nullEDGE attendees"
-    ],
-    rightTitle="You'll Be Able To:",
-    rightItems=[
-      "Meet ServiceNow professionals from around the world",
-      "Share challenges and solutions with peers",
-      "Discuss trends and opportunities",
-      "Build your professional network",
-      "Learn about the nullEDGE community"
-    ]
-  ) }}
-
-{% elseif eventData.type == 'sessions' %}
-  {# Sessions Event Format #}
-  {{ featureGrid(
-    title="Event Details",
-    columns=4,
-    items=[
-      {
-        iconClass: "fa-solid fa-calendar-days",
-        title: eventData.sessionCount ~ " Technical Sessions",
-        description: "Deep-dive technical sessions covering real-world implementations, best practices, and lessons learned from the ServiceNow community."
-      },
-      {
-        iconClass: "fa-solid fa-chalkboard-user",
-        title: "Expert Speakers",
-        description: "Learn from experienced ServiceNow folks sharing their real-world knowledge and battle-tested solutions."
-      },
-      {
-        iconClass: "fa-solid fa-earth-americas",
-        title: "Regional Focus",
-        description: "Scheduled to accommodate " ~ (eventData.region | upper) ~ " timezones, making it easier for regional folks to participate live."
-      },
-      {
-        iconClass: "fa-solid fa-hand-holding-dollar",
-        title: "100% Free",
-        description: "No registration fees. Community-funded event focused on education over promotion."
-      }
-    ]
-  ) }}
-
-  {# Call for Speakers if active #}
-  {% if eventData.speakerRegistrationUrl %}
-  {{ ctaBanner(
-    title="Call for Speakers",
-    description="We're looking for speakers to share their ServiceNow knowledge and experience. Whether you're a seasoned presenter or sharing for the first time, we'd love to hear from you!",
-    primaryButtonText="Submit a Session Proposal",
-    primaryButtonLink=eventData.speakerRegistrationUrl,
-    metaText="Submissions close: " ~ (eventData.speakerSubmissionEnd | formatDateShort(eventData.timezone))
-  ) }}
+  {# Schedule - Simple text table #}
+  {% if eventData.sessions and eventData.sessions.length %}
+  <section class="event-schedule">
+    <h2>Schedule</h2>
+    <p class="schedule-note">All times shown in US Eastern</p>
+    
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Session</th>
+          <th>Speaker</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for session in eventData.sessions %}
+        <tr>
+          <td class="schedule-time">{{ session.time_start | formatSessionTime }}</td>
+          <td class="schedule-title">{{ session.name }}</td>
+           <td class="schedule-speaker">
+            {%- if session.speakers and session.speakers.length -%}
+              {%- for speaker in session.speakers -%}
+                {%- set personData = people[speaker.name] -%}
+                {%- set speakerLinkedin = personData.linkedin if personData and personData.linkedin else None -%}
+                {%- set speakerWebsite = personData.website if personData and personData.website else None -%}
+                {%- set speakerSearchUrl = "https://www.linkedin.com/search/results/all/?keywords=" + (speaker.name | urlencode) -%}
+                {%- set speakerProfileUrl = speakerLinkedin or speakerWebsite or speakerSearchUrl -%}
+                <a href="{{ speakerProfileUrl }}" target="_blank" rel="noopener noreferrer">{{ speaker.name }}</a>{% if not loop.last %}, {% endif %}
+              {%- endfor -%}
+            {%- endif -%}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
   {% endif %}
 
-{% elseif eventData.type == 'full-day' %}
-  {# Full-Day Conference Format #}
-  {{ featureGrid(
-    title="What to Expect",
-    columns=3,
-    items=[
-      {
-        iconClass: "fa-solid fa-calendar-days",
-        title: (eventData.stats.sessions or '30+') ~ " Sessions",
-        description: "A full day of technical content across multiple tracks covering development, architecture, admin, and emerging ServiceNow technologies."
-      },
-      {
-        iconClass: "fa-solid fa-users",
-        title: "World-Class Speakers",
-        description: "Industry leaders, ServiceNow MVPs, and experienced folks sharing real-world knowledge and proven solutions."
-      },
-      {
-        iconClass: "fa-solid fa-hand-holding-dollar",
-        title: "100% Free",
-        description: "No registration fees, no sales pitches. Just pure technical content and community connection."
-      }
-    ]
-  ) }}
-
-  {# Sessions placeholder (server-rendered sessions kept for SEO; client will enhance) #}
-  <section id="event-sessions" class="region flow" data-event-id="{{ eventData.id }}" data-event-slug="{{ eventData.registrationUrl | replace('https://events.ringcentral.com/events/','') }}">
-    <div class="sessions-grid">
-      {# Server-rendered sessions if available #}
-      {% if eventData.sessions and eventData.sessions.length %}
-        {% for s in eventData.sessions %}
-          <article class="card session-card" id="session-{{ s.external_id }}">
-            <h3 class="h5">{{ s.name }}</h3>
-            {% if s.time_start or s.time_end %}
-              <div class="meta">{{ s.time_start | formatDateShort(eventData.timezone) }}{% if s.time_end %} — {{ s.time_end | formatDateShort(eventData.timezone) }}{% endif %}</div>
-            {% endif %}
-            {% if s.description %}
-              <div class="session-desc">{{ s.description | safe }}</div>
-            {% endif %}
-            {% if s.speakers and s.speakers.length %}
-              <div class="session-speakers">
-                {% for sp in s.speakers %}
-                  <div class="session-speaker">
-                    {% if sp.thumb_picture_url %}
-                      <img src="{{ sp.thumb_picture_url }}" alt="{{ sp.name }}" width="40" height="40">
-                    {% endif %}
-                    <div><strong>{{ sp.name }}</strong>{% if sp.headline %}<div class="muted">{{ sp.headline }}</div>{% endif %}</div>
-                  </div>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </article>
-        {% endfor %}
-      {% else %}
-        <p class="muted">Sessions will be published here once the schedule is available.</p>
-      {% endif %}
-    </div>
+  {# Call for Speakers (if open) #}
+  {% if eventData.speakerRegistrationUrl %}
+  <section class="event-cta">
+    <h2>Call for Speakers</h2>
+    <p>Want to share your ServiceNow knowledge? We're looking for speakers!</p>
+    <a href="{{ eventData.speakerRegistrationUrl }}" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+      Submit a Session
+    </a>
   </section>
+  {% endif %}
 
-  <script type="module" src="/assets/scripts/event-schedule.js"></script>
-{% endif %}
+  {# Register CTA #}
+  {% if eventData.registrationUrl %}
+  <section class="event-cta">
+    <h2>Join Us</h2>
+    <p>Registration is free and takes less than a minute.</p>
+    <a href="{{ eventData.registrationUrl }}" class="btn btn-lg btn-primary" target="_blank" rel="noopener noreferrer">
+      Register Now
+    </a>
+  </section>
+  {% endif %}
+</article>
 
-{# Speaker Highlights - Shows for any event type if speakers exist #}
-{% if eventData.featuredSpeakers and eventData.featuredSpeakers.length > 0 %}
-{{ speakerHighlights(
-  title="Featured Speakers",
-  subtitle="Learn from experienced ServiceNow folks",
-  speakers=eventData.featuredSpeakers,
-  viewAllLink="/speakers",
-  people=people
-) }}
-{% endif %}
+<style>
+  .event-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
 
-{# Registration CTA - Shows if registration URL is provided #}
-{% if eventData.registrationUrl %}
-{{ ctaBanner(
-  title="Register for " ~ eventData.name,
-  description="Secure your spot for this free virtual event. Registration takes less than a minute.",
-  primaryButtonText="Register Now",
-  primaryButtonLink=eventData.registrationUrl
-) }}
-{% endif %}
+  /* Hero */
+  .event-hero {
+    text-align: center;
+    padding: 3rem 0;
+    border-bottom: 1px solid hsl(var(--border));
+  }
 
-{# Related Events Section #}
-{{ eventsTimeline(
-  title="More nullEDGE 2026 Events",
-  subtitle="Explore other events in the nullEDGE 2026 series",
-  year="2026",
-  eventsData=events['2026']
-) }}
+  .event-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
 
-{# Final CTA Banner #}
-{{ ctaBanner(
-  title=ctaTitle,
-  description=ctaDescription,
-  primaryButtonText="Register Free",
-  primaryButtonLink=eventData.registrationUrl,
-  variant="primary"
-) }}
+  .event-description {
+    font-size: 1.25rem;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-{# FAQ Section #}
-{% if eventData.faqs and eventData.faqs.length > 0 %}
-{{ eventFaq(
-  title="Frequently Asked Questions",
-  faqs=eventData.faqs
-) }}
-{% endif %}
+  /* Event Details */
+  .event-details {
+    padding: 2rem 0;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+  }
+
+  .meta-item {
+    text-align: center;
+  }
+
+  .meta-item dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 0.25rem;
+  }
+
+  .meta-item dd {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  /* Schedule */
+  .event-schedule {
+    padding: 3rem 0;
+  }
+
+  .event-schedule h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .schedule-note {
+    text-align: center;
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 2rem;
+  }
+
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .schedule-table th,
+  .schedule-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .schedule-table th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: hsl(var(--muted-foreground));
+    font-weight: 600;
+  }
+
+  .schedule-time {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    color: hsl(var(--primary));
+    font-weight: 500;
+  }
+
+  .schedule-title {
+    font-weight: 500;
+  }
+
+  .schedule-speaker {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .schedule-speaker a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+  }
+
+  .schedule-speaker a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 600px) {
+    .schedule-table th:nth-child(3),
+    .schedule-table td:nth-child(3) {
+      display: none;
+    }
+  }
+
+  /* CTA Sections */
+  .event-cta {
+    text-align: center;
+    padding: 3rem 0;
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  .event-cta h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .event-cta p {
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 1.5rem;
+  }
+</style>

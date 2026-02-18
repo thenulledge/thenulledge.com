@@ -89,3 +89,62 @@ export const formatDateShort = (date, timezoneStr) => {
   // Wrap the time portion in a span to allow controlled line breaking
   return `${dayName} ${monthName} ${parseInt(day)} '${yearShort} <span class="no-break">@ ${hour12} ${ampm} ${tzAbbr}</span>`;
 };
+
+/**
+ * Formats a session time from UTC to US/Eastern timezone.
+ * Returns format: "9:00 AM EDT" or "9:00 AM — 9:30 AM EDT" for ranges.
+ * @param {string} startTime - ISO datetime string (e.g., "2026-04-16T13:00:00Z")
+ * @param {string} [endTime] - Optional end time for ranges
+ * @returns {string} - Formatted time in US/Eastern
+ */
+export const formatSessionTime = (startTime, endTime) => {
+  if (!startTime) return '';
+
+  // Parse as UTC and convert to US/Eastern
+  const start = dayjs(startTime).tz('America/New_York');
+  if (!start.isValid()) return startTime;
+
+  // Format: "9:00 AM EDT"
+  const formatTime = (d) => d.format('h:mm A');
+  const tzAbbr = start.format('z'); // EDT or EST
+
+  if (endTime) {
+    const end = dayjs(endTime).tz('America/New_York');
+    if (end.isValid()) {
+      return `${formatTime(start)} — ${formatTime(end)} ${tzAbbr}`;
+    }
+  }
+
+  return `${formatTime(start)} ${tzAbbr}`;
+};
+
+/**
+ * Calculates and formats the duration between two times.
+ * Returns format: "15 min" or "1 hr 15 min"
+ * @param {string} startTime - ISO datetime string
+ * @param {string} endTime - ISO datetime string
+ * @returns {string} - Formatted duration
+ */
+export const formatSessionDuration = (startTime, endTime) => {
+  if (!startTime || !endTime) return '';
+
+  const start = dayjs(startTime);
+  const end = dayjs(endTime);
+
+  if (!start.isValid() || !end.isValid()) return '';
+
+  const diffMinutes = end.diff(start, 'minute');
+
+  if (diffMinutes < 60) {
+    return `${diffMinutes} min`;
+  }
+
+  const hours = Math.floor(diffMinutes / 60);
+  const minutes = diffMinutes % 60;
+
+  if (minutes === 0) {
+    return `${hours} hr`;
+  }
+
+  return `${hours} hr ${minutes} min`;
+};
