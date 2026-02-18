@@ -324,6 +324,33 @@ src/assets/css/
 4. **Add speaker profiles**: Update `src/_data/people.js`
 5. **Add sponsor logos**: `src/assets/images/companies/`
 6. **Add sponsor info**: Update `src/_data/companies.js`
+
+### Fetch Sponsor Products (Fourthwall storefront)
+
+The site fetches sponsor product data from Fourthwall at build time so sponsor cards can show images, pricing, and CTAs. A small prefetch script lives at `scripts/get-sponsor-items.js` and is run automatically before `npm run build`.
+
+- Output: `src/_data/fourthwall-products.json` (generated)
+- Cache: `.fourthwall-cache.json` (written locally, gitignored)
+- Required env: `FOURTHWALL_STOREFRONT_TOKEN` (storefront token) — add this as a secret in CI
+- Optional env: `FOURTHWALL_CACHE_TTL_SECONDS` (default 3600)
+- Fail behavior: by default the script aborts the build if any product fails to fetch and no cache exists. Override with `FOURTHWALL_FAIL_ON_FETCH=false` or run the script with `--no-fail`.
+
+Examples:
+```bash
+# Manual fetch (uses sponsor list in src/_data/sponsor-items.json)
+npm run getSponsorItems
+
+# Force fresh fetch (ignore cache)
+npm run getSponsorItems -- --force
+
+# Custom TTL (seconds)
+npm run getSponsorItems -- --ttl=7200
+
+# Disable failing behavior (permissive)
+FOURTHWALL_FAIL_ON_FETCH=false npm run build
+```
+
+If you need strict CI guarantees, add `FOURTHWALL_STOREFRONT_TOKEN` as a repository/CI secret and keep the default fail-on-fetch behavior so a missing token or failing request will fail the build.
 7. **Test locally**: `npm start` and visit the event URL
 
 **Example**:

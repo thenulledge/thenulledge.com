@@ -15,10 +15,33 @@ export default async function() {
   
   // Load each event file
   const eventsArray = [];
+  // load schedules & registrations data if present
+  let schedules = {};
+  let registrations = {};
+  try {
+    const s = await import('../../_data/schedules.js');
+    schedules = await s.default();
+  } catch (e) {
+    schedules = {};
+  }
+  try {
+    const r = await import('../../_data/registrations.js');
+    registrations = await r.default();
+  } catch (e) {
+    registrations = {};
+  }
   for (const file of files) {
     const filePath = path.join(__dirname, file);
     const module = await import(filePath);
     const eventData = await module.default();
+    // merge schedule sessions if available (schedules keyed by event id)
+    if (schedules && schedules[eventData.id] && schedules[eventData.id].sessions && schedules[eventData.id].sessions.length) {
+      eventData.sessions = schedules[eventData.id].sessions;
+    }
+    // merge registration counts if available
+    if (registrations && registrations[eventData.id]) {
+      eventData._registrations = registrations[eventData.id];
+    }
     eventsArray.push(eventData);
   }
   

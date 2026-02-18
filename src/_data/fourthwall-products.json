@@ -1,0 +1,146 @@
+{
+  "sponsor-minimum": {
+    "id": "0d6103f9-10b5-4538-97e7-14a478dbf8d4",
+    "name": "Sponsor - Minimum",
+    "slug": "sponsor-minimum",
+    "description": "<ul><li>Logo on event website</li><li>Logo on opening / closing ceremonies</li><li>Virtual Booth visible to all attendees</li></ul>",
+    "state": {
+      "type": "AVAILABLE"
+    },
+    "access": {
+      "type": "HIDDEN"
+    },
+    "images": [],
+    "variants": [
+      {
+        "id": "74af79e0-6a79-46ec-9ca7-bc6442c80148",
+        "name": "Sponsor - Minimum",
+        "sku": "QY1Y-3ZD0000",
+        "unitPrice": {
+          "value": 1000,
+          "currency": "USD"
+        },
+        "compareAtPrice": null,
+        "attributes": {
+          "description": "",
+          "color": null,
+          "size": null
+        },
+        "stock": {
+          "type": "UNLIMITED"
+        },
+        "weight": {
+          "value": 10,
+          "unit": "oz"
+        },
+        "dimensions": {
+          "length": 10,
+          "width": 12,
+          "height": 2,
+          "unit": "in"
+        },
+        "images": []
+      }
+    ],
+    "additionalInformation": null,
+    "sizeGuide": null,
+    "createdAt": "2025-12-21T16:25:11.074612Z",
+    "updatedAt": "2026-02-18T04:23:30.864429Z"
+  },
+  "sponsor-premium": {
+    "id": "3850972b-583d-4ee6-a846-0178180ea7e2",
+    "name": "Sponsor - Premium",
+    "slug": "sponsor-premium",
+    "description": "<ul><li>All Minimum benefits</li><li>Prominent logo placement</li><li>15-min technical session</li></ul>",
+    "state": {
+      "type": "AVAILABLE"
+    },
+    "access": {
+      "type": "HIDDEN"
+    },
+    "images": [],
+    "variants": [
+      {
+        "id": "b250fbec-67fe-4de5-ba02-a096a5a8f130",
+        "name": "Sponsor - Premium",
+        "sku": "QUHE-A450000",
+        "unitPrice": {
+          "value": 2000,
+          "currency": "USD"
+        },
+        "compareAtPrice": null,
+        "attributes": {
+          "description": "",
+          "color": null,
+          "size": null
+        },
+        "stock": {
+          "type": "UNLIMITED"
+        },
+        "weight": {
+          "value": 10,
+          "unit": "oz"
+        },
+        "dimensions": {
+          "length": 10,
+          "width": 12,
+          "height": 2,
+          "unit": "in"
+        },
+        "images": []
+      }
+    ],
+    "additionalInformation": null,
+    "sizeGuide": null,
+    "createdAt": "2025-12-24T22:48:58.916794Z",
+    "updatedAt": "2026-02-18T04:24:38.04987Z"
+  },
+  "sponsor-elite": {
+    "id": "54d85d95-e349-4013-94f3-4def261e6397",
+    "name": "Sponsor - Elite",
+    "slug": "sponsor-elite",
+    "description": "<ul><li>All Premium benefits</li><li>Priority platement everywhere</li><li>Session on your chosen topic!</li></ul>",
+    "state": {
+      "type": "AVAILABLE"
+    },
+    "access": {
+      "type": "HIDDEN"
+    },
+    "images": [],
+    "variants": [
+      {
+        "id": "5d1f20d5-280a-4c9c-9049-08c93963c806",
+        "name": "Sponsor - Elite",
+        "sku": "Q9EB-F7A0000",
+        "unitPrice": {
+          "value": 5000,
+          "currency": "USD"
+        },
+        "compareAtPrice": null,
+        "attributes": {
+          "description": "",
+          "color": null,
+          "size": null
+        },
+        "stock": {
+          "type": "UNLIMITED"
+        },
+        "weight": {
+          "value": 10,
+          "unit": "oz"
+        },
+        "dimensions": {
+          "length": 10,
+          "width": 12,
+          "height": 2,
+          "unit": "in"
+        },
+        "images": []
+      }
+    ],
+    "additionalInformation": null,
+    "sizeGuide": null,
+    "createdAt": "2025-12-24T22:50:05.944945Z",
+    "updatedAt": "2026-02-18T04:42:05.020901Z"
+  }
+}
