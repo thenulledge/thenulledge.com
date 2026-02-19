@@ -3,8 +3,11 @@ server {
         root /usr/share/nginx/html;
         index index.html index.htm;
 
-        # Redirects - include redirects file if it exists
-        include /usr/share/nginx/html/_redirects;
+        # Redirects (nginx rewrite rules - converted from Netlify _redirects)
+        rewrite ^/submit-session(/.*)?$ /speak$1 permanent;
+        rewrite ^/conference/2025(/.*)?$ /2025/conference permanent;
+        rewrite ^/terms(/.*)?$ /event-terms permanent;
+        rewrite ^/privacy(/.*)?$ /privacy-policy permanent;
 
         try_files $uri $uri.html $uri/index.html $uri/index.htm $uri/ =404;
     }
