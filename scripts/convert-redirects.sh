@@ -21,7 +21,8 @@ if [ -f "$REDIRECTS_FILE" ]; then
             # Escape special characters for nginx regex
             from_escaped=$(echo "$from" | sed 's/\./\\./g' | sed 's/\//\\\//g')
             to_escaped=$(echo "$to" | sed 's/\//\\\//g')
-            echo "rewrite ^$from_escaped(/.*)?$ $to_escaped\$1 permanent;" >> "$NGINX_REDIRECTS_FILE"
+            # Use $scheme://$host to preserve domain
+            echo "rewrite ^${from_escaped}(/.*)?$ \$scheme://\$host${to_escaped}\$1 permanent;" >> "$NGINX_REDIRECTS_FILE"
         fi
     done < "$REDIRECTS_FILE"
     
