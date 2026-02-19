@@ -18,11 +18,10 @@ if [ -f "$REDIRECTS_FILE" ]; then
         
         # Only handle 301 redirects (permanent)
         if [[ "$status" == "301" ]]; then
-            # Escape special characters for nginx regex
-            from_escaped=$(echo "$from" | sed 's/\./\\./g' | sed 's/\//\\\//g')
-            to_escaped=$(echo "$to" | sed 's/\//\\\//g')
-            # Use $scheme://$host to preserve domain
-            echo "rewrite ^${from_escaped}(/.*)?$ \$scheme://\$host${to_escaped}\$1 permanent;" >> "$NGINX_REDIRECTS_FILE"
+            # Escape dots for nginx regex (but not slashes)
+            from_escaped=$(echo "$from" | sed 's/\./\\./g')
+            # Use https://$host to preserve domain (hardcoded https since $scheme can be unreliable in rewrites)
+            echo "rewrite ^${from_escaped}(/.*)?$ https://\$host${to}\$1 permanent;" >> "$NGINX_REDIRECTS_FILE"
         fi
     done < "$REDIRECTS_FILE"
     
