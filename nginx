@@ -3,8 +3,8 @@ server {
         root /usr/share/nginx/html;
         index index.html index.htm;
 
-        # Redirects - include redirects file if it exists
-        include /usr/share/nginx/html/_redirects;
+        # Redirects - include generated nginx rewrite rules
+        include /usr/share/nginx/html/_redirects.conf;
 
         try_files $uri $uri.html $uri/index.html $uri/index.htm $uri/ =404;
     }
