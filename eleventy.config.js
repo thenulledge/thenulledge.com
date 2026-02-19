@@ -89,7 +89,7 @@ export default async function (eleventyConfig) {
   // --------------------- Passthrough File Copy
 
   // -- same path
-  ['src/assets/fonts/', 'src/assets/images/template', 'src/assets/images/companies', 'src/assets/images/people', 'src/assets/images/og.png'].forEach(path =>
+  ['src/assets/fonts/', 'src/assets/images/template', 'src/assets/images/companies', 'src/assets/images/people', 'src/assets/images/og.png', 'src/_redirects'].forEach(path =>
     eleventyConfig.addPassthroughCopy(path)
   );
 
