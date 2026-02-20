@@ -1,0 +1,5 @@
+# Netlify-style redirects
+/submit-session /speak 301
+/conference/2025 /2025/conference 301
+/terms /event-terms 301
+/privacy /privacy-policy 301
