@@ -54,7 +54,11 @@ export default async function () {
   ],
     featuredSpeakers: ["Jace Benson"],
   stats: {},
-  sponsors: [],
+  sponsors: {
+    elite: ["Flow-IT","ShareLogic"],
+    premium: ["Genus Technologies", "AI In A Box"],
+    minimum: ["DTH IT Consulting"]
+  },
   team: [
     { name: "Ben Forrest-Green", role: "Contributor" },
     { name: "Carleen Carter", role: "Contributor" },

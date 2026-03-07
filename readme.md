@@ -365,6 +365,124 @@ cp ~/speaker-photo.jpg src/assets/images/people/jane-doe.jpg
 npm start
 ```
 
+### Managing Speakers and Sponsors
+
+The workflow differs depending on whether an event is **upcoming** or **past**:
+
+#### For Upcoming Events (Using RingCentral)
+
+Before an event happens, session/speaker data is fetched dynamically from RingCentral Events:
+
+1. **Fetch session data from RingCentral**:
+   ```bash
+   npm run fetch:schedules
+   ```
+   
+   This fetches:
+   - Session times, titles, descriptions
+   - Speaker names and LinkedIn profiles
+   - Registration counts
+   
+   Data is saved to:
+   - `src/_data/schedules.json` - Session schedule data
+   - `src/_data/registrations.json` - Registration counts
+
+2. **Event file structure** (upcoming events use minimal data):
+   ```javascript
+   // src/pages/2026/nullStackAlpha.js
+   export default async function () {
+     return {
+       id: "2026-nullstack-alpha",
+       name: "nullStack Alpha",
+       // ... event metadata
+       // NO hardcoded sessions array - pulled from RingCentral
+       sponsors: {
+         elite: ["Flow-IT"],
+         premium: ["ShareLogic", "AI In A Box"],
+         minimum: ["Genus Technologies", "DTH IT Consulting"]
+       }
+     };
+   }
+   ```
+
+3. **Adding speakers for upcoming events**:
+   - Speakers are pulled automatically from RingCentral
+   - Add speaker photos to: `src/assets/images/people/{name}.jpg`
+   - Add speaker profiles to: `src/_data/people.js`:
+     ```javascript
+     'Speaker Name': {
+       image: '/assets/images/people/speaker-name.jpg',
+       title: 'Job Title',
+       company: 'Company Name',
+       linkedin: 'https://linkedin.com/in/speaker'
+     }
+     ```
+
+#### For Past Events (Hardcoded Data)
+
+After an event, copy the schedule data into the event file for permanent archiving:
+
+1. **Hardcode session data** in the event file:
+   ```javascript
+   // src/pages/2025/nullEDGE.js
+   export default async function () {
+     return {
+       id: "2025-nulledge",
+       name: "nullEDGE",
+       // ... event metadata
+       sessions: [  // Hardcoded for posterity
+         {
+           id: "dU6JY136vTg",           // YouTube video ID
+           duration: 15,
+           published: "2025-10-17T10:00:00-04:00",
+           title: "Session Title",
+           speakers: ["Speaker Name"],  // Must match people.js key
+           chatFile: "Session 'Title' chat.csv"  // Optional
+         }
+       ],
+       sponsors: [  // Past events use flat array
+         "AI In A Box",
+         "ShareLogic",
+         // ... etc
+       ]
+     };
+   }
+   ```
+
+2. **Why hardcode past events?**
+   - RingCentral data may change or be removed
+   - Ensures session recordings and details remain available
+   - Creates a permanent archive of the event
+
+#### Adding Sponsors
+
+Sponsors are **always manually maintained** (not fetched from RingCentral):
+
+1. **Add sponsor logo**: Place image in `src/assets/images/companies/`
+2. **Add sponsor info** to `src/_data/companies.js`:
+   ```javascript
+   'Company Name': {
+     image: '/assets/images/companies/company.png',
+     website: 'https://company.com'
+   }
+   ```
+3. **Reference in event file** (see tier structure above)
+
+#### Updating Data
+
+```bash
+# Update session data from RingCentral (for upcoming events)
+npm run fetch:schedules
+
+# Update sponsorship package details (for /sponsors page)
+npm run getSponsorItems
+
+# Update both
+npm run fetch:schedules && npm run getSponsorItems
+```
+
+**Note**: `fetch:schedules` fetches **session/speaker data** from RingCentral. It does NOT fetch sponsor information - sponsors are always manually maintained in the event files.
+
 ### Add Chat Transcripts
 
 Chat transcripts are CSV files exported from RingCentral Events.

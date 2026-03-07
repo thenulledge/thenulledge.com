@@ -21,6 +21,7 @@ const testimonials = [
     name: 'Casey Ferguson',
     quote: 'Jace Benson the format, parallel chat, and pacing is perfect',
     link: 'https://thenulledge.com/2025/conference/#event-chat',
+    featured: true
   },
   {
     name: "Jan Rijk",
@@ -37,6 +38,7 @@ All in all, it was a highly valuable and inspiring evening. Many thanks to the o
     name: 'Sharon Van Luyn-Prater',
     quote: 'THANK YOU to all the presenters! What a great event...fast paced and FUN',
     link: 'https://thenulledge.com/2025/conference/closing-remarks/#event-chat',
+    featured: true
   },
   {
     name: 'Ty Roach',
@@ -88,7 +90,8 @@ https://lnkd.in/d4JzixGt`,
   },
   {
     name: "Kevin Clark",
-    quote: "super enthusiastic participants, amazing collection of content - best of the best."
+    quote: "super enthusiastic participants, amazing collection of content - best of the best.",
+    featured: true
   },
   {
     name: "James Neale",
@@ -144,7 +147,7 @@ https://lnkd.in/d4JzixGt`,
     quote: `I was there at the beginning. As good as today's hashtag#ServiceNow Knowledge conferences are (and they're amazing). There was a magic to the earliest ones. A sense that we were all building the ecosystem together. Nobody could read the future, but we all felt the vibe... the possibility of what could be. Peers sharing insights.
 
 Jace Benson & his crew REALLY captured that with The nullEDGE conference.`,
-    link: "https://www.linkedin.com/posts/rfedoruk_the-nulledge-conference-last-week-still-has-activity-7387093143072038913--bms?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0"
+    link: "https://www.linkedin.com/posts/rfedoruk_the-nulledge-conference-last-week-still-has-activity-7387093143072038913--bms?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAGfKkYB3XFd0Ybegy4h2swmWmxgXj4HMN0",
   },
   {
     name: "Robert Fedoruk",

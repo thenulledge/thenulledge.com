@@ -18,6 +18,7 @@
     "build": "npm run clean && npm run build:11ty && npm run postbuild",
     "postbuild": "bash scripts/convert-redirects.sh",
     "fetch:schedules": "node ./scripts/fetch-schedules.js",
+    "sync:people": "node ./scripts/sync-people.js",
     "getSponsorItems": "node ./scripts/get-sponsor-items.js",
     "prebuild": "node ./scripts/get-sponsor-items.js"
   },

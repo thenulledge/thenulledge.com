@@ -2,7 +2,7 @@ export default {
   top: [
     {
       text: 'Submit Talk',
-      url: '/submit-session/'
+      url: '/speak/'
     },
     {
       text: 'Sponsors',
