@@ -9,101 +9,43 @@ permalink: /events/index.html
   <div class="container">
     <header class="archive-header">
       <h1>All Events</h1>
-      <p class="archive-description">Complete archive of nullEDGE conferences, sessions, and networking events.</p>
+      <p class="archive-description">Browse nullEDGE events by year.</p>
     </header>
     
-    {% set allEvents = [] %}
-    {% for year, yearEvents in events %}
-      {% for eventName, event in yearEvents %}
-        {% set _ = allEvents.push({
-          event: event,
-          year: year,
-          isPast: event | isPastEvent
-        }) %}
-      {% endfor %}
-    {% endfor %}
-    
-    {% set sortedEvents = allEvents | sort(attribute='event.when.start') | reverse %}
-    
-    <div class="events-timeline">
-      {% for item in sortedEvents %}
-      {% set event = item.event %}
-      {% set year = item.year %}
-      {% set isPast = item.isPast %}
-      
-      <article class="timeline-event {% if isPast %}timeline-event--past{% endif %}">
-        <div class="timeline-marker">
-          <span class="timeline-year">{{ year }}</span>
-          <span class="timeline-dot"></span>
+    <div class="years-grid">
+      {# 2026 - Upcoming #}
+      <a href="/2026/" class="year-card year-card-upcoming">
+        <span class="year-badge">2026</span>
+        <h2 class="year-title">2026 Events</h2>
+        <p class="year-description">Four events throughout the year. Join us for technical sessions, networking, and community.</p>
+        <div class="year-stats">
+          <span class="year-stat">
+            <i class="fa-solid fa-calendar"></i>
+            4 Events
+          </span>
+          <span class="year-stat">
+            <i class="fa-solid fa-arrow-right"></i>
+            View 2026
+          </span>
         </div>
-        
-        <div class="timeline-content">
-          {% if isPast %}
-          <span class="event-status event-status--past">
+      </a>
+      
+      {# 2025 - Past #}
+      <a href="/2025/" class="year-card year-card-past">
+        <span class="year-badge">2025</span>
+        <h2 class="year-title">2025 Retrospective</h2>
+        <p class="year-description">Our first year: 746 attendees, 30 sessions, and amazing community engagement.</p>
+        <div class="year-stats">
+          <span class="year-stat">
+            <i class="fa-solid fa-users"></i>
+            746 Attendees
+          </span>
+          <span class="year-stat">
             <i class="fa-solid fa-check-circle"></i>
             Completed
           </span>
-          {% else %}
-          <span class="event-status event-status--upcoming">
-            <i class="fa-solid fa-calendar-day"></i>
-            Upcoming
-          </span>
-          {% endif %}
-          
-          <h2 class="event-name">
-            <a href="{{ event.url }}/">{{ event.name }}</a>
-          </h2>
-          
-          <div class="event-meta">
-            <div class="event-date">
-              <i class="fa-solid fa-calendar"></i>
-              <span>{{ event.when.start | formatDate('MMMM D, YYYY') }}</span>
-            </div>
-            <div class="event-type">
-              {% if event.type == 'networking' %}
-                <span class="type-badge type-networking">Networking</span>
-              {% endif %}
-              {% if event.type == 'sessions' %}
-                <span class="type-badge type-sessions">{{ event.sessionCount }} Sessions</span>
-              {% endif %}
-              {% if event.type == 'full-day' %}
-                <span class="type-badge type-conference">Full Day Conference</span>
-              {% endif %}
-            </div>
-          </div>
-          
-          <p class="event-description">{{ event.description }}</p>
-          
-          {% if event.stats and isPast %}
-          <div class="event-stats">
-            {% if event.stats.attendees %}
-            <div class="stat">
-              <span class="stat-value">{{ event.stats.attendees }}</span>
-              <span class="stat-label">Attendees</span>
-            </div>
-            {% endif %}
-            {% if event.stats.sessions %}
-            <div class="stat">
-              <span class="stat-value">{{ event.stats.sessions }}</span>
-              <span class="stat-label">Sessions</span>
-            </div>
-            {% endif %}
-            {% if event.stats.sponsors %}
-            <div class="stat">
-              <span class="stat-value">{{ event.stats.sponsors }}</span>
-              <span class="stat-label">Sponsors</span>
-            </div>
-            {% endif %}
-          </div>
-          {% endif %}
-          
-          <a href="{{ event.url }}/" class="event-link">
-            {% if isPast %}View Event{% else %}View Details{% endif %}
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
         </div>
-      </article>
-      {% endfor %}
+      </a>
     </div>
     
     <div class="archive-navigation">
@@ -119,250 +61,127 @@ permalink: /events/index.html
   .events-archive {
     padding: 4rem 1rem;
   }
-  
+
   .container {
     max-width: 900px;
     margin: 0 auto;
   }
-  
+
   .archive-header {
     text-align: center;
     margin-bottom: 3rem;
   }
-  
+
   .archive-header h1 {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     margin-bottom: 1rem;
   }
-  
+
   .archive-description {
     font-size: 1.25rem;
     color: hsl(var(--muted-foreground));
     max-width: 600px;
     margin: 0 auto;
   }
-  
-  /* Timeline */
-  .events-timeline {
-    position: relative;
-    padding-left: 2rem;
+
+  /* Years Grid */
+  .years-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
   }
-  
-  .events-timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(
-      to bottom,
-      hsl(var(--primary)) 0%,
-      hsl(var(--primary)) 60%,
-      hsl(var(--border)) 60%,
-      hsl(var(--border)) 100%
-    );
-  }
-  
-  .timeline-event {
-    position: relative;
-    padding-bottom: 3rem;
-  }
-  
-  .timeline-event:last-child {
-    padding-bottom: 0;
-  }
-  
-  .timeline-marker {
-    position: absolute;
-    left: -2rem;
-    transform: translateX(-50%);
+
+  .year-card {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-  }
-  
-  .timeline-year {
-    font-size: var(--size-step--2);
-    font-weight: 700;
-    color: hsl(var(--primary));
-    background: hsl(var(--background));
-    padding: 0.125rem 0.25rem;
-    white-space: nowrap;
-  }
-  
-  .timeline-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: hsl(var(--primary));
-    border: 3px solid hsl(var(--background));
-    box-shadow: 0 0 0 2px hsl(var(--primary));
-  }
-  
-  .timeline-event--past .timeline-dot {
-    background: hsl(var(--border));
-    box-shadow: 0 0 0 2px hsl(var(--border));
-  }
-  
-  .timeline-event--past .timeline-year {
-    color: hsl(var(--muted-foreground));
-  }
-  
-  /* Timeline Content */
-  .timeline-content {
+    padding: 2rem;
     background: hsl(var(--card));
     border: 2px solid hsl(var(--border));
     border-radius: var(--radius);
-    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
     transition: all 0.2s;
   }
-  
-  .timeline-content:hover {
+
+  .year-card:hover {
     border-color: hsl(var(--primary));
-    box-shadow: 0 4px 12px hsl(var(--primary) / 0.1);
+    box-shadow: 0 8px 16px hsl(var(--primary) / 0.1);
   }
-  
-  .timeline-event--past .timeline-content {
+
+  .year-card-past {
     opacity: 0.8;
     background: hsl(var(--muted) / 0.3);
   }
-  
-  .event-status {
+
+  .year-card-past:hover {
+    opacity: 0.9;
+  }
+
+  .year-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
-    padding: 0.25rem 0.75rem;
+    padding: 0.375rem 0.75rem;
     border-radius: calc(var(--radius) - 4px);
     font-size: var(--size-step--2);
-    font-weight: 600;
-    margin-bottom: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    width: fit-content;
   }
-  
-  .event-status--upcoming {
+
+  .year-card-upcoming .year-badge {
     background: hsl(var(--primary) / 0.1);
     color: hsl(var(--primary));
   }
-  
-  .event-status--past {
+
+  .year-card-past .year-badge {
     background: hsl(var(--accent) / 0.5);
     color: hsl(var(--accent-foreground));
   }
-  
-  .event-name {
+
+  .year-title {
     font-size: var(--size-step-1);
     font-weight: 700;
     margin-bottom: 0.75rem;
   }
-  
-  .event-name a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  .event-name a:hover {
-    color: hsl(var(--primary));
-  }
-  
-  .event-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    font-size: var(--size-step--1);
-  }
-  
-  .event-date {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: hsl(var(--muted-foreground));
-  }
-  
-  .event-date i {
-    color: hsl(var(--primary));
-  }
-  
-  .type-badge {
-    display: inline-flex;
-    padding: 0.25rem 0.75rem;
-    border-radius: calc(var(--radius) - 4px);
-    font-size: var(--size-step--2);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
-  }
-  
-  .type-networking {
-    background: hsl(var(--primary) / 0.1);
-    color: hsl(var(--primary));
-  }
-  
-  .type-sessions {
-    background: hsl(var(--accent) / 0.5);
-    color: hsl(var(--accent-foreground));
-  }
-  
-  .type-conference {
-    background: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
-  }
-  
-  .event-description {
+
+  .year-description {
     color: hsl(var(--muted-foreground));
     line-height: 1.6;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
   }
-  
-  /* Stats */
-  .event-stats {
+
+  .year-stats {
     display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    background: hsl(var(--muted) / 0.3);
-    border-radius: calc(var(--radius) - 4px);
+    gap: 1rem;
+    flex-wrap: wrap;
   }
-  
-  .stat {
-    text-align: center;
-  }
-  
-  .stat-value {
-    display: block;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: hsl(var(--primary));
-  }
-  
-  .stat-label {
-    font-size: var(--size-step--2);
-    color: hsl(var(--muted-foreground));
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  
-  .event-link {
+
+  .year-stat {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: var(--size-step--1);
+    color: hsl(var(--muted-foreground));
+  }
+
+  .year-card-upcoming .year-stat i {
     color: hsl(var(--primary));
-    font-weight: 600;
-    text-decoration: none;
   }
-  
-  .event-link:hover {
-    text-decoration: underline;
+
+  .year-card-past .year-stat i {
+    color: hsl(var(--accent));
   }
-  
+
   /* Navigation */
   .archive-navigation {
     text-align: center;
     margin-top: 3rem;
   }
-  
+
   .btn {
     display: inline-flex;
     align-items: center;
@@ -373,40 +192,23 @@ permalink: /events/index.html
     text-decoration: none;
     transition: all 0.2s;
   }
-  
+
   .btn-primary {
     background: hsl(var(--primary));
     color: hsl(var(--primary-foreground));
   }
-  
+
   .btn-primary:hover {
     background: hsl(var(--primary) / 0.9);
   }
-  
+
   @media (max-width: 768px) {
     .events-archive {
       padding: 2rem 1rem;
     }
-    
-    .events-timeline {
-      padding-left: 1.5rem;
-    }
-    
-    .timeline-marker {
-      left: -1.5rem;
-    }
-    
-    .timeline-year {
-      font-size: 0.625rem;
-    }
-    
-    .event-meta {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    
-    .event-stats {
-      gap: 1rem;
+
+    .years-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

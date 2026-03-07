@@ -43,21 +43,53 @@
     },
     speakerSessions: (data) => {
       const sessions = [];
+      const seenSessions = new Set(); // Track unique sessions by name+year
       const speakerName = data.speakerEntry?.[0];
-      if (!speakerName || !data.schedules) return sessions;
+      if (!speakerName) return sessions;
       
-      Object.entries(data.schedules).forEach(([eventId, info]) => {
-        const evSessions = info.sessions || [];
-        evSessions.forEach(session => {
-          if (session.speakers && session.speakers.find(s => s.name === speakerName)) {
-            sessions.push({
-              ...session,
-              eventName: eventId,
-              year: eventId.split('-')[0]
+      // Check 2026 schedules (Sched.com integration)
+      if (data.schedules) {
+        Object.entries(data.schedules).forEach(([eventId, info]) => {
+          const evSessions = info.sessions || [];
+          evSessions.forEach(session => {
+            if (session.speakers && session.speakers.find(s => s.name === speakerName)) {
+              const sessionKey = `${session.name}-${eventId}`;
+              if (!seenSessions.has(sessionKey)) {
+                seenSessions.add(sessionKey);
+                sessions.push({
+                  ...session,
+                  eventName: eventId,
+                  year: eventId.split('-')[0]
+                });
+              }
+            }
+          });
+        });
+      }
+      
+      // Check 2025 events (stored in events data)
+      if (data.events && data.events['2025']) {
+        Object.values(data.events['2025']).forEach(event => {
+          if (event.sessions) {
+            event.sessions.forEach(session => {
+              if (session.speakers && session.speakers.includes(speakerName)) {
+                const sessionKey = `${session.title}-2025-${event.name}`;
+                if (!seenSessions.has(sessionKey)) {
+                  seenSessions.add(sessionKey);
+                  sessions.push({
+                    name: session.title,
+                    id: session.id,
+                    speakers: session.speakers,
+                    eventName: event.name,
+                    year: '2025'
+                  });
+                }
+              }
             });
           }
         });
-      });
+      }
+      
       return sessions;
     }
   }
@@ -90,7 +122,23 @@
     <ul class="sessions-list">
       {% for session in speakerSessions %}
       <li>
-        <a href="/{{ session.year }}/conference/{{ session.name | slugify }}/">{{ session.name }}</a>
+        {% if session.year == '2025' %}
+          {# 2025 sessions have individual pages with videos #}
+          <a href="/{{ session.year }}/conference/{{ session.name | slugify }}/">{{ session.name }}</a>
+        {% else %}
+          {# 2026+ sessions - link to specific event page #}
+          {% if session.eventName == '2026-nullstack-alpha' %}
+            <a href="/2026/nullstack-alpha/">{{ session.name }}</a>
+          {% elif session.eventName == '2026-nullstack-beta' %}
+            <a href="/2026/nullstack-beta/">{{ session.name }}</a>
+          {% elif session.eventName == '2026-nullhub' %}
+            <a href="/2026/nullhub/">{{ session.name }}</a>
+          {% elif session.eventName == '2026-nulledge' %}
+            <a href="/2026/conference/">{{ session.name }}</a>
+          {% else %}
+            <span>{{ session.name }}</span>
+          {% endif %}
+        {% endif %}
         <span class="session-meta">{{ session.eventName }}{% if session.id %} · <a href="https://www.youtube.com/watch?v={{ session.id }}" target="_blank" rel="noopener">Watch</a>{% endif %}</span>
       </li>
       {% endfor %}

@@ -93,17 +93,23 @@
           <td class="schedule-time">{{ session.time_start | formatSessionTime }}</td>
           <td class="schedule-title">{{ session.name }}</td>
            <td class="schedule-speaker">
-            {%- if session.speakers and session.speakers.length -%}
-              {%- for speaker in session.speakers -%}
-                {%- set personData = people[speaker.name] -%}
-                {%- set speakerLinkedin = personData.linkedin if personData and personData.linkedin else None -%}
-                {%- set speakerWebsite = personData.website if personData and personData.website else None -%}
-                {%- set speakerSearchUrl = "https://www.linkedin.com/search/results/all/?keywords=" + (speaker.name | urlencode) -%}
-                {%- set speakerProfileUrl = speakerLinkedin or speakerWebsite or speakerSearchUrl -%}
-                <a href="{{ speakerProfileUrl }}" target="_blank" rel="noopener noreferrer">{{ speaker.name }}</a>{% if not loop.last %}, {% endif %}
-              {%- endfor -%}
-            {%- endif -%}
-          </td>
+             {%- if session.speakers and session.speakers.length -%}
+               {%- for speaker in session.speakers -%}
+                 {%- set personData = people[speaker.name] -%}
+                 {%- set speakerLinkedin = personData.linkedin if personData and personData.linkedin else None -%}
+                 {%- set speakerWebsite = personData.website if personData and personData.website else None -%}
+                 {%- set speakerSearchUrl = "https://www.linkedin.com/search/results/all/?keywords=" + (speaker.name | urlencode) -%}
+                 {%- set speakerProfileUrl = speakerLinkedin or speakerWebsite or speakerSearchUrl -%}
+                 {%- set speakerImage = personData.image if personData and personData.image else None -%}
+                 <span class="speaker-with-image">
+                   {%- if speakerImage -%}
+                   <img src="{{ speakerImage }}" alt="{{ speaker.name }}" class="speaker-avatar" loading="lazy" eleventy:ignore>
+                   {%- endif -%}
+                   <a href="{{ speakerProfileUrl }}" target="_blank" rel="noopener noreferrer">{{ speaker.name }}</a>
+                 </span>{% if not loop.last %}, {% endif %}
+               {%- endfor -%}
+             {%- endif -%}
+           </td>
         </tr>
         {% endfor %}
       </tbody>
@@ -120,6 +126,69 @@
       Submit a Session
     </a>
   </section>
+  {% endif %}
+
+  {# Sponsors by Tier #}
+  {% if eventData.sponsors %}
+    {% set hasSponsors = (eventData.sponsors.elite and eventData.sponsors.elite.length > 0) or
+                         (eventData.sponsors.premium and eventData.sponsors.premium.length > 0) or
+                         (eventData.sponsors.minimum and eventData.sponsors.minimum.length > 0) %}
+    {% if hasSponsors %}
+    <section class="event-sponsors">
+      <h2>Sponsors</h2>
+      <p class="sponsors-thanks">Thank you to our amazing sponsors for making this event possible.</p>
+
+      {# Elite Tier #}
+      {% if eventData.sponsors.elite and eventData.sponsors.elite.length > 0 %}
+      <div class="sponsor-tier tier-elite">
+        <h3 class="tier-label"><span class="tier-badge tier-badge-elite">Elite</span></h3>
+        <div class="sponsors-grid tier-elite-grid">
+          {% for sponsorName in eventData.sponsors.elite %}
+            {%- set company = companies[sponsorName] %}
+            {% if company %}
+            <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-item sponsor-elite">
+              <img src="{{ company.image }}" alt="{{ sponsorName }}" loading="lazy">
+            </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {# Premium Tier #}
+      {% if eventData.sponsors.premium and eventData.sponsors.premium.length > 0 %}
+      <div class="sponsor-tier tier-premium">
+        <h3 class="tier-label"><span class="tier-badge tier-badge-premium">Premium</span></h3>
+        <div class="sponsors-grid tier-premium-grid">
+          {% for sponsorName in eventData.sponsors.premium %}
+            {%- set company = companies[sponsorName] %}
+            {% if company %}
+            <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-item sponsor-premium">
+              <img src="{{ company.image }}" alt="{{ sponsorName }}" loading="lazy">
+            </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {# Supporters - no label #}
+      {% if eventData.sponsors.minimum and eventData.sponsors.minimum.length > 0 %}
+      <div class="sponsor-tier tier-supporters">
+        <div class="sponsors-grid tier-supporters-grid">
+          {% for sponsorName in eventData.sponsors.minimum %}
+            {%- set company = companies[sponsorName] %}
+            {% if company %}
+            <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-item sponsor-supporter">
+              <img src="{{ company.image }}" alt="{{ sponsorName }}" loading="lazy">
+            </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </section>
+    {% endif %}
   {% endif %}
 
   {# Register CTA (if event not past) #}
@@ -268,6 +337,21 @@
     text-decoration: underline;
   }
 
+  .speaker-with-image {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .speaker-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid hsl(var(--border));
+    vertical-align: middle;
+  }
+
   @media (max-width: 600px) {
     .schedule-table th:nth-child(3),
     .schedule-table td:nth-child(3) {
@@ -289,5 +373,128 @@
   .event-cta p {
     color: hsl(var(--muted-foreground));
     margin-bottom: 1.5rem;
+  }
+
+  /* Sponsors by Tier */
+  .event-sponsors {
+    padding: 3rem 0;
+    border-top: 1px solid hsl(var(--border));
+    text-align: center;
+  }
+
+  .event-sponsors h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .sponsors-thanks {
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 2rem;
+  }
+
+  .sponsor-tier {
+    margin-bottom: 2.5rem;
+  }
+
+  .tier-label {
+    margin-bottom: 1rem;
+  }
+
+  .tier-badge {
+    display: inline-flex;
+    padding: 0.375rem 1rem;
+    border-radius: calc(var(--radius) - 2px);
+    font-size: var(--size-step--2);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .tier-badge-elite {
+    background: linear-gradient(135deg, hsl(45 90% 50%), hsl(35 90% 45%));
+    color: #000;
+  }
+
+  .tier-badge-premium {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .sponsors-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sponsor-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: var(--radius);
+    border: 2px solid hsl(var(--border));
+    transition: all 0.2s;
+  }
+
+  .sponsor-item:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 8px 24px hsl(var(--primary) / 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Elite - largest */
+  .tier-elite-grid {
+    gap: 3rem;
+  }
+  .sponsor-elite img {
+    max-width: 280px;
+    max-height: 120px;
+  }
+
+  /* Premium - medium */
+  .tier-premium-grid {
+    gap: 2.5rem;
+  }
+  .sponsor-premium img {
+    max-width: 220px;
+    max-height: 90px;
+  }
+
+  /* Supporters - no label */
+  .tier-supporters-grid {
+    gap: 1.5rem;
+  }
+  .sponsor-supporter img {
+    max-width: 160px;
+    max-height: 70px;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    .tier-elite-grid {
+      gap: 2rem;
+    }
+    .sponsor-elite img {
+      max-width: 200px;
+      max-height: 90px;
+    }
+
+    .tier-premium-grid {
+      gap: 1.5rem;
+    }
+    .sponsor-premium img {
+      max-width: 160px;
+      max-height: 70px;
+    }
+
+    .tier-supporters-grid {
+      gap: 1rem;
+    }
+    .sponsor-supporter img {
+      max-width: 120px;
+      max-height: 55px;
+    }
   }
 </style>

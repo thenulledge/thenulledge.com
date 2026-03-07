@@ -301,7 +301,7 @@ export default async function () {
                 "duration": 15,
                 "published": "2025-10-17T14:15:00-04:00",
                 "title": "The Silent Killer: How Poor Governance Breaks Your Platform",
-                "speakers": ["Dr.Atul Grover"],
+                "speakers": ["Dr. Atul Grover"],
                 "chatFile": "Session 'The Silent Killer How Poor Governance Breaks Your Platform' chat.csv"
             },
             {

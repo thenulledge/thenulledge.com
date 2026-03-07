@@ -61,6 +61,24 @@ permalink: /2025/index.html
       {% endfor %}
     </div>
     
+    {# Sponsors Section #}
+    {% set event2025 = events2025Array | first %}
+    {% if event2025.sponsors and event2025.sponsors.length > 0 %}
+    <section class="year-sponsors">
+      <h2 class="sponsors-title">2025 Sponsors</h2>
+      <div class="sponsors-grid">
+        {% for sponsorName in event2025.sponsors %}
+          {%- set company = companies[sponsorName] %}
+          {% if company %}
+          <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-item">
+            <img src="{{ company.image }}" alt="{{ sponsorName }}" loading="lazy">
+          </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
     <div class="year-navigation">
       <a href="/events/" class="btn btn-outline">
         <i class="fa-solid fa-clock-rotate-left"></i>
@@ -283,21 +301,82 @@ permalink: /2025/index.html
     background: hsl(var(--primary) / 0.9);
   }
   
+  /* Year Sponsors */
+  .year-sponsors {
+    margin: 4rem 0;
+    padding: 2rem;
+    background: hsl(var(--muted) / 0.2);
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--border));
+  }
+
+  .sponsors-title {
+    text-align: center;
+    font-size: var(--size-step-1);
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .sponsors-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sponsor-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--border));
+    transition: all 0.2s;
+    filter: grayscale(100%);
+    opacity: 0.8;
+  }
+
+  .sponsor-item:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    border-color: hsl(var(--primary));
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.1);
+  }
+
+  .sponsor-item img {
+    max-width: 180px;
+    max-height: 80px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
   @media (max-width: 768px) {
     .year-index {
       padding: 2rem 1rem;
     }
-    
+
     .events-grid {
       grid-template-columns: 1fr;
     }
-    
+
     .event-stats {
       gap: 1rem;
     }
-    
+
     .stat-value {
       font-size: 1.25rem;
+    }
+
+    .sponsors-grid {
+      gap: 1rem;
+    }
+
+    .sponsor-item img {
+      max-width: 140px;
+      max-height: 60px;
     }
   }
 </style>

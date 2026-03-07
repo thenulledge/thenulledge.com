@@ -381,6 +381,74 @@
         "tags": []
       },
       {
+        "external_id": "IgFkSyFwABli7OBSyZTWBqWRv",
+        "name": "What No One Tells You About Breaking Into ServiceNow",
+        "description": "",
+        "time_start": "2026-04-16T15:15:00Z",
+        "time_end": "2026-04-16T15:30:00Z",
+        "event_part_type": "sessions",
+        "event_type": "virtual",
+        "room": null,
+        "capacity": null,
+        "attendance": "optional",
+        "stage": null,
+        "session": {
+          "name": "What No One Tells You About Breaking Into ServiceNow",
+          "can_watch": "anyone",
+          "personas": []
+        },
+        "sessions": [
+          {
+            "name": "What No One Tells You About Breaking Into ServiceNow",
+            "can_watch": "anyone",
+            "personas": []
+          }
+        ],
+        "booth": null,
+        "booths": [],
+        "speakers": [
+          {
+            "name": "Kabria Holmes",
+            "headline": "ServiceNow Business Process Consultant",
+            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/kh.svg",
+            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/kh.svg",
+            "website": "https://lovekd.substack.com/",
+            "twitter": null,
+            "linkedin": "https://www.linkedin.com/in/kabriaholmes/"
+          }
+        ],
+        "tags": []
+      },
+      {
+        "external_id": "EY40wmYcXs5OE9A52jYHCmNcr",
+        "name": "Avoid the Data Graveyard: What to do with historical data",
+        "description": "",
+        "time_start": "2026-04-16T15:30:00Z",
+        "time_end": "2026-04-16T15:45:00Z",
+        "event_part_type": "sessions",
+        "event_type": "virtual",
+        "room": null,
+        "capacity": null,
+        "attendance": "optional",
+        "stage": null,
+        "session": null,
+        "sessions": [],
+        "booth": null,
+        "booths": [],
+        "speakers": [
+          {
+            "name": "Brian Parks",
+            "headline": "ITSM Archivist, CEO/CTO of Synapse Software",
+            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/bp.svg",
+            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/bp.svg",
+            "website": "https://synapsesoftware.com",
+            "twitter": null,
+            "linkedin": "https://www.linkedin.com/in/brian-c-parks/"
+          }
+        ],
+        "tags": []
+      },
+      {
         "external_id": "d8hFWmyogHQk2sINCpjfD772u",
         "name": "Closing",
         "description": "",

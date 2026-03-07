@@ -27,6 +27,14 @@ const companies = {
     image: '/assets/images/companies/cjandtheduke.webp',
     website: 'https://www.cjandtheduke.com'
   },
+  'DTH IT Consulting': {
+    image: '/assets/images/companies/dth_it_consulting.png',
+    website: 'https://dthconsulting.com'
+  },
+  'Flow-IT': {
+    image: '/assets/images/companies/flow-it.png',
+    website: 'https://flow-it.com'
+  },
   'Echelon AI': {
     image: '/assets/images/companies/echelonai.png',
     website: 'https://www.echelonai.com'
