@@ -77,6 +77,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addFilter('truncate', filters.truncate);
   eleventyConfig.addFilter('thousands', filters.thousands);
   eleventyConfig.addFilter('imageToBase64', filters.imageToBase64);
+  eleventyConfig.addFilter('isPastEvent', filters.isPastEvent);
 
   // --------------------- Shortcodes
   eleventyConfig.addShortcode('image', shortcodes.imageShortcode);

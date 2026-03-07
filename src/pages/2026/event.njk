@@ -27,6 +27,7 @@
 ---
 
 {# Simple Event Page - No type conditionals, no client-side JS #}
+{% set isPast = eventData | isPastEvent %}
 
 <article class="event-page">
   {# Hero #}
@@ -34,7 +35,12 @@
     <h1>{{ eventData.name }}</h1>
     <p class="event-description">{{ eventData.description }}</p>
     
-    {% if eventData.registrationUrl %}
+    {% if isPast %}
+      <span class="event-completed-badge">
+        <i class="fa-solid fa-check-circle"></i>
+        Event Completed
+      </span>
+    {% elif eventData.registrationUrl %}
       <a href="{{ eventData.registrationUrl }}" class="btn btn-lg btn-primary" target="_blank" rel="noopener noreferrer">
         Register Free
       </a>
@@ -105,8 +111,8 @@
   </section>
   {% endif %}
 
-  {# Call for Speakers (if open) #}
-  {% if eventData.speakerRegistrationUrl %}
+  {# Call for Speakers (if open and event not past) #}
+  {% if not isPast and eventData.speakerRegistrationUrl %}
   <section class="event-cta">
     <h2>Call for Speakers</h2>
     <p>Want to share your ServiceNow knowledge? We're looking for speakers!</p>
@@ -116,8 +122,8 @@
   </section>
   {% endif %}
 
-  {# Register CTA #}
-  {% if eventData.registrationUrl %}
+  {# Register CTA (if event not past) #}
+  {% if not isPast and eventData.registrationUrl %}
   <section class="event-cta">
     <h2>Join Us</h2>
     <p>Registration is free and takes less than a minute.</p>
@@ -155,6 +161,18 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .event-completed-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: hsl(var(--accent) / 0.5);
+    color: hsl(var(--accent-foreground));
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 1.125rem;
   }
 
   /* Event Details */
