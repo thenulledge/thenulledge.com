@@ -69,8 +69,8 @@
           {
             "name": "Paul Morris",
             "headline": "SN Nerd",
-            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/pm.svg",
-            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/pm.svg",
+            "picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/894/original/88cf0823-48f3-4500-8346-341df390c08f.png?ixlib=rails-4.3.1&auto=compress&w=384&h=384&fit=clip&s=b995df2e837d34fe12e002527402b70d",
+            "thumb_picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/894/original/88cf0823-48f3-4500-8346-341df390c08f.png?ixlib=rails-4.3.1&auto=compress&w=60&h=60&fit=clip&s=abd7eb91722d61af43f7be54d57b1d16",
             "website": "https://sn-nerd.com",
             "twitter": null,
             "linkedin": null
@@ -108,8 +108,8 @@
           {
             "name": "Fabian Kunzke",
             "headline": "ITOM & ServiceNow evangelist at heart with a love for beautiful solutions.",
-            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/fk.svg",
-            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/fk.svg",
+            "picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/896/original/5a9cc90d-c74f-4460-bc7f-af30022d952a.png?ixlib=rails-4.3.1&auto=compress&w=384&h=384&fit=clip&s=f3c478b0f0121443f2f5ac8db7bd31be",
+            "thumb_picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/896/original/5a9cc90d-c74f-4460-bc7f-af30022d952a.png?ixlib=rails-4.3.1&auto=compress&w=60&h=60&fit=clip&s=fef66fffc1b54ed314036db268063789",
             "website": null,
             "twitter": null,
             "linkedin": "https://www.linkedin.com/in/fabian-kunzke/"
@@ -147,8 +147,8 @@
           {
             "name": "Sachin Namjoshi",
             "headline": "ServiceNow Senior Engineer",
-            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/sn.svg",
-            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/sn.svg",
+            "picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/898/original/101d4cd5-2aee-4842-9b1f-238328319de3.png?ixlib=rails-4.3.1&auto=compress&w=384&h=384&fit=clip&s=d20536ae553406cb06dc10b732c1a7c8",
+            "thumb_picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/898/original/101d4cd5-2aee-4842-9b1f-238328319de3.png?ixlib=rails-4.3.1&auto=compress&w=60&h=60&fit=clip&s=7898f679fa854724a375b13446db353c",
             "website": "https://www.servicenow.com/community/user/viewprofilepage/user-id/161770",
             "twitter": null,
             "linkedin": "https://www.linkedin.com/in/sachin-namjoshi/"
@@ -186,8 +186,8 @@
           {
             "name": "Rampriya Sundaramoorthy",
             "headline": "ServiceNow MVP | AI, CSDM & Automation Evangelist",
-            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/rs.svg",
-            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/rs.svg",
+            "picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/900/original/3d4c4826-d23d-40d1-9ca3-14668d9f0800.png?ixlib=rails-4.3.1&auto=compress&w=384&h=384&fit=clip&s=e65a43eb3fcb1625ae70bd06d64fa1c2",
+            "thumb_picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/900/original/3d4c4826-d23d-40d1-9ca3-14668d9f0800.png?ixlib=rails-4.3.1&auto=compress&w=60&h=60&fit=clip&s=3aa9d7a27e95dd946bbcf7b1096fb81a",
             "website": null,
             "twitter": null,
             "linkedin": "https://www.linkedin.com/in/rampriya-s/"
@@ -197,7 +197,7 @@
       },
       {
         "external_id": "B32eSzdJj3GYE1iZn2OzaV1OV",
-        "name": "Governance is the Missing Link in ServiceNow Platform Healht",
+        "name": "Governance is the Missing Link in ServiceNow Platform Health ",
         "description": "",
         "time_start": "2026-04-16T14:15:00Z",
         "time_end": "2026-04-16T14:30:00Z",
@@ -225,8 +225,8 @@
           {
             "name": "Nathan Weldon",
             "headline": "Recovering Practice Leader",
-            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/nw.svg",
-            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/nw.svg",
+            "picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/895/original/a6da4ace-25aa-40ca-b9ea-93678d66c4fb.png?ixlib=rails-4.3.1&auto=compress&w=384&h=384&fit=clip&s=75a16dd8af0eca8cd797566feb1ce7ae",
+            "thumb_picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/895/original/a6da4ace-25aa-40ca-b9ea-93678d66c4fb.png?ixlib=rails-4.3.1&auto=compress&w=60&h=60&fit=clip&s=5053bc62c61907b7b8ff28d57247e110",
             "website": "https://tpsflow.com",
             "twitter": null,
             "linkedin": "https://www.linkedin.com/in/nathanweldon/"
@@ -264,8 +264,8 @@
           {
             "name": "Suresh Loganathan",
             "headline": "The Gold Rush of Processes: Lessons Learned in Mining Efficiency",
-            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/sl.svg",
-            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/sl.svg",
+            "picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/899/original/537f3e5c-602f-4569-82d1-16c288a53ef5.png?ixlib=rails-4.3.1&auto=compress&w=384&h=384&fit=clip&s=515e72aeb851a127ea3a70f6c2bd25ba",
+            "thumb_picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/899/original/537f3e5c-602f-4569-82d1-16c288a53ef5.png?ixlib=rails-4.3.1&auto=compress&w=60&h=60&fit=clip&s=93dd137b490cbf3f35bd82e4acf6134c",
             "website": "https://www.servicenow.com/community/developer-blog/knowledge-vault-unveiling-insights-from-the-servicenow-universe/ba-p/3093756",
             "twitter": null,
             "linkedin": "https://www.linkedin.com/in/suresh-loganathan-11a91418/"
@@ -371,8 +371,8 @@
           {
             "name": "Gregory Yuh",
             "headline": "Is your CMDB messed up? Here is where you start",
-            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/gy.svg",
-            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/gy.svg",
+            "picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/897/original/26ef9051-dc7c-457b-a03e-f4b898075753.png?ixlib=rails-4.3.1&auto=compress&w=384&h=384&fit=clip&s=05d28e5123f5f486763ad732eeaa501a",
+            "thumb_picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/030/897/original/26ef9051-dc7c-457b-a03e-f4b898075753.png?ixlib=rails-4.3.1&auto=compress&w=60&h=60&fit=clip&s=fc11c289038764425e1479a654b568a9",
             "website": null,
             "twitter": null,
             "linkedin": "https://www.linkedin.com/in/gregory-yuh-2a8546/"
@@ -410,8 +410,8 @@
           {
             "name": "Kabria Holmes",
             "headline": "ServiceNow Business Process Consultant",
-            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/kh.svg",
-            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/kh.svg",
+            "picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/031/407/original/f116fc6e-7340-48e6-a8d8-d5ed98d5e7d8.png?ixlib=rails-4.3.1&auto=compress&w=384&h=384&fit=clip&s=bf6342e4af66bddc4fd0f12dbc3c1e96",
+            "thumb_picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/031/407/original/f116fc6e-7340-48e6-a8d8-d5ed98d5e7d8.png?ixlib=rails-4.3.1&auto=compress&w=60&h=60&fit=clip&s=d5252ad78e489c1dea247cd48df6c2d0",
             "website": "https://lovekd.substack.com/",
             "twitter": null,
             "linkedin": "https://www.linkedin.com/in/kabriaholmes/"
@@ -439,8 +439,8 @@
           {
             "name": "Brian Parks",
             "headline": "ITSM Archivist, CEO/CTO of Synapse Software",
-            "picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/bp.svg",
-            "thumb_picture_url": "https://usercontent.events.ringcentral.com/default_images/avatars/bp.svg",
+            "picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/035/173/original/2da5d6c1-20ca-4861-ada3-b902b7098e2a.png?ixlib=rails-4.3.1&auto=compress&w=384&h=384&fit=clip&s=8463c3077b459f73939a9e78f0ec08bb",
+            "thumb_picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/035/173/original/2da5d6c1-20ca-4861-ada3-b902b7098e2a.png?ixlib=rails-4.3.1&auto=compress&w=60&h=60&fit=clip&s=b6bfaada6147fa454aa2d3c4e71ee370",
             "website": "https://synapsesoftware.com",
             "twitter": null,
             "linkedin": "https://www.linkedin.com/in/brian-c-parks/"

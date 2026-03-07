@@ -74,7 +74,7 @@
       {% for sponsorName in nullEDGE.sponsors %}
         {%- set company = companies[sponsorName] %}
         <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer">
-          <img src="{{ company.image }}" alt="{{ sponsorName }}" eleventy:ignore loading="lazy">
+          <img src="{{ company.image }}" alt="{{ sponsorName }}" eleventy:ignore>
         </a>
       {% endfor %}
     </div>

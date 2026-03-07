@@ -71,7 +71,7 @@ permalink: /2025/index.html
           {%- set company = companies[sponsorName] %}
           {% if company %}
           <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="sponsor-item">
-            <img src="{{ company.image }}" alt="{{ sponsorName }}" loading="lazy">
+            <img src="{{ company.image }}" alt="{{ sponsorName }}">
           </a>
           {% endif %}
         {% endfor %}
