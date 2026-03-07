@@ -10,6 +10,14 @@ Usage:
 #}
 
 {% macro eventsTimeline(title, subtitle="", year="", eventsData={}, sectionId="events") %}
+{% set eventsSorted = eventsData | eventsToArray %}
+{% set nonFeaturedCount = 0 %}
+{% for event in eventsSorted %}
+  {% set isPast = event | isPastEvent %}
+  {% if not isPast and event.type != 'full-day' %}
+    {% set nonFeaturedCount = nonFeaturedCount + 1 %}
+  {% endif %}
+{% endfor %}
 <section class="events-section" id="{{ sectionId }}">
   <div class="container">
     <h2 class="section-title">{{ title }}</h2>
@@ -17,9 +25,10 @@ Usage:
     <p class="section-subtitle">{{ subtitle }}</p>
     {% endif %}
     
-    <div class="events-grid">
-      {% set eventsSorted = eventsData | eventsToArray %}
+    <div class="events-grid {% if nonFeaturedCount == 2 %}events-grid--two{% endif %}">
       {% for event in eventsSorted %}
+      {% set isPast = event | isPastEvent %}
+      {% if not isPast %}
       <a href="{{ event.url }}" class="event-card {% if event.type == 'full-day' %}event-card-featured{% endif %}">
         <h3 class="event-name">{{ event.name }}</h3>
         <div class="event-meta">
@@ -45,7 +54,15 @@ Usage:
           <span class="reg-text"></span>
         </p>
       </a>
+      {% endif %}
       {% endfor %}
+    </div>
+    
+    <div class="events-footer">
+      <a href="/events/" class="events-archive-link">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        View All Events
+      </a>
     </div>
   </div>
 </section>
@@ -103,6 +120,11 @@ Usage:
     margin: 0 auto;
   }
 
+  /* When only 2 upcoming events, make them 50% width each */
+  .events-grid--two {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .event-card {
     position: relative;
     padding: 2rem;
@@ -122,6 +144,11 @@ Usage:
   }
 
   .event-card-featured {
+    grid-column: 1 / -1;
+  }
+
+  /* Featured card in 2-column grid still spans full width */
+  .events-grid--two .event-card-featured {
     grid-column: 1 / -1;
   }
 
@@ -192,6 +219,29 @@ Usage:
     font-size: var(--size-step--1);
     color: hsl(var(--primary));
     font-weight: 500;
+  }
+
+  /* Events Footer */
+  .events-footer {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .events-archive-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    color: hsl(var(--muted-foreground));
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: var(--radius);
+    transition: all 0.2s;
+  }
+
+  .events-archive-link:hover {
+    color: hsl(var(--primary));
+    background: hsl(var(--muted) / 0.3);
   }
 
   /* Mobile Responsive */

@@ -3,6 +3,7 @@ import {splitlines} from './filters/splitlines.js';
 import {slugifyString} from './filters/slugify.js';
 import {eventsToArray} from './filters/sort-events.js';
 import {imageToBase64} from './filters/image-to-base64.js';
+import {isPastEvent} from './filters/is-past-event.js';
 
 /**
  * URL encode a string using encodeURIComponent
@@ -59,5 +60,6 @@ export default {
   nlToBr,
   truncate,
   thousands,
-  imageToBase64
+  imageToBase64,
+  isPastEvent
 };

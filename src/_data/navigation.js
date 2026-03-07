@@ -15,8 +15,8 @@ export default {
       url: '/speakers/'
     },
     {
-      text: '2025',
-      url: '/2025/conference'
+      text: 'Past Events',
+      url: '/events/'
     },
     {
       text: 'Privacy Policy',
