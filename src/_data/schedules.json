@@ -91,13 +91,13 @@
         "attendance": "optional",
         "stage": null,
         "session": {
-          "name": "Why is it modeled like that? An efficient approach to CSDM_5",
+          "name": "Why is it modeled like that? An efficient approach to CSDM",
           "can_watch": "anyone",
           "personas": []
         },
         "sessions": [
           {
-            "name": "Why is it modeled like that? An efficient approach to CSDM_5",
+            "name": "Why is it modeled like that? An efficient approach to CSDM",
             "can_watch": "anyone",
             "personas": []
           }
@@ -152,6 +152,35 @@
             "website": "https://www.servicenow.com/community/user/viewprofilepage/user-id/161770",
             "twitter": null,
             "linkedin": "https://www.linkedin.com/in/sachin-namjoshi/"
+          }
+        ],
+        "tags": []
+      },
+      {
+        "external_id": "HazhLNkPgTUA0lwbeKxmiiI3e",
+        "name": "Garbage In, Genius Out? Fixing Data Quality for AI Readiness",
+        "description": "",
+        "time_start": "2026-04-16T13:45:00Z",
+        "time_end": "2026-04-16T14:00:00Z",
+        "event_part_type": "sessions",
+        "event_type": "virtual",
+        "room": null,
+        "capacity": null,
+        "attendance": "optional",
+        "stage": null,
+        "session": null,
+        "sessions": [],
+        "booth": null,
+        "booths": [],
+        "speakers": [
+          {
+            "name": "Jan Procházka",
+            "headline": "Before scaling AI, fix the data that feeds it.",
+            "picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/038/794/original/0704c13d-d3ab-4c6a-b073-1a42aff576c1.png?ixlib=rails-4.3.1&auto=compress&w=384&h=384&fit=clip&s=6c436143f4561071646c53074c84194f",
+            "thumb_picture_url": "https://events-ringcentral-prod.imgix.net/suggested_profiles/pictures/001/038/794/original/0704c13d-d3ab-4c6a-b073-1a42aff576c1.png?ixlib=rails-4.3.1&auto=compress&w=60&h=60&fit=clip&s=1ef556f8d8fb166e6d455c8feb1cff0f",
+            "website": null,
+            "twitter": null,
+            "linkedin": "https://www.linkedin.com/in/jan-prochazka-cz/"
           }
         ],
         "tags": []
