@@ -33,7 +33,7 @@ const companies = {
   },
   'Flow-IT': {
     image: '/assets/images/companies/flow-it.png',
-    website: 'https://flow-it.com'
+    website: 'https://flow-it.sk'
   },
   'Echelon AI': {
     image: '/assets/images/companies/echelonai.png',
